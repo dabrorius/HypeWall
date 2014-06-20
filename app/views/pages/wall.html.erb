@@ -1,2 +1,13 @@
-<h1>Pages#wall</h1>
-<p>Find me in app/views/pages/wall.html.erb</p>
+<%# @photos.each do |photo| %>
+  <%# <div class="photo-frame"> %>
+    <%#= image_tag photo, :class => "photo" %>
+  <%# </div> %>
+<%# end %>
+
+<div class="wall">
+  <% 6.times do |i| %>
+    <div id="photo-frame-<%=i%>" class="photo-frame">
+      <%= image_tag "/stock/#{rand(1..6)}.jpg" %>
+    </div>
+  <% end %>
+</div>
