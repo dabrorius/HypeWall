@@ -4,10 +4,10 @@
   <%# </div> %>
 <%# end %>
 
-<div class="info-bar"> <div class="content"> Send to #blah blah </div> </div>
+<div class="info-bar"> <div class="content"> Send to #blah blah <div class="bounce animated"> bla bla </div></div> </div>
 <div class="wall">
   <% 6.times do |i| %>
-    <div id="photo-frame-<%=i%>" class="photo-frame">
+    <div id="photo-frame-<%=i%>" class="photo-frame animated rotateIn">
       <%= image_tag "/stock/#{rand(1..6)}.jpg" %>
     </div>
   <% end %>

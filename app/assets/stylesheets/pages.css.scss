@@ -33,6 +33,13 @@ html, body {
     overflow: hidden;
     float: left;
     background-color: gray;
+    position: relative;
+
+    img {
+      position: absolute;
+    }
   }
 }
+
+
 
