@@ -9,6 +9,7 @@
   <% 6.times do |i| %>
     <div id="photo-frame-<%=i%>" class="photo-frame animated rotateIn">
       <%= image_tag "/stock/#{rand(1..6)}.jpg" %>
+      <%= image_tag "/stock/#{rand(1..6)}.jpg", id: "photo-#{i}" %>
     </div>
   <% end %>
 </div>
