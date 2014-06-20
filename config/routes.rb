@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
   get 'wall' => "pages#wall"
 
+  get 'instagram/webhook' => 'instagram#webhook'
+  post 'instagram/webhook' => 'instagram#webhook'
+
   root "pages#landing"
 
   # The priority is based upon order of creation: first created -> highest priority.
