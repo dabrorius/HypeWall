@@ -8,11 +8,12 @@ function pushImage(position, url, animation) {
     });
 }
 
+var availableAnimations = ['flipInX', 'flipInY','bounceInDown','bounceInUp','bounceInLeft','bounceInRight'];
 var nextPosition = 0;
 function fetchNextImage() {
   $.get( "/images/next", function( data ) {
-    $( ".result" ).html( data );
-    pushImage(nextPosition, data.url, 'flipInX');
+    var animation = availableAnimations[Math.floor(Math.random()*availableAnimations.length)];
+    pushImage(nextPosition, data.url, animation);
     nextPosition = (nextPosition + 1) % 6;
   });
 }
