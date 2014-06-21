@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'images/next'
+
   get 'wall' => "pages#wall"
 
   get 'instagram/webhook' => 'instagram#webhook'

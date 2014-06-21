@@ -13,7 +13,7 @@ html, body {
 
 .info-bar {
   background-color: black;
-    background-color: rgba(0,0,0,0.5);
+  background-color: rgba(0,0,0,0.5);
   width: 100%;
   color: white;
   position: absolute;
@@ -22,6 +22,7 @@ html, body {
     padding: 10px;
   }
 }
+
 .wall {
   border: 0px solid black;
   width: 100%;
@@ -36,6 +37,7 @@ html, body {
     position: relative;
 
     img {
+      height: 100%;
       position: absolute;
     }
   }
