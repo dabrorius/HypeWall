@@ -40,6 +40,22 @@ html, body {
       height: 100%;
       position: absolute;
     }
+
+    .anchor-right {
+      right: -2px;
+    }
+
+    .anchor-left {
+      left: 0;
+    }
+
+    .anchor-up {
+      top: 0;
+    }
+
+    .anchor-down {
+      bottom: -2px;
+    }
   }
 }
 
