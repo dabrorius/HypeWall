@@ -7,8 +7,10 @@ class Image < ActiveRecord::Base
       image.update_attributes(presented: true)
       return image
     else
-      offset = rand(Image.count)
-      return Image.offset(offset).first
+      last_fetched = Rails.cache.fetch('last_fetched') || 0
+      current_image = (last_fetched + 1) % Image.count;
+      last_fetched = Rails.cache.write('last_fetched', current_image)
+      return Image.offset(current_image).first
     end
   end
 end
