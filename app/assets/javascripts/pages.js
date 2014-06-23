@@ -36,7 +36,9 @@ function panImage( position ) {
     animateObject.height = "110%";
   }
 
-  image.animate(animateObject, 5000)
+  image.animate(animateObject, 5000);
+    frame.fadeTo(500,1);
+
 }
 
 function loadUnload() {
@@ -55,7 +57,8 @@ function loadUnload() {
   loadAt += loadDelay;
 
   setTimeout(function() { addFrame(3) }, loadAt);
-  loadAt += loadDelay;
+  loadAt += loadDelay * 3;
+
 
   setTimeout(function() { panImage(0)}, loadAt );
   loadAt += panDelay;

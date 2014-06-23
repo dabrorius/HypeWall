@@ -20,7 +20,6 @@
   </div>
   <% 2.times do |i| %>
     <div id="photo-frame-<%=i+1%>" class="photo-frame single low hide">
-      <%= image_tag "/stock/#{rand(1..9)}.jpg" %>
       <%= image_tag "/stock/#{rand(1..9)}.jpg", id: "photo-#{i+1}" %>
     </div>
   <% end %>
