@@ -40,20 +40,47 @@ function panImage( position ) {
 }
 
 function loadUnload() {
-  addFrame(0)
-  setTimeout(function() { addFrame(1) }, 500);
-  setTimeout(function() { addFrame(2) }, 1000);
-  setTimeout(function() { addFrame(3) }, 1500);
+  var loadDelay = 500;
+  var panDelay = 5000;
 
-  setTimeout(function() { panImage(0)}, 2000 );
-  setTimeout(function() { panImage(1)}, 7000 );
-  setTimeout(function() { panImage(2)}, 12000 );
-  setTimeout(function() { panImage(3)}, 17000 );
+  var loadAt = 0;
 
-  setTimeout(function() { removeFrame(3) }, 25000);
-  setTimeout(function() { removeFrame(2) }, 25500);
-  setTimeout(function() { removeFrame(1) }, 26000);
-  setTimeout(function() { removeFrame(0) }, 26500);
+  addFrame(loadAt)
+  loadAt += loadDelay;
+
+  setTimeout(function() { addFrame(1) }, loadAt);
+  loadAt += loadDelay;
+
+  setTimeout(function() { addFrame(2) }, loadAt);
+  loadAt += loadDelay;
+
+  setTimeout(function() { addFrame(3) }, loadAt);
+  loadAt += loadDelay;
+
+  setTimeout(function() { panImage(0)}, loadAt );
+  loadAt += panDelay;
+
+  setTimeout(function() { panImage(1)}, loadAt );
+  loadAt += panDelay;
+
+  setTimeout(function() { panImage(2)}, loadAt );
+  loadAt += panDelay;
+
+  setTimeout(function() { panImage(3)}, loadAt );
+  loadAt += panDelay;
+
+
+  setTimeout(function() { removeFrame(3) }, loadAt);
+  loadAt += loadDelay;
+
+  setTimeout(function() { removeFrame(2) }, loadAt);
+  loadAt += loadDelay;
+
+  setTimeout(function() { removeFrame(1) }, loadAt);
+  loadAt += loadDelay;
+
+  setTimeout(function() { removeFrame(0) }, loadAt);
+  loadAt += loadDelay;
 }
 
 function loadNewFrames() {
