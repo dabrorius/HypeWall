@@ -31,6 +31,24 @@ html, body {
   }
 }
 
+#info {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  color: white;
+  text-align: center;
+  font-family: helvetica;
+  font-size: 40px;
+  text-shadow:
+   -1px -1px 0 #000,  
+    1px -1px 0 #000,
+    -1px 1px 0 #000,
+     1px 1px 0 #000;
+
+}
+
 .wall {
   border: 0px solid black;
   width: 100%;
