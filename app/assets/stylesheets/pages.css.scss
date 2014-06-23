@@ -89,17 +89,10 @@ html, body {
 
   .single {
     width: 33.333333%;
-
-    img {
-      height: 100%;
-    }
   }
 
   .double {
     width: 66.666666%;
-    img {
-      width: 100%;
-    }
   }
 
   .low {
@@ -115,4 +108,10 @@ html, body {
   display: none;
 }
 
+.stretch-width {
+  width: 100%;
+}
 
+.stretch-height {
+  height: 100%;
+}

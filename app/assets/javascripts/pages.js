@@ -11,6 +11,18 @@ function removeFrame( position ) {
   );
 }
 
+function resizeImage( position ) {
+  var image = $("#photo-frame-"+position+" img");
+  var frame = $("#photo-frame-"+position);
+
+  if (frame.width() > frame.height() ) {
+    image.addClass("stretch-width");
+  } else {
+    image.addClass("stretch-height");
+  }
+
+}
+
 function panImage( position ) {
   var image = $("#photo-frame-"+position+" img");
   var frame = $("#photo-frame-"+position);
@@ -89,6 +101,10 @@ function loadUnload() {
 function loadNewFrames() {
   $.get( "/frames", function( data ) {
     $(".wall").html(data);
+    resizeImage(0);
+    resizeImage(1);
+    resizeImage(2);
+    resizeImage(3);
     loadUnload();
   });
   setTimeout( loadNewFrames, 28000);
@@ -96,4 +112,5 @@ function loadNewFrames() {
 
 $(document).ready(function(){
   loadNewFrames();
+  
 });
