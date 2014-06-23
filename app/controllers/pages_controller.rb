@@ -7,6 +7,7 @@ class PagesController < ApplicationController
   end
 
   def frames
+    @photos = [Image.next, Image.next, Image.next, Image.next]
     render partial: 'pages/frames'
   end
 end
