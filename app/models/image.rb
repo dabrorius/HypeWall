@@ -13,8 +13,11 @@ class Image < ActiveRecord::Base
       image = Image.offset(current_image).first
     end
     unless image.original_id.nil?
-      likes = Instagram.media_likes(image.original_id).count
-      image.update_attributes(likes: likes)
+      begin
+        likes = Instagram.media_likes(image.original_id).count
+        image.update_attributes(likes: likes)
+      rescue
+      end
     end
     return image
   end
