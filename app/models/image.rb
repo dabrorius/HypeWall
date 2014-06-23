@@ -9,7 +9,7 @@ class Image < ActiveRecord::Base
     else
       last_fetched = Rails.cache.fetch('last_fetched') || 0
       current_image = (last_fetched + 1) % Image.count;
-      last_fetched = Rails.cache.write('last_fetched', current_image)
+      Rails.cache.write('last_fetched', current_image)
       return Image.offset(current_image).first
     end
   end
