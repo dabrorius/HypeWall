@@ -16,8 +16,7 @@
 <% when 1 %>
 
   <div id="photo-frame-0" class="photo-frame single high hide">
-    <%= image_tag "/stock/#{rand(1..9)}.jpg" %>
-    <%= image_tag "/stock/#{rand(1..9)}.jpg", id: "photo-4" %>
+    <%= image_tag "/stock/#{rand(1..9)}.jpg", id: "photo-0" %>
   </div>
   <% 2.times do |i| %>
     <div id="photo-frame-<%=i+1%>" class="photo-frame single low hide">
@@ -26,26 +25,21 @@
     </div>
   <% end %>
   <div id="photo-frame-3" class="photo-frame double low hide">
-    <%= image_tag "/stock/#{rand(1..9)}.jpg" %>
-    <%= image_tag "/stock/#{rand(1..9)}.jpg", id: "photo-4" %>
+    <%= image_tag "/stock/#{rand(1..9)}.jpg", id: "photo-3" %>
   </div>
 
 <% when 2 %>
 
   <div id="photo-frame-0" class="photo-frame double low hide">
-    <%= image_tag "/stock/#{rand(1..9)}.jpg" %>
     <%= image_tag "/stock/#{rand(1..9)}.jpg", id: "photo-0" %>
   </div>
   <div id="photo-frame-1" class="photo-frame single low hide">
-      <%= image_tag "/stock/#{rand(1..9)}.jpg" %>
       <%= image_tag "/stock/#{rand(1..9)}.jpg", id: "photo-1" %>
     </div>
   <div id="photo-frame-2" class="photo-frame single low hide">
-      <%= image_tag "/stock/#{rand(1..9)}.jpg" %>
       <%= image_tag "/stock/#{rand(1..9)}.jpg", id: "photo-2" %>
     </div>
   <div id="photo-frame-3" class="photo-frame double low hide">
-    <%= image_tag "/stock/#{rand(1..9)}.jpg" %>
     <%= image_tag "/stock/#{rand(1..9)}.jpg", id: "photo-3" %>
   </div>
 

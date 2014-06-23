@@ -1,35 +1,6 @@
-var verticalAnchors = ['anchor-left','anchor-right'];
-var horizontalAnchors = ['anchor-up','anchor-down'];
-
-var maxPosition = 5;
-
-function pushImage(position, url, animation) {
-  var frameSelector = "#photo-frame-"+position;
-  $(frameSelector + " img").addClass("to-remove");
-  var verticalAnchor = verticalAnchors[Math.floor(Math.random()*verticalAnchors.length)];
-  var horizontalAnchor = horizontalAnchors[Math.floor(Math.random()*horizontalAnchors.length)];
-  $(frameSelector).append("<img class='animated "+ animation +" "+ verticalAnchor +" "+ horizontalAnchor +"' src='"+url+"'>").
-  one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', 
-    function(){
-      $(frameSelector + " .to-remove").remove();
-      $(frameSelector + " img").animate({height: "110%"}, 5000)
-    });
-}
-
-var availableAnimations = ['flipInX', 'flipInY','bounceInDown','bounceInUp','bounceInLeft','bounceInRight'];
-var nextPosition = 0;
-function fetchNextImage() {
-  $.get( "/images/next", function( data ) {
-    var animation = availableAnimations[Math.floor(Math.random()*availableAnimations.length)];
-    pushImage(nextPosition, data.url, animation);
-    nextPosition = (nextPosition + 1) % maxPosition;
-  });
-}
-
 
 function addFrame( position ) {
   $("#photo-frame-" + position).addClass("animated slideInRight").removeClass("hide");
-  return { 'addFrame': this }
 }
 
 function removeFrame( position ) {
@@ -41,8 +12,31 @@ function removeFrame( position ) {
 }
 
 function panImage( position ) {
-  var frameSelector = "#photo-frame-"+position;
-  $(frameSelector + " img").animate({height: "110%"}, 5000)
+  var image = $("#photo-frame-"+position+" img");
+  var frame = $("#photo-frame-"+position);
+
+  //frame.animate({height: "110%"}, 5000)
+  var frameWidth = frame.width();
+  var imageWidth = image.width();
+  var panDistanceX = (imageWidth - frameWidth);
+
+
+  var frameHeight = frame.height();
+  var imageHeight = image.height();
+  var panDistanceY = (imageHeight - frameHeight);
+
+  var animateObject = {};
+  animateObject.left = "-"+panDistanceX+"px";
+  animateObject.top = "-"+panDistanceY+"px";
+
+  if( frameWidth > frameHeight ) {
+    animateObject.width = "110%";
+  }
+  else {
+    animateObject.height = "110%";
+  }
+
+  image.animate(animateObject, 5000)
 }
 
 function loadUnload() {
