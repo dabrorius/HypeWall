@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   get 'instagram/new_subscription' => 'instagram#new_subscription'
   post 'instagram/create_subscription' => 'instagram#create_subscription', as: "create_subscription"
 
+  get 'frames' => 'pages#frames'
   root "pages#landing"
 
   # The priority is based upon order of creation: first created -> highest priority.

@@ -6,6 +6,8 @@ html, body {
   height: 100%;
   padding: 0;
   margin: 0;
+  max-width: 100%;
+  overflow-x: hidden;
 }
 
 .photo {
@@ -29,15 +31,16 @@ html, body {
   height: 100%;
 
   .photo-frame {
-    width: 33.333333%;
-    height: 50%;
     overflow: hidden;
     float: left;
     background-color: gray;
     position: relative;
+    border: 1px solid #fff;
+    -moz-box-sizing:border-box;
+    -webkit-box-sizing:border-box;
+    box-sizing:border-box;
 
     img {
-      height: 100%;
       position: absolute;
     }
 
@@ -57,7 +60,33 @@ html, body {
       bottom: -2px;
     }
   }
+
+  .single {
+    width: 33.333333%;
+
+    img {
+      height: 100%;
+    }
+  }
+
+  .double {
+    width: 66.666666%;
+    img {
+      width: 100%;
+    }
+  }
+
+  .low {
+    height: 50%;
+  }
+
+  .high {
+    height: 100%;
+  }
 }
 
+.hide {
+  display: none;
+}
 
 
