@@ -51,6 +51,10 @@ function panImage( position ) {
   frame.removeClass("animated slideInRight");
   image.animate(animateObject, 5000);
   frame.fadeTo(500,1);
+
+  var likes = $("#photo-frame-"+position+" .likes");
+  setTimeout(function() { likes.fadeIn(); }, 500 );
+  setTimeout(function() { likes.fadeOut(); }, 5000 );
 }
 
 function loadUnload() {
