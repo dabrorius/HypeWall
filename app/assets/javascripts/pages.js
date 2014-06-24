@@ -48,9 +48,9 @@ function panImage( position ) {
     animateObject.height = "110%";
   }
 
+  frame.removeClass("animated slideInRight");
   image.animate(animateObject, 5000);
-    frame.fadeTo(500,1);
-
+  frame.fadeTo(500,1);
 }
 
 function loadUnload() {
@@ -112,5 +112,5 @@ function loadNewFrames() {
 
 $(document).ready(function(){
   loadNewFrames();
-  
+
 });
