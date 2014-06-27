@@ -7,6 +7,6 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 
-9.times do |i|
-  Image.create(url: "/stock/#{i+1}.jpg")
+8.times do |i|
+  Image.create(url: "/ultra/#{i+1}.jpg", likes: rand(20) )
 end
