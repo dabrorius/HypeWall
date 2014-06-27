@@ -10,7 +10,7 @@ class InstagramController < ApplicationController
       Instagram.delete_subscription(id: subscription.id)
     end
     Thread.new do |t|
-      Instagram.create_subscription('tag', "http://59fc4634.ngrok.com/instagram/webhook", object_id: params[:tag])
+      Instagram.create_subscription('tag', "#{root_url}instagram/webhook", object_id: params[:tag])
       get_images
       t.exit
     end
