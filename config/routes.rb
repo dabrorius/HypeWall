@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   get 'images/next'
 
-  get 'wall' => "pages#wall"
+  get 'wall/mstart2014' => "pages#wall"
 
   get 'instagram/webhook' => 'instagram#webhook'
   post 'instagram/webhook' => 'instagram#webhook'
@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   post 'instagram/create_subscription' => 'instagram#create_subscription', as: "create_subscription"
 
   get 'frames' => 'pages#frames'
-  root "pages#wall"
+  root "pages#landing"
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
