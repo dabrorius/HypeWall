@@ -32,6 +32,17 @@ gem 'dotenv-rails', :groups => [:development, :test]
 # User authentication
 gem 'devise'
 
+group :test do
+  gem 'rspec-rails', '~> 3.0.0'
+  gem 'capybara', '2.2.0'
+  gem 'poltergeist', '1.5.0'
+  gem 'factory_girl_rails', '4.2.1'
+  gem 'shoulda-context', '~> 1.0.2'
+  gem 'shoulda-matchers', '~> 2.3.0'
+  gem 'simplecov', '0.7.1'
+  gem 'webmock', '~>1.17.0'
+end
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
