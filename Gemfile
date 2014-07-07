@@ -29,6 +29,9 @@ gem 'spring',        group: :development
 gem 'instagram'
 gem 'dotenv-rails', :groups => [:development, :test]
 
+# User authentication
+gem 'devise'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 

@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  devise_for :users
   get 'images/next'
 
   get 'wall/mstart2014' => "pages#wall"
