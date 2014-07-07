@@ -1,10 +1,11 @@
 class WallsController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_wall, only: [:show, :edit, :update, :destroy]
 
   # GET /walls
   # GET /walls.json
   def index
-    @walls = Wall.all
+    @walls = current_user.walls
   end
 
   # GET /walls/1
@@ -28,6 +29,7 @@ class WallsController < ApplicationController
 
     respond_to do |format|
       if @wall.save
+        WallRole.create(user: current_user, wall: @wall)
         format.html { redirect_to @wall, notice: 'Wall was successfully created.' }
         format.json { render :show, status: :created, location: @wall }
       else
@@ -64,7 +66,7 @@ class WallsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_wall
-      @wall = Wall.find(params[:id])
+      @wall = current_user.walls.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
