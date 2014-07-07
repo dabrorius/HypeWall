@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :walls
+
   devise_for :users
   get 'images/next'
 
