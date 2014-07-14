@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get "dashboard" => "walls#index"
   resources :walls
 
   devise_for :users

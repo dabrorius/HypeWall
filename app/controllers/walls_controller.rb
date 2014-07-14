@@ -11,6 +11,7 @@ class WallsController < ApplicationController
   # GET /walls/1
   # GET /walls/1.json
   def show
+    render layout: 'application_fullscreen'
   end
 
   # GET /walls/new

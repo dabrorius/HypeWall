@@ -1,19 +1,12 @@
-<p id="notice"><%= notice %></p>
+<div id="info">
+  <br/>
+  <p><%= image_tag '/logo.png' %></p>
+  <p>
+    Instagram images with hashtag
+    <h1>#mStart2014</h1>
+    We give away awesome prizes <br/>
+    for best photo every day!
+  </p>
+</div>
 
-<p>
-  <strong>Name:</strong>
-  <%= @wall.name %>
-</p>
-
-<p>
-  <strong>Instagram hashtag:</strong>
-  <%= @wall.instagram_hashtag %>
-</p>
-
-<p>
-  <strong>Description:</strong>
-  <%= @wall.description %>
-</p>
-
-<%= link_to 'Edit', edit_wall_path(@wall) %> |
-<%= link_to 'Back', walls_path %>
+<div class="wall"></div>
