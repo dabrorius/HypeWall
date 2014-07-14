@@ -1,5 +1,7 @@
 class Image < ActiveRecord::Base
 
+  scope :unpresented, -> { where('presented = ?', false).order('created_at ASC') }
+
   def self.next
     image = Image.first
     new_images = Image.where('presented = ?', false).order('created_at ASC')

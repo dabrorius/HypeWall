@@ -6,7 +6,7 @@ function addFrame( position ) {
 function removeFrame( position ) {
   var frameSelector = "#photo-frame-"+position;
   $(frameSelector).addClass("animated slideOutLeft").
-  one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', 
+  one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend',
     function(){ $(frameSelector).remove(); }
   );
 }
@@ -103,7 +103,8 @@ function loadUnload() {
 }
 
 function loadNewFrames() {
-  $.get( "/frames", function( data ) {
+  var url = $("#wall").data('frames-url');
+  $.get(url, function( data ) {
     $(".wall").html(data);
     resizeImage(0);
     resizeImage(1);

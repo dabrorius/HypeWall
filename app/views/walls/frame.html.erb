@@ -1,0 +1,55 @@
+<% case @current_frame %>
+<% when 0 %>
+
+  <div id="photo-frame-0" class="photo-frame single high hide">
+    <%= image_tag @photos[0].url %>
+    <div class="likes hide"><i class="fa fa-heart"></i><%= @photos[0].likes %></div>
+  </div>
+  <% 2.times do |i| %>
+    <div id="photo-frame-<%=i+1%>" class="photo-frame single low hide">
+      <%= image_tag @photos[i+1].url %>
+      <div class="likes hide"><i class="fa fa-heart"></i><%= @photos[i+1].likes %></div>
+    </div>
+  <% end %>
+  <div id="photo-frame-3" class="photo-frame double low hide">
+    <%= image_tag @photos[3].url %>
+    <div class="likes hide"><i class="fa fa-heart"></i><%= @photos[3].likes %></div>
+  </div>
+
+<% when 1 %>
+
+  <div id="photo-frame-0" class="photo-frame single high hide">
+    <%= image_tag @photos[0].url %>
+    <div class="likes hide"><i class="fa fa-heart"></i><%= @photos[0].likes %></div>
+  </div>
+  <% 2.times do |i| %>
+    <div id="photo-frame-<%=i+1%>" class="photo-frame single low hide">
+      <%= image_tag @photos[i+1].url %>
+      <div class="likes hide"><i class="fa fa-heart"></i><%= @photos[i+1].likes %></div>
+    </div>
+  <% end %>
+  <div id="photo-frame-3" class="photo-frame double low hide">
+    <%= image_tag @photos[3].url %>
+    <div class="likes hide"><i class="fa fa-heart"></i><%= @photos[3].likes %></div>
+  </div>
+
+<% when 2 %>
+
+  <div id="photo-frame-0" class="photo-frame double low hide">
+    <%= image_tag @photos[0].url %>
+    <div class="likes hide"><i class="fa fa-heart"></i><%= @photos[0].likes %></div>
+  </div>
+  <div id="photo-frame-1" class="photo-frame single low hide">
+    <%= image_tag @photos[1].url %>
+    <div class="likes hide"><i class="fa fa-heart"></i><%= @photos[1].likes %></div>
+  </div>
+  <div id="photo-frame-2" class="photo-frame single low hide">
+    <%= image_tag @photos[2].url %>
+    <div class="likes hide"><i class="fa fa-heart"></i><%= @photos[2].likes %></div>
+  </div>
+  <div id="photo-frame-3" class="photo-frame double low hide">
+    <%= image_tag @photos[3].url  %>
+    <div class="likes hide"><i class="fa fa-heart"></i><%= @photos[3].likes %></div>
+  </div>
+
+<% end %>

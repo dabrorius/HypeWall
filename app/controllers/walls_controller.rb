@@ -1,6 +1,6 @@
 class WallsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_wall, only: [:show, :edit, :update, :destroy]
+  before_action :set_wall, only: [:show, :edit, :update, :destroy, :frame]
 
   # GET /walls
   # GET /walls.json
@@ -62,6 +62,43 @@ class WallsController < ApplicationController
       format.html { redirect_to walls_url, notice: 'Wall was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  # Renders a partial with new set of images
+  # It's animated and added to wall
+  def frame
+    # Id of newest image that have been shown on this wall
+    # All images with id larger than this are considered new and have precedence
+    newest_in_circulation = session[:newest_in_circulation] || 0
+    first_presented =  session[:first_presented] || 0
+    last_presented = session[:last_presented] || 0
+
+    # Layout id of images on wall, it's circulated
+    session[:current_frame] ||= 0
+    @current_frame = session[:current_frame]
+
+    images_per_frame = 4
+    # Fetch images that have just been uploaded
+    new_images = @wall.images.where('id > ?', newest_in_circulation).order('id ASC').limit(4)
+
+    # Fetch images that come after the last presented
+    old_images_next = @wall.images.where('id > ?', last_presented).order('id ASC').limit(images_per_frame - new_images.count)
+    # Fetch images from the begining of cyclus if full circle was made
+    old_images_previous = @wall.images.order('id ASC').limit(images_per_frame - new_images.count - old_images_next.count)
+    old_images = old_images_next.concat(old_images_previous)
+
+    Rails.logger.debug "New images #{new_images.pluck(:id)}"
+    Rails.logger.debug "Old images #{old_images_next.pluck(:id)} + #{old_images_previous.pluck(:id)} = #{old_images}"
+
+    session[:newest_in_circulation] = new_images.last.id if new_images.last
+    session[:first_presented] = old_images.first.id if old_images.first
+    session[:last_presented] = old_images.last.id if old_images.last
+
+    total_frames = 3
+    session[:current_frame] = (session[:current_frame] + 1) % total_frames
+
+    @photos = new_images.concat old_images
+    render layout: false
   end
 
   private

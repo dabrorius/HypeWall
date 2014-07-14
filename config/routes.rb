@@ -1,6 +1,11 @@
 Rails.application.routes.draw do
   get "dashboard" => "walls#index"
-  resources :walls
+
+  resources :walls do
+    member do
+      get 'frame' => "walls#frame", as: 'frame'
+    end
+  end
 
   devise_for :users
   get 'images/next'
