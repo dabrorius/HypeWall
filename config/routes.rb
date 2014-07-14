@@ -3,7 +3,7 @@ Rails.application.routes.draw do
 
   resources :walls do
     member do
-      get 'frame' => "walls#frame", as: 'frame'
+      get 'frame/:instance_id' => "walls#frame", as: 'frame'
     end
   end
 
