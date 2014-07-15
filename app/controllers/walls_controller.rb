@@ -3,13 +3,11 @@ class WallsController < ApplicationController
   before_action :set_wall, only: [:show, :edit, :update, :destroy, :frame]
 
   # GET /walls
-  # GET /walls.json
   def index
     @walls = current_user.walls
   end
 
   # GET /walls/1
-  # GET /walls/1.json
   def show
     @wall_instance_id = SecureRandom.uuid
     render layout: 'application_fullscreen'
@@ -25,44 +23,29 @@ class WallsController < ApplicationController
   end
 
   # POST /walls
-  # POST /walls.json
   def create
     @wall = Wall.new(wall_params)
-
-    respond_to do |format|
-      if @wall.save
-        WallRole.create(user: current_user, wall: @wall)
-        format.html { redirect_to @wall, notice: 'Wall was successfully created.' }
-        format.json { render :show, status: :created, location: @wall }
-      else
-        format.html { render :new }
-        format.json { render json: @wall.errors, status: :unprocessable_entity }
-      end
+    if @wall.save
+      WallRole.create(user: current_user, wall: @wall)
+      redirect_to @wall, notice: 'Wall was successfully created.'
+    else
+      render :new
     end
   end
 
   # PATCH/PUT /walls/1
-  # PATCH/PUT /walls/1.json
   def update
-    respond_to do |format|
-      if @wall.update(wall_params)
-        format.html { redirect_to @wall, notice: 'Wall was successfully updated.' }
-        format.json { render :show, status: :ok, location: @wall }
-      else
-        format.html { render :edit }
-        format.json { render json: @wall.errors, status: :unprocessable_entity }
-      end
+    if @wall.update(wall_params)
+      redirect_to @wall, notice: 'Wall was successfully updated.'
+    else
+      render :edit
     end
   end
 
   # DELETE /walls/1
-  # DELETE /walls/1.json
   def destroy
     @wall.destroy
-    respond_to do |format|
-      format.html { redirect_to walls_url, notice: 'Wall was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    redirect_to walls_url, notice: 'Wall was successfully destroyed.'
   end
 
   # Renders a partial with new set of images

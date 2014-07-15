@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
-  get "dashboard" => "walls#index"
+
+  devise_for :users
 
   resources :walls do
     member do
@@ -7,17 +8,12 @@ Rails.application.routes.draw do
     end
   end
 
-  devise_for :users
-  get 'images/next'
-
-  get 'wall/mstart2014' => "pages#wall"
-
   get 'instagram/webhook' => 'instagram#webhook'
   post 'instagram/webhook' => 'instagram#webhook'
   get 'instagram/new_subscription' => 'instagram#new_subscription'
   post 'instagram/create_subscription' => 'instagram#create_subscription', as: "create_subscription"
 
-  get 'frames' => 'pages#frames'
+  get "dashboard" => "walls#index"
   root "pages#landing"
 
   # The priority is based upon order of creation: first created -> highest priority.
