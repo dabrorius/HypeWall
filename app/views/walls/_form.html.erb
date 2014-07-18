@@ -1,4 +1,4 @@
-<%= form_for(@wall) do |f| %>
+<%= form_for(@wall, class: 'form') do |f| %>
   <% if @wall.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@wall.errors.count, "error") %> prohibited this wall from being saved:</h2>
@@ -11,19 +11,24 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
+  <div class="form-group">
+    <%= f.label :name %>
+    <%= f.text_field :name, class: 'form-control' %>
   </div>
-  <div class="field">
-    <%= f.label :instagram_hashtag %><br>
-    <%= f.text_field :instagram_hashtag %>
+  <div class="form-group">
+    <%= f.label :instagram_hashtag %>
+    <%= f.text_field :instagram_hashtag, class: 'form-control' %>
   </div>
-  <div class="field">
-    <%= f.label :description %><br>
-    <%= f.text_area :description %>
+  <div class="form-group">
+    <%= f.label :description %>
+    <%= f.text_area :description, class: 'form-control large-textarea' %>
   </div>
-  <div class="actions">
-    <%= f.submit %>
+  <div class="form-group">
+    <%= f.label :background_image %></br>
+    <%= image_tag @wall.background_image.url %></br>
+    <%= f.file_field :background_image %>
+  </div>
+  <div class="form-group">
+    <%= f.submit class: "btn btn-primary" %>
   </div>
 <% end %>

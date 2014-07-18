@@ -32,6 +32,9 @@ gem 'dotenv-rails', :groups => [:development, :test]
 # User authentication
 gem 'devise'
 
+# File upload manager
+gem "paperclip", :git => "git://github.com/thoughtbot/paperclip.git"
+
 group :test do
   gem 'rspec-rails', '~> 3.0.0'
   gem 'capybara', '2.2.0'

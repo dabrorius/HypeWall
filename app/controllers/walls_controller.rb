@@ -27,7 +27,7 @@ class WallsController < ApplicationController
     @wall = Wall.new(wall_params)
     if @wall.save
       WallRole.create(user: current_user, wall: @wall)
-      redirect_to @wall, notice: 'Wall was successfully created.'
+      redirect_to edit_wall_path(@wall), notice: 'Wall was successfully created.'
     else
       render :new
     end
@@ -36,7 +36,7 @@ class WallsController < ApplicationController
   # PATCH/PUT /walls/1
   def update
     if @wall.update(wall_params)
-      redirect_to @wall, notice: 'Wall was successfully updated.'
+      redirect_to edit_wall_path(@wall), notice: 'Wall was successfully updated.'
     else
       render :edit
     end
@@ -97,6 +97,6 @@ class WallsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def wall_params
-      params.require(:wall).permit(:name, :instagram_hashtag, :description)
+      params.require(:wall).permit(:name, :instagram_hashtag, :description, :background_image)
     end
 end

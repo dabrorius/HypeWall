@@ -7,7 +7,7 @@
   <%= stylesheet_link_tag 'application_fullscreen' %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
 </head>
-<body>
+<body style="background-image: url('<%= @wall.background_image.url %>');">
 <%= yield %>
 </body>
 </html>
