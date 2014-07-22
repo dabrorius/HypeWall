@@ -35,6 +35,8 @@ gem 'devise'
 # File upload manager
 gem "paperclip", :git => "git://github.com/thoughtbot/paperclip.git"
 
+gem "activerecord-session_store"
+
 group :test do
   gem 'rspec-rails', '~> 3.0.0'
   gem 'capybara', '2.2.0'
