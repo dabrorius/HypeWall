@@ -27,6 +27,7 @@ class WallsController < ApplicationController
     @wall = Wall.new(wall_params)
     if @wall.save
       WallRole.create(user: current_user, wall: @wall)
+      @wall.instagram_subscribe
       redirect_to edit_wall_path(@wall), notice: 'Wall was successfully created.'
     else
       render :new
