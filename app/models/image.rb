@@ -1,4 +1,5 @@
 class Image < ActiveRecord::Base
+  STATUSES = ['pending_approval','approved','banned']
 
   scope :unpresented, -> { where('presented = ?', false).order('created_at ASC') }
 

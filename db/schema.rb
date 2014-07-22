@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140722105911) do
+ActiveRecord::Schema.define(version: 20140722114925) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,6 +25,7 @@ ActiveRecord::Schema.define(version: 20140722105911) do
     t.datetime "updated_at"
     t.integer  "likes",       default: 0
     t.integer  "wall_id"
+    t.string   "status",      default: "pending_approval"
   end
 
   add_index "images", ["wall_id"], name: "index_images_on_wall_id", using: :btree
