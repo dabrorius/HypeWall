@@ -1,4 +1,6 @@
 class Wall < ActiveRecord::Base
+  include Rails.application.routes.url_helpers
+
   BACKGROUDN_STYLES = ['center','tile','stretch']
 
   has_attached_file :background_image, :styles => { :thumb => "300x300>" }, :default_url => "/images/:style/missing.png"
@@ -11,11 +13,11 @@ class Wall < ActiveRecord::Base
   has_many :images
 
   def instagram_subscribe
-    # Thread.new do |t|
-      Instagram.create_subscription('tag', "http://78e9f1f1.ngrok.com/instagram/webhook", object_id: instagram_hashtag)
+    Thread.new do |t|
+      Instagram.create_subscription('tag', "#{root_url}instagram/webhook", object_id: instagram_hashtag)
       get_images
-      # t.exit
-    # end
+      t.exit
+    end
   end
 
   def get_images
