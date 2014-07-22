@@ -15,21 +15,6 @@ html, body {
   background-size: auto 100%;
 }
 
-.photo {
-}
-
-.info-bar {
-  background-color: black;
-  background-color: rgba(0,0,0,0.5);
-  width: 100%;
-  color: white;
-  position: absolute;
-
-  .content {
-    padding: 10px;
-  }
-}
-
 #info {
   position: absolute;
   top: 0;
@@ -47,7 +32,12 @@ html, body {
      1px 1px 0 #000;
   overflow: hidden;
 
+  .large {
+    font-size: 80px;
+  }
 }
+
+
 
 .wall {
   border: 0px solid black;
