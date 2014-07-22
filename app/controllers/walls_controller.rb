@@ -97,6 +97,6 @@ class WallsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def wall_params
-      params.require(:wall).permit(:name, :instagram_hashtag, :description, :background_image)
+      params.require(:wall).permit(:name, :instagram_hashtag, :description, :background_image, :logo)
     end
 end
