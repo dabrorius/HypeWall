@@ -9,10 +9,23 @@ html, body {
   max-width: 100%;
   overflow-x: hidden;
   background-color: black;
+}
+
+.stretch {
   background-repeat:no-repeat;
   background-attachment:fixed;
   background-position:center;
   background-size: auto 100%;
+}
+
+.center {
+  background-repeat:no-repeat;
+  background-attachment:fixed;
+  background-position:center;
+}
+
+.tile {
+  background-repeat: repeat;
 }
 
 #info {

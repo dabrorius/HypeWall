@@ -32,6 +32,7 @@
     <%= f.label :background_image %></br>
     <%= image_tag @wall.background_image.url %></br>
     <%= f.file_field :background_image %>
+    <%= f.select :background_style, Wall::BACKGROUDN_STYLES %>
   </div>
   <div class="form-group">
     <%= f.submit class: "btn btn-primary" %>
