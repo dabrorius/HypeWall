@@ -1,10 +1,18 @@
 Rails.application.routes.draw do
 
+  resources :images do
+    member do
+      get 'approve' => "images#approve", as: 'approve'
+      get 'ban' => "images#ban", as: 'ban'
+    end
+  end
+
   devise_for :users
 
   resources :walls do
     member do
       get 'frame/:instance_id' => "walls#frame", as: 'frame'
+      get 'control' => "walls#control", as: 'control'
     end
   end
 

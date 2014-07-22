@@ -43,3 +43,43 @@
   clear: both;
 }
 
+#control {
+  .box {
+    float: left;
+    width:32%;
+    margin-bottom: 20px;
+    margin-right: 1%;
+    height: 300px;
+    background-repeat:no-repeat;
+    background-position:center;
+    background-size: 100% auto;
+    background-color: #ddd
+  }
+
+  .controls {
+    margin: 5px;
+    padding: 5px;
+    color: #333;
+
+    a {
+      color: black;
+      font-weight: bold;
+      text-decoration: underline;
+    }
+  }
+
+  .pending_approval {
+    background-color: white;
+    background-color: rgba(225,225,225,0.9);
+  }
+
+  .banned {
+    background-color: red;
+    background-color: rgba(225,  0,  0,0.9);
+  }
+
+  .approved {
+    background-color: green;
+    background-color: rgba(0,225,0,0.9);
+  }
+}

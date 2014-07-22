@@ -1,0 +1,5 @@
+<div class="controls <%= image.status %>">
+  <%= link_to_if (image.status != 'approved'), 'Approve', approve_image_path(image), remote: true %>
+  |
+  <%= link_to_if (image.status != 'banned'), 'Ban', ban_image_path(image), remote: true %>
+</div>

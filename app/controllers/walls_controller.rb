@@ -1,6 +1,6 @@
 class WallsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_wall, only: [:show, :edit, :update, :destroy, :frame]
+  before_action :set_wall, only: [:show, :edit, :update, :destroy, :frame, :control]
 
   # GET /walls
   def index
@@ -46,6 +46,10 @@ class WallsController < ApplicationController
   def destroy
     @wall.destroy
     redirect_to walls_url, notice: 'Wall was successfully destroyed.'
+  end
+
+  def control
+    @images = @wall.images.order("id DESC")
   end
 
   # Renders a partial with new set of images
