@@ -15,3 +15,5 @@
 //= require turbolinks
 //= require angular.min
 //= require_tree .
+//= require websocket_rails/main
+

@@ -2,8 +2,15 @@
 
 <div id="control">
 <% @images.each do |image| %>
-  <div id="image_<%= image.id %>" class="box" style="background-image: url('<%= image.url %>');">
-    <%= render 'approve_menu', image: image %>
-  </div>
+  <%= render image %>
 <% end %>
 </div>
+
+<script>
+  var dispatcher = new WebSocketRails('<%= request.host_with_port %>/websocket');
+  channel = dispatcher.subscribe('image_control_<%= @wall.id %>');
+  channel.bind('new', function(image_box_partial) {
+    console.log('New photo data arrived!');
+    $("#control").prepend(image_box_partial);
+  });
+</script>
