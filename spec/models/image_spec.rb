@@ -6,7 +6,7 @@ describe Image do
     let(:wall) { FactoryGirl.create :wall, require_image_approval: false }
     let(:image) { FactoryGirl.create :image, wall: wall }
 
-    it "sets status to pending approval" do
+    it "sets status to approved" do
       expect(image.status).to eq('approved')
     end
   end
