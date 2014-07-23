@@ -22,21 +22,14 @@ class InstagramController < ApplicationController
       hub_challenge = params['hub.challenge'.to_sym]
       render text: hub_challenge
     elsif request.post?
-      get_images
+      get_instagram_images
       render nothing: true
     end
   end
 
-  def get_images
-   tag = Instagram.subscriptions.first['object_id']
-    images = Instagram.tag_recent_media(tag)
-    images.each do |image|
-      unless Image.find_by_original_id(image.id).present?
-        Image.create(
-          original_id: image.id,
-          user_id: image.user.id,
-          url: image.images.standard_resolution.url)
-      end
-    end
+  def get_instagram_images
+    instagram_hashtag = params['_json'][0]['object_id']
+    wall = Wall.find_by_instagram_hashtag(instagram_hashtag)
+    wall.get_instagram_images
   end
 end

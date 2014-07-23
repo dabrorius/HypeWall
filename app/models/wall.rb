@@ -12,22 +12,23 @@ class Wall < ActiveRecord::Base
   has_many :wall_roles
   has_many :images
 
-  def instagram_subscribe
+  def instagram_subscribe(webhook)
     Thread.new do |t|
-      Instagram.create_subscription('tag', "#{root_url}instagram/webhook", object_id: instagram_hashtag)
-      get_images
+      Instagram.create_subscription('tag', "#{webhook}", object_id: instagram_hashtag)
+      get_instagram_images
       t.exit
     end
   end
 
-  def get_images
+  def get_instagram_images()
     images = Instagram.tag_recent_media(instagram_hashtag)
     images.each do |image|
       unless Image.find_by_original_id(image.id).present?
         Image.create(
           original_id: image.id,
           user_id: image.user.id,
-          url: image.images.standard_resolution.url)
+          url: image.images.standard_resolution.url,
+          wall_id: self.id)
       end
     end
   end

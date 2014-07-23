@@ -1,6 +1,6 @@
 class WallsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_wall, only: [:show, :edit, :update, :destroy, :frame, :control]
+  before_action :set_wall, only: [:show, :edit, :update, :destroy, :frame]
 
   # GET /walls
   def index
@@ -27,7 +27,7 @@ class WallsController < ApplicationController
     @wall = Wall.new(wall_params)
     if @wall.save
       WallRole.create(user: current_user, wall: @wall)
-      @wall.instagram_subscribe
+      @wall.instagram_subscribe("#{root_url}instagram/webhook")
       redirect_to edit_wall_path(@wall), notice: 'Wall was successfully created.'
     else
       render :new
@@ -47,10 +47,6 @@ class WallsController < ApplicationController
   def destroy
     @wall.destroy
     redirect_to walls_url, notice: 'Wall was successfully destroyed.'
-  end
-
-  def control
-    @images = @wall.images.order("id DESC")
   end
 
   # Renders a partial with new set of images
