@@ -41,6 +41,7 @@ gem "activerecord-session_store"
 gem 'websocket-rails'
 
 group :test do
+  gem "minitest"
   gem 'rspec-rails', '~> 3.0.0'
   gem 'capybara', '2.2.0'
   gem 'poltergeist', '1.5.0'

@@ -24,6 +24,10 @@
     <%= f.text_area :description, class: 'form-control large-textarea' %>
   </div>
   <div class="form-group">
+    <%= f.check_box :require_image_approval %>
+    <%= f.label :require_image_approval %>
+  </div>
+  <div class="form-group">
     <%= f.label :logo %></br>
     <%= image_tag @wall.logo.url %></br>
     <%= f.file_field :logo %>

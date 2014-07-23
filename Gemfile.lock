@@ -245,6 +245,7 @@ DEPENDENCIES
   instagram
   jbuilder (~> 2.0)
   jquery-rails
+  minitest
   newrelic_rpm
   paperclip!
   pg

@@ -72,12 +72,12 @@ class WallsController < ApplicationController
 
     images_per_frame = 4
     # Fetch images that have just been uploaded
-    new_images = @wall.images.where('id > ?', newest_in_circulation).order('id ASC').limit(4)
+    new_images = @wall.images.approved.where('id > ?', newest_in_circulation).order('id ASC').limit(4)
 
     # Fetch images that come after the last presented
-    old_images_next = @wall.images.where('id > ?', last_presented).order('id ASC').limit(images_per_frame - new_images.count)
+    old_images_next = @wall.images.approved.where('id > ?', last_presented).order('id ASC').limit(images_per_frame - new_images.count)
     # Fetch images from the begining of cyclus if full circle was made
-    old_images_previous = @wall.images.order('id ASC').limit(images_per_frame - new_images.count - old_images_next.count)
+    old_images_previous = @wall.images.approved.order('id ASC').limit(images_per_frame - new_images.count - old_images_next.count)
     old_images = old_images_next.concat(old_images_previous)
 
     Rails.logger.debug "New images #{new_images.pluck(:id)}"
@@ -102,6 +102,6 @@ class WallsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def wall_params
-      params.require(:wall).permit(:name, :instagram_hashtag, :description, :background_image, :background_style, :logo)
+      params.require(:wall).permit(:name, :instagram_hashtag, :description, :background_image, :background_style, :logo, :require_image_approval)
     end
 end
