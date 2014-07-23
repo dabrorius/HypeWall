@@ -21,15 +21,17 @@ class Wall < ActiveRecord::Base
   end
 
   def get_instagram_images()
+    image_models = []
     images = Instagram.tag_recent_media(instagram_hashtag)
     images.each do |image|
       unless Image.find_by_original_id(image.id).present?
-        Image.create(
+        image_models.push Image.create(
           original_id: image.id,
           user_id: image.user.id,
           url: image.images.standard_resolution.url,
           wall_id: self.id)
       end
     end
+    return image_models
   end
 end
