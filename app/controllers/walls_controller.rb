@@ -1,6 +1,6 @@
 class WallsController < ApplicationController
-  before_action :authenticate_user!, except: [:show]
-  before_action :set_wall, only: [:edit, :update, :destroy, :frame, :control]
+  before_action :authenticate_user!, except: [:show, :frame]
+  before_action :set_wall, only: [:edit, :update, :destroy, :control]
 
   # GET /walls
   def index
@@ -63,6 +63,7 @@ class WallsController < ApplicationController
   # Renders a partial with new set of images
   # It's animated and added to wall
   def frame
+    @wall = Wall.find(params[:id])
     # Instance of wall, it's uniqe to each opened window.
     # This enables using multiple parallel walls
     instance_id = params[:instance_id]

@@ -40,6 +40,9 @@ gem "activerecord-session_store"
 # Two way comunication with browser
 gem 'websocket-rails'
 
+# Amazon web services (uploading stuff on heroku)
+gem 'aws-sdk'
+
 group :test do
   gem "minitest"
   gem 'rspec-rails', '~> 3.0.0'
