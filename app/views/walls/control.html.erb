@@ -7,7 +7,7 @@
 </div>
 
 <script>
-  var dispatcher = new WebSocketRails('http://<%= request.host_with_port %>/websocket');
+  var dispatcher = new WebSocketRails('<%= websocket_host %>');
   channel = dispatcher.subscribe('image_control_<%= @wall.id %>');
   channel.bind('new', function(image_box_partial) {
     console.log('New photo data arrived!');
