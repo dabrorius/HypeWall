@@ -8,14 +8,14 @@ class Wall < ActiveRecord::Base
   validates_attachment_content_type :background_image, :content_type => /\Aimage\/.*\Z/
   validates_attachment_content_type :logo, :content_type => /\Aimage\/.*\Z/
 
-  validates :instagram_hashtag, uniqueness: true
+  validates :hashtag, uniqueness: true
 
   has_many :wall_roles
   has_many :images
 
   def instagram_subscribe(webhook)
     Thread.new do |t|
-      Instagram.create_subscription('tag', "#{webhook}", object_id: instagram_hashtag)
+      Instagram.create_subscription('tag', "#{webhook}", object_id: hashtag)
       get_instagram_images
       t.exit
     end
@@ -23,7 +23,7 @@ class Wall < ActiveRecord::Base
 
   def get_instagram_images()
     image_models = []
-    images = Instagram.tag_recent_media(instagram_hashtag)
+    images = Instagram.tag_recent_media(hashtag)
     images.each do |image|
       unless Image.find_by_original_id(image.id).present?
         image_models.push Image.create(

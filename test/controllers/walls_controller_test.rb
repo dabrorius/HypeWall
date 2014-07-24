@@ -18,7 +18,7 @@ class WallsControllerTest < ActionController::TestCase
 
   test "should create wall" do
     assert_difference('Wall.count') do
-      post :create, wall: { description: @wall.description, instagram_hashtag: @wall.instagram_hashtag, name: @wall.name }
+      post :create, wall: { description: @wall.description, hashtag: @wall.hashtag, name: @wall.name }
     end
 
     assert_redirected_to wall_path(assigns(:wall))
@@ -35,7 +35,7 @@ class WallsControllerTest < ActionController::TestCase
   end
 
   test "should update wall" do
-    patch :update, id: @wall, wall: { description: @wall.description, instagram_hashtag: @wall.instagram_hashtag, name: @wall.name }
+    patch :update, id: @wall, wall: { description: @wall.description, hashtag: @wall.hashtag, name: @wall.name }
     assert_redirected_to wall_path(assigns(:wall))
   end
 

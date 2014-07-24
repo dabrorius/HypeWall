@@ -2,10 +2,10 @@
 
 one:
   name: MyString
-  instagram_hashtag: MyString
+  hashtag: MyString
   description: MyText
 
 two:
   name: MyString
-  instagram_hashtag: MyString
+  hashtag: MyString
   description: MyText
