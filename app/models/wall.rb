@@ -21,7 +21,7 @@ class Wall < ActiveRecord::Base
     end
   end
 
-  def get_instagram_images()
+  def get_instagram_images
     image_models = []
     images = Instagram.tag_recent_media(hashtag)
     images.each do |image|
