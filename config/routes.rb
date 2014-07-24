@@ -18,8 +18,6 @@ Rails.application.routes.draw do
 
   get 'instagram/webhook' => 'instagram#webhook'
   post 'instagram/webhook' => 'instagram#webhook'
-  get 'instagram/new_subscription' => 'instagram#new_subscription'
-  post 'instagram/create_subscription' => 'instagram#create_subscription', as: "create_subscription"
 
   get "dashboard" => "walls#index"
   root "pages#landing"
