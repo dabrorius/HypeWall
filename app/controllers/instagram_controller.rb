@@ -14,8 +14,7 @@ class InstagramController < ApplicationController
   def get_instagram_images
     hashtag = params['_json'][0]['object_id']
     wall = Wall.find_by_hashtag(hashtag)
-    new_images = wall.get_instagram_images
-    new_images.each do |image|
+    wall.new_images.each do |image|
       push_to_image_control image
     end
   end
