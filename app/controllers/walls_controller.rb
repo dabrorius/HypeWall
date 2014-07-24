@@ -1,6 +1,6 @@
 class WallsController < ApplicationController
   before_action :authenticate_user!, except: [:show]
-  before_action :set_wall, only: [:show, :edit, :update, :destroy, :frame, :control]
+  before_action :set_wall, only: [:edit, :update, :destroy, :frame, :control]
 
   # GET /walls
   def index
@@ -9,6 +9,7 @@ class WallsController < ApplicationController
 
   # GET /walls/1
   def show
+    @wall = Wall.find(params[:id])
     @wall_instance_id = SecureRandom.uuid
     render layout: 'application_fullscreen'
   end
