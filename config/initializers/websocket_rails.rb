@@ -28,8 +28,12 @@ WebsocketRails.setup do |config|
   # Uncomment and edit to point to a different redis instance.
   # Will not be used unless standalone or synchronization mode
   # is enabled.
-  # config.redis_options = {:host => 'localhost', :port => '6379'}
-
+  config.redis_options = {
+    username: 'rediscloud',
+    password: 'OMMYWljCtAga9DZk',
+    host: 'pub-redis-16809.eu-west-1-1.2.ec2.garantiadata.com',
+    port: '16809'
+  }
   # By default, all subscribers in to a channel will be removed
   # when that channel is made private. If you don't wish active
   # subscribers to be removed from a previously public channel
@@ -37,7 +41,7 @@ WebsocketRails.setup do |config|
   # config.keep_subscribers_when_private = false
 
   # Set to true if you wish to broadcast channel subscriber_join and
-  # subscriber_part events. All subscribers of a channel will be 
+  # subscriber_part events. All subscribers of a channel will be
   # notified when other clients join and part the channel. If you are
   # using the UserManager, the current_user object will be sent along
   # with the event.
