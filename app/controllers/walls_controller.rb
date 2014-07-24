@@ -37,7 +37,13 @@ class WallsController < ApplicationController
 
   # PATCH/PUT /walls/1
   def update
+    @old_hashtag = @wall.hashtag.dup
     if @wall.update(wall_params)
+      if @wall.hashtag != @old_hashtag
+        @wall.instagram_unsubscribe
+        @wall.images.destroy_all
+        @wall.instagram_subscribe("#{root_url}instagram/webhook")
+      end
       redirect_to edit_wall_path(@wall), notice: 'Wall was successfully updated.'
     else
       render :edit

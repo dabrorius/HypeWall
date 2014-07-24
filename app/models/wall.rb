@@ -39,4 +39,13 @@ class Wall < ActiveRecord::Base
   def new_images
     recent_instagram_images
   end
+
+  def instagram_subscription
+    (Instagram.subscriptions.select{ |subscription|
+      subscription['object_id'] == self.hashtag }).first
+  end
+
+  def instagram_unsubscribe
+    Instagram.delete_subscription(id: instagram_subscription.id)
+  end
 end
