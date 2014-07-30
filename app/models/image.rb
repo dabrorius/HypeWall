@@ -1,7 +1,9 @@
 class Image < ActiveRecord::Base
 
   belongs_to :wall
+
   validates :status, presence: true
+  validates :wall, presence: true
 
   before_validation :set_status
   def set_status
