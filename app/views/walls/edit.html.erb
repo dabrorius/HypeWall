@@ -1,7 +1,35 @@
-<h1>Editing wall</h1>
+<div  id="wall-edit-preview"
+      style="background-image: url('<%= @wall.background_image.url %>');"
+      class="<%= @wall.background_style %>">
 
-<%= render 'form' %>
+<div id="info">
 
-<%= link_to 'Show', @wall %> |
-<%= link_to 'Destroy', @wall, method: :delete %> |
-<%= link_to 'Back', walls_path %>
+    <%= image_tag @wall.logo.url, class: 'logo' %>
+    <div class="logo-tool-box tool-box">
+      <%= form_for(@wall, class: 'form') do |f| %>
+        <div class="form-group">
+          <%= f.label :logo %>
+          <%= f.file_field :logo %>
+        </div>
+        <%= f.submit "Upload", class: "btn btn-primary" %>
+      <% end %>
+    </div>
+    <div class="description">
+      <%= parse_hypecode @wall.description %>
+    </div>
+</div>
+
+
+<div id="bg-select" class="tool-box">
+  <%= form_for(@wall, class: 'form') do |f| %>
+    <div class="form-group">
+      <%= f.label :background_image %>
+      <%= f.file_field :background_image%>
+    </div>
+    <div class="form-group">
+      <%= f.label :background_style %></br>
+      <%= f.select :background_style, Wall::BACKGROUND_STYLES %>
+    </div>
+    <%= f.submit "Update", class: "btn btn-primary" %>
+  <% end %>
+</div>
