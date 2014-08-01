@@ -10,6 +10,16 @@ body, html {
   bottom: 0;
   background-color: black;
 
+  .description-editor {
+    margin-left: auto;
+    margin-right: auto;
+    width: 500px;
+
+    textarea {
+      height: 300px;
+    }
+  }
+
   .tool-box {
     background-color: white;
     border: 2px solid #ddd;

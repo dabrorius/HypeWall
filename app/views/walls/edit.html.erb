@@ -23,8 +23,23 @@
       <% end %>
     </div>
 
-    <div class="description">
+    <div class="description" data-tool-box-open="edit-description">
       <%= parse_hypecode @wall.description %>
+      <button class="btn btn-default" data-tool-box-open="edit-description">
+        <i class="fa fa-edit"></i> Edit description
+      </button>
+    </div>
+    <div class="tool-box hide description-editor" data-tool-box="edit-description">
+      <%= form_for(@wall, class: 'form') do |f| %>
+        <div class="form-group">
+          <%= f.label :description %>
+          <%= f.text_area :description, class: 'form-control large-textarea' %>
+        </div>
+        <div class="form-group">
+          <%= f.submit class: "btn btn-primary" %>
+          <div class="btn btn-default" data-tool-box-close="edit-description">Cancel</div>
+        </div>
+      <% end %>
     </div>
 
 
