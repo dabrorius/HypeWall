@@ -5,31 +5,48 @@
 <div id="info">
 
     <%= image_tag @wall.logo.url, class: 'logo' %>
-    <div class="logo-tool-box tool-box">
+
+    <!-- Logo upload -->
+    <p>
+      <button class="btn btn-default" data-tool-box-open="change-logo">
+        <i class="fa fa-upload"></i> Change logo
+      </button>
+    <p>
+    <div class="logo-tool-box tool-box hide" data-tool-box="change-logo">
       <%= form_for(@wall, class: 'form') do |f| %>
         <div class="form-group">
           <%= f.label :logo %>
           <%= f.file_field :logo %>
         </div>
         <%= f.submit "Upload", class: "btn btn-primary" %>
+        <div class="btn btn-default" data-tool-box-close="change-logo">Cancel</div>
       <% end %>
     </div>
+
     <div class="description">
       <%= parse_hypecode @wall.description %>
     </div>
+
+
+    <!-- Background upload -->
+    <button id="btn-bg-select" class="btn btn-default" data-tool-box-open="change-bg">
+      <i class="fa fa-upload"></i> Change background
+    </button>
+    <div id="bg-select" class="tool-box hide" data-tool-box="change-bg">
+      <%= form_for(@wall, class: 'form') do |f| %>
+        <div class="form-group">
+          <%= f.label :background_image %>
+          <%= f.file_field :background_image%>
+        </div>
+        <div class="form-group">
+          <%= f.label :background_style %></br>
+          <%= f.select :background_style, Wall::BACKGROUND_STYLES %>
+        </div>
+        <%= f.submit "Update", class: "btn btn-primary" %>
+        <div class="btn btn-default" data-tool-box-close="change-bg">Cancel</div>
+      <% end %>
+    </div>
+
 </div>
 
 
-<div id="bg-select" class="tool-box">
-  <%= form_for(@wall, class: 'form') do |f| %>
-    <div class="form-group">
-      <%= f.label :background_image %>
-      <%= f.file_field :background_image%>
-    </div>
-    <div class="form-group">
-      <%= f.label :background_style %></br>
-      <%= f.select :background_style, Wall::BACKGROUND_STYLES %>
-    </div>
-    <%= f.submit "Update", class: "btn btn-primary" %>
-  <% end %>
-</div>

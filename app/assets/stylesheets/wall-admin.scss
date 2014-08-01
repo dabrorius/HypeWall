@@ -24,15 +24,17 @@ body, html {
   }
 
   #bg-select {
-    opacity: 0.8;
     position: absolute;
     right: 10px;
     top: 10px;
   }
 
-  #bg-select:hover {
-    opacity: 1;
+  #btn-bg-select {
+    position: absolute;
+    right: 10px;
+    top: 10px;
   }
+
 }
 
 .wall-list {
