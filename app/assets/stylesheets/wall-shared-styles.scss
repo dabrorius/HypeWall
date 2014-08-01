@@ -1,0 +1,45 @@
+.stretch {
+  background-repeat:no-repeat;
+  background-attachment:fixed;
+  background-position:center;
+  background-size: auto 100%;
+}
+
+.center {
+  background-repeat:no-repeat;
+  background-attachment:fixed;
+  background-position:center;
+}
+
+.tile {
+  background-repeat: repeat;
+}
+
+#info {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  text-align: center;
+
+  .logo {
+    margin-top: 50px;
+  }
+
+  .description {
+    color: white;
+    font-family: helvetica;
+    font-size: 40px;
+    text-shadow:
+     -1px -1px 0 #000,
+      1px -1px 0 #000,
+      -1px 1px 0 #000,
+       1px 1px 0 #000;
+    overflow: hidden;
+
+    .large {
+      font-size: 80px;
+    }
+  }
+}

@@ -1,13 +1,15 @@
-<div class="wall-list">
+<div class="container">
+  <div class="wall-list">
 
-  <% @walls.each do |wall| %>
-    <div style="background-image: url('<%= wall.background_image.url(:thumb) %>')" class="box">
-      <h1> <%= link_to wall.name, wall %> </h1>
-      <%= link_to 'Edit', edit_wall_path(wall), :class => 'edit' %>
-    </div>
-  <% end %>
+    <% @walls.each do |wall| %>
+      <div style="background-image: url('<%= wall.background_image.url(:thumb) %>')" class="box">
+        <h1> <%= link_to wall.name, wall %> </h1>
+        <%= link_to 'Edit', edit_wall_path(wall), :class => 'edit' %>
+      </div>
+    <% end %>
 
+  </div>
+  <div style="clear:both;"></div>
+
+  <%= link_to 'New Wall', new_wall_path, class: 'btn btn-primary' %>
 </div>
-<div style="clear:both;"></div>
-
-<%= link_to 'New Wall', new_wall_path, class: 'btn btn-primary' %>

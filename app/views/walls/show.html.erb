@@ -3,9 +3,9 @@
   <p>
     <%= image_tag @wall.logo.url %>
   </p>
-  <p>
+  <div class="description">
     <%= parse_hypecode @wall.description %>
-  </p>
+  </div>
 </div>
 
 <div id="wall" class="wall" data-frames-url="<%= frame_wall_path(@wall,@wall_instance_id) %>"></div>
