@@ -8,13 +8,21 @@
       <tr>
         <th>Name</th>
         <th class="tool-column">Edit</th>
+        <th class="tool-column">Control</th>
         <th class="tool-column">Delete</th>
       </tr>
       <% @walls.each do |wall| %>
         <tr>
           <td> <%= link_to wall.name, wall %> </td>
-          <td class="tool-column"> <%= link_to edit_wall_path(wall) do %> <i class="fa fa-pencil"></i> <% end %> </td>
-          <td class="tool-column"> <%= link_to wall, method: :delete do %> <i class="fa fa-times"></i> <% end %> </td>
+          <td class="tool-column">
+            <%= link_to edit_wall_path(wall) do %> <i class="fa fa-pencil"></i> <% end %>
+          </td>
+          <td class="tool-column">
+            <%= link_to control_wall_path(wall) do %> <i class="fa fa-eye"></i> <% end %>
+          </td>
+          <td class="tool-column">
+            <%= link_to wall, method: :delete do %> <i class="fa fa-times"></i> <% end %>
+          </td>
         </tr>
       <% end %>
     </table>
