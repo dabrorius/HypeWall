@@ -48,50 +48,11 @@ body, html {
 
 }
 
-.wall-list {
- .box {
-    width: 32%;
-    height: 150px;
-    background-color: #ddd;
-    margin-bottom: 10px;
-    border: 3px solid #ddd;
-    float: left;
-    margin-right: 1%;
-    position: relative;
-
-    .edit {
-      display: block;
-      position: absolute;
-      bottom: 5px;
-      right: 5px;
-    }
-  }
-
-  h1 {
-  line-height: 20px;
-  background-color: #000;
-  background-color: rgba(1,1,1,0.65);
-  width: 100%;
-  margin-top: 0;
-  font-size: 20px;
-
-   a {
-    color: white;
-    padding: 10px;
-    display: block;
-   }
-
-   a:hover {
-    text-decoration: none;
-    color: #ddd;
-
-   }
-  }
+.tool-column {
+  width: 80px;
+  text-align: center;
 }
 
-.wall-list:after {
-  clear: both;
-}
 
 #control {
   .box {

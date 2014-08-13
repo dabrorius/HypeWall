@@ -1,15 +1,42 @@
 <div class="container">
   <div class="wall-list">
 
-    <% @walls.each do |wall| %>
-      <div style="background-image: url('<%= wall.background_image.url(:thumb) %>')" class="box">
-        <h1> <%= link_to wall.name, wall %> </h1>
-        <%= link_to 'Edit', edit_wall_path(wall), :class => 'edit' %>
-      </div>
+
+  <% if @walls.any? %>
+    <h1>My walls</h1>
+    <table class="table table-hover">
+      <tr>
+        <th>Name</th>
+        <th class="tool-column">Edit</th>
+        <th class="tool-column">Delete</th>
+      </tr>
+      <% @walls.each do |wall| %>
+        <tr>
+          <td> <%= link_to wall.name, wall %> </td>
+          <td class="tool-column"> <%= link_to edit_wall_path(wall) do %> <i class="fa fa-pencil"></i> <% end %> </td>
+          <td class="tool-column"> <%= link_to wall, method: :delete do %> <i class="fa fa-times"></i> <% end %> </td>
+        </tr>
+      <% end %>
+    </table>
+    <%= link_to new_wall_path, class: 'btn btn-primary' do %>
+      <i class="fa fa-plus"></i> New Wall
     <% end %>
+  <% else %>
+    <div class="jumbotron">
+      <h1>Create your first wall</h1>
+      <p>
+        It seems you are new around here. </br>
+        Don't worry you will have your first HypeWall running in no time.
+      </p>
+      <p>
+        <%= link_to new_wall_path, class: 'btn btn-primary btn-lg' do %>
+          <i class="fa fa-plus"></i> Create my wall
+        <% end %>
+      </p>
+
+    </div>
+  <% end %>
 
   </div>
-  <div style="clear:both;"></div>
 
-  <%= link_to 'New Wall', new_wall_path, class: 'btn btn-primary' %>
 </div>
