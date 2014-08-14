@@ -21,7 +21,7 @@
             <%= link_to control_wall_path(wall) do %> <i class="fa fa-eye"></i> <% end %>
           </td>
           <td class="tool-column">
-            <%= link_to wall, method: :delete do %> <i class="fa fa-times"></i> <% end %>
+            <%= link_to wall, method: :delete, data: { confirm: "Are you sure?" } do %> <i class="fa fa-times"></i> <% end %>
           </td>
         </tr>
       <% end %>
