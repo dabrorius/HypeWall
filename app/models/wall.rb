@@ -48,4 +48,5 @@ class Wall < ActiveRecord::Base
   def instagram_unsubscribe
     Instagram.delete_subscription(id: instagram_subscription.id)
   end
+
 end

@@ -11,34 +11,23 @@
     </div>
   <% end %>
 
-  <div class="form-group">
-    <%= f.label :name %>
-    <%= f.text_field :name, class: 'form-control' %>
-  </div>
-  <div class="form-group">
-    <%= f.label :hashtag %>
-    <%= f.text_field :hashtag, class: 'form-control' %>
-  </div>
-  <div class="form-group">
-    <%= f.label :description %>
-    <%= f.text_area :description, class: 'form-control large-textarea' %>
-  </div>
-  <div class="form-group">
-    <%= f.check_box :require_image_approval %>
-    <%= f.label :require_image_approval %>
-  </div>
-  <div class="form-group">
-    <%= f.label :logo %></br>
-    <%= image_tag @wall.logo.url %></br>
-    <%= f.file_field :logo %>
-  </div>
-  <div class="form-group">
-    <%= f.label :background_image %></br>
-    <%= image_tag @wall.background_image.url %></br>
-    <%= f.file_field :background_image %>
-    <%= f.select :background_style, Wall::BACKGROUND_STYLES %>
-  </div>
-  <div class="form-group">
-    <%= f.submit class: "btn btn-primary" %>
+  <div class="row">
+    <div class="col-xs-4">
+      <div class="form-group">
+        <%= f.label :name %>
+        <%= f.text_field :name, class: 'form-control' %>
+      </div>
+      <div class="form-group">
+        <%= f.label :hashtag %>
+        <%= f.text_field :hashtag, class: 'form-control' %>
+      </div>
+      <div class="form-group">
+        <%= f.check_box :require_image_approval %>
+        <%= f.label :require_image_approval %>
+      </div>
+      <div class="form-group">
+        <%= f.submit class: "btn btn-primary" %>
+      </div>
+    </div>
   </div>
 <% end %>
