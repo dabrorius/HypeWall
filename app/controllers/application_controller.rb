@@ -6,4 +6,8 @@ class ApplicationController < ActionController::Base
   def push_to_image_control(image)
     WebsocketRails[:"image_control_#{image.wall.id}"].trigger 'new', render_to_string(image)
   end
+
+  def after_sign_in_path_for(resource)
+	  dashboard_path
+	end
 end
