@@ -4,6 +4,7 @@ class WallsController < ApplicationController
 
   # GET /walls
   def index
+    @menu = 'dashboard'
     @walls = current_user.walls
   end
 

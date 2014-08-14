@@ -18,7 +18,7 @@
     <div class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <% if current_user %>
-          <li class="active"><%= link_to 'Dashboard', dashboard_path %></a></li>
+          <li class="<%= 'active' if @menu == 'dashboard' %>"><%= link_to 'Dashboard', dashboard_path %></a></li>
         <% end %>
       </ul>
       <ul class="nav navbar-nav navbar-right">

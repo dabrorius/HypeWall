@@ -1,16 +1,18 @@
-<h1>Images control</h1>
+<div class="container">
+  <h1>Images control</h1>
 
-<div id="control">
-<% @images.each do |image| %>
-  <%= render image %>
-<% end %>
+  <div id="control">
+  <% @images.each do |image| %>
+    <%= render image %>
+  <% end %>
+  </div>
+
+  <script>
+    var dispatcher = new WebSocketRails('<%= websocket_host %>');
+    channel = dispatcher.subscribe('image_control_<%= @wall.id %>');
+    channel.bind('new', function(image_box_partial) {
+      console.log('New photo data arrived!');
+      $("#control").prepend(image_box_partial);
+    });
+  </script>
 </div>
-
-<script>
-  var dispatcher = new WebSocketRails('<%= websocket_host %>');
-  channel = dispatcher.subscribe('image_control_<%= @wall.id %>');
-  channel.bind('new', function(image_box_partial) {
-    console.log('New photo data arrived!');
-    $("#control").prepend(image_box_partial);
-  });
-</script>
