@@ -1,1 +1,1 @@
-Rails.application.config.assets.precompile += %w( application_fullscreen.css )
+Rails.application.config.assets.precompile += %w( application_fullscreen.css landing.css )

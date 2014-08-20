@@ -1,0 +1,22 @@
+body { 
+  background-image: url('/assets/landing.jpg');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+.landing-body {
+  background-color: white;
+  min-height: 1000px;
+}
+
+#banner {
+  height: 600px;
+}
+
+#banner-content {
+  color: white;
+  font-size: 60px;
+  width: 100%;
+  text-align: center;
+  margin-top: 230px;
+}
