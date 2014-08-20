@@ -103,6 +103,14 @@ class WallsController < ApplicationController
     render layout: false
   end
 
+  def upload_images
+    @wall = Wall.find(params[:id])
+    params['wall']['images_attributes'].each do |image|
+      UploadedImage.create(wall: @wall, status: 'approved')
+    end
+    redirect_to control_wall_path
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_wall

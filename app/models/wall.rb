@@ -14,6 +14,8 @@ class Wall < ActiveRecord::Base
   has_many :wall_roles
   has_many :images
 
+  accepts_nested_attributes_for :images, :allow_destroy => true
+
   def instagram_subscribe(webhook)
     Thread.new do |t|
       Instagram.create_subscription('tag', "#{webhook}", object_id: hashtag)

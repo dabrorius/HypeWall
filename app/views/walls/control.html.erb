@@ -1,6 +1,17 @@
 <div class="container">
   <h1>Images control</h1>
 
+  <div class="tool-box" data-tool-box="change-logo">
+    <%= form_for(@wall, url: 'upload_images', method: :partialost, class: 'form') do |f| %>
+      <div class="form-group">
+        <%= f.label :logo %>
+        <%= file_field_tag('wall_images_attributes_file', multiple: true, name: "wall[images_attributes][][file]") %>
+      </div>
+      <%= f.submit "Upload", class: "btn btn-primary" %>
+      <div class="btn btn-default" data-tool-box-close="change-logo">Cancel</div>
+    <% end %>
+  </div>
+
   <div id="control">
   <% @images.each do |image| %>
     <%= render partial: 'images/image', locals: { image: image } %>

@@ -13,6 +13,7 @@ Rails.application.routes.draw do
     member do
       get 'frame/:instance_id' => "walls#frame", as: 'frame'
       get 'control' => "walls#control", as: 'control'
+      post 'upload_images' => "walls#upload_images", as: 'upload_images'
     end
   end
 
