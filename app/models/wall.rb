@@ -1,4 +1,9 @@
 class Wall < ActiveRecord::Base
+
+  def self.example
+    Wall.find(ENV['EXAMPLE_WALL_ID'])
+  end
+
   include Rails.application.routes.url_helpers
 
   BACKGROUND_STYLES = ['center','tile','stretch']
