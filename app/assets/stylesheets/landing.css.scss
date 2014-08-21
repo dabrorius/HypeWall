@@ -32,10 +32,57 @@ body {
     margin-bottom: 20px;
   }
 
-  .form {
-    .btn {
-      background-color: #fc224b;
-      border-color: #fc224b;
-    }
+}
+
+.feature {
+  border-bottom: 1px solid #ddd;
+  width: 100%;
+  padding: 40px 0;
+
+  .description {
+    font-size: 18px;
+    color: #555;
   }
+
+  .fa {
+    width: 40px;
+  }
+}
+
+.pricing {
+  width: 100%;
+  padding: 40px 0;
+}
+
+.feature-right {
+  text-align: right;
+}
+
+.btn-hype {
+  background-color: #fc224b;
+  border-color: #fc224b;
+}
+.get-started {
+  margin-top: 50px;
+
+  .description {
+    font-size: 18px;
+  }
+
+  .sign-up {
+    padding-top: 28px;
+  }
+}
+
+.strikeout {
+    position: relative;
+    color: #444;
+}
+.strikeout::after {
+    border-bottom: 3px solid #444;
+    content: "";
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 50%;
 }

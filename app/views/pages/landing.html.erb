@@ -10,8 +10,8 @@
         in less then 5 minutes.
       </div>
       <div class="form">
-        <div class="btn btn-primary btn-lg">
-          <i class="fa fa-bolt"></i>
+        <div class="btn btn-primary btn-lg btn-hype">
+          <i class="fa fa-play"></i>&nbsp;
           See it in action
         </div>
       </div>
@@ -20,19 +20,63 @@
 </div>
 <div class="landing-body">
 <div class="container">
-<h1>Social networks integration</h1>
-Collect photos from Instagram and Twitter hastag
-- social network ikone -
-<hr>
-<h1>Direct upload</h1>
-Upload photos directly from your local collection
-- neka upload slika -
-<hr>
-<h1>Moderation</h1>
-Require photo approval before showing
-<hr>
-<h1>Pricing</h1>
-Limited time free!
-<hr>
-Registration form
+  <div class="row">
+    <div class="col-md-6">
+      <div class="feature">
+        <h1><i class="fa fa-instagram icon"></i> Social integration</h1>
+        <span class="description">Collect photos from Instagram and Twitter hashtag.</span>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="feature">
+        <h1><i class="fa fa-upload"></i> Direct upload</h1>
+        <span class="description">Upload photos directly from your local collection.</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6">
+      <div class="feature">
+        <h1><i class="fa fa-wrench"></i> Wall customisation</h1>
+        <span class="description">Make your wall look and feel unique.</span>
+      </div>
+    </div>
+    <div class="col-md-6">
+       <div class="feature">
+        <h1><i class="fa fa-eye"></i> Moderation</h1>
+        <span class="description">Require photo approval before showing them on wall.</span>
+      </div>
+    </div>
+  </div>
+
+  <% unless current_user %>
+    <div class="jumbotron get-started">
+      <div class="row">
+        <div class="col-md-6">
+          <h1>Get started!</h1></br>
+          <h2><span class="strikeout">$20/month</span> FREE</h2>
+          <div class="description">You can use hypewall completely free while it is in beta!</div>
+        </div>
+        <div class="col-md-6 sign-up">
+          <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+            <%= devise_error_messages! %>
+            <div class="form-group">
+              <%= f.label :email %><br />
+              <%= f.email_field :email, autofocus: true, class: "form-control" %>
+            </div>
+            <div class="form-group">
+              <%= f.label :password %><br />
+              <%= f.password_field :password, autocomplete: "off", class: "form-control" %>
+            </div>
+            <div class="form-group">
+              <%= f.label :password_confirmation %><br />
+              <%= f.password_field :password_confirmation, autocomplete: "off", class: "form-control" %>
+            </div>
+            <div class="form-group"><%= f.submit "Sign up", class: "btn btn-primary btn-lg btn-hype btn-block" %></div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  <% end %>
 </div>
