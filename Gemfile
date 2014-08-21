@@ -1,5 +1,10 @@
 source 'https://rubygems.org'
 
+group :production do
+  # Heroku assets
+  gem 'rails_12factor'
+end
+
 # Track performance
 gem 'newrelic_rpm'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
