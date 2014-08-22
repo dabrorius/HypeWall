@@ -2,10 +2,11 @@
   <h1>Images control</h1>
 
   <div class="tool-box" data-tool-box="change-logo">
-    <%= form_for(@wall, url: 'upload_images', method: :partialost, class: 'form') do |f| %>
+    <%= form_for([@wall, UploadedImage.new], method: :post, html: { multipart: true }, class: 'form') do |f| %>
       <div class="form-group">
         <%= f.label :logo %>
-        <%= file_field_tag('wall_images_attributes_file', multiple: true, name: "wall[images_attributes][][file]") %>
+        <%#= file_field_tag('wall_images_attributes_file', multiple: true, name: "wall[images_attributes][][file]") %>
+        <%= f.file_field :attachment %>
       </div>
       <%= f.submit "Upload", class: "btn btn-primary" %>
       <div class="btn btn-default" data-tool-box-close="change-logo">Cancel</div>
