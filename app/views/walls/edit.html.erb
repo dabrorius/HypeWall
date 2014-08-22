@@ -4,12 +4,12 @@
 
 <div id="info">
 
-    <%= image_tag @wall.logo.url, class: 'logo' %>
+    <%= image_tag @wall.logo.url, class: 'logo' if @wall.has_logo? %>
 
     <!-- Logo upload -->
     <p>
       <button class="btn btn-default" data-tool-box-open="change-logo">
-        <i class="fa fa-upload"></i> Change logo
+        <i class="fa fa-upload"></i> <%= @wall.has_logo? ? 'Change logo' : 'Upload logo' %>
       </button>
     <p>
     <div class="logo-tool-box tool-box hide" data-tool-box="change-logo">
@@ -26,7 +26,7 @@
     <div class="description" data-tool-box-open="edit-description">
       <%= parse_hypecode @wall.description %>
       <button class="btn btn-default" data-tool-box-open="edit-description">
-        <i class="fa fa-edit"></i> Edit description
+        <i class="fa fa-edit"></i> <%= @wall.description.blank? ? "Add description" : "Edit description" %>
       </button>
     </div>
     <div class="tool-box hide description-editor" data-tool-box="edit-description">

@@ -1,7 +1,7 @@
 <div id="info">
   <br/>
   <p>
-    <%= image_tag @wall.logo.url %>
+    <%= image_tag @wall.logo.url, class: "logo" if @wall.has_logo? %>
   </p>
   <div class="description">
     <%= parse_hypecode @wall.description %>
