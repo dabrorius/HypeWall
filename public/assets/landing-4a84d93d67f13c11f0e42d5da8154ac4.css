@@ -1,0 +1,105 @@
+/* line 1, /Users/dabrorius/Dev/Rails/HypeWall/app/assets/stylesheets/landing.css.scss */
+body {
+  background-image: url("/assets/landing.jpg");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+/* line 7, /Users/dabrorius/Dev/Rails/HypeWall/app/assets/stylesheets/landing.css.scss */
+.landing-body {
+  background-color: white;
+}
+
+/* line 11, /Users/dabrorius/Dev/Rails/HypeWall/app/assets/stylesheets/landing.css.scss */
+#banner {
+  height: 600px;
+}
+
+/* line 15, /Users/dabrorius/Dev/Rails/HypeWall/app/assets/stylesheets/landing.css.scss */
+#banner-content {
+  width: 100%;
+  text-align: center;
+  margin-top: 180px;
+}
+/* line 20, /Users/dabrorius/Dev/Rails/HypeWall/app/assets/stylesheets/landing.css.scss */
+#banner-content .tagline {
+  color: white;
+  font-size: 60px;
+}
+/* line 25, /Users/dabrorius/Dev/Rails/HypeWall/app/assets/stylesheets/landing.css.scss */
+#banner-content .description {
+  color: #eee;
+  font-size: 20px;
+  width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 20px;
+}
+
+/* line 36, /Users/dabrorius/Dev/Rails/HypeWall/app/assets/stylesheets/landing.css.scss */
+.feature {
+  border-bottom: 1px solid #ddd;
+  width: 100%;
+  padding: 40px 0;
+}
+/* line 41, /Users/dabrorius/Dev/Rails/HypeWall/app/assets/stylesheets/landing.css.scss */
+.feature .description {
+  font-size: 18px;
+  color: #555;
+}
+/* line 46, /Users/dabrorius/Dev/Rails/HypeWall/app/assets/stylesheets/landing.css.scss */
+.feature .fa {
+  width: 40px;
+}
+
+/* line 51, /Users/dabrorius/Dev/Rails/HypeWall/app/assets/stylesheets/landing.css.scss */
+.pricing {
+  width: 100%;
+  padding: 40px 0;
+}
+
+/* line 56, /Users/dabrorius/Dev/Rails/HypeWall/app/assets/stylesheets/landing.css.scss */
+.feature-right {
+  text-align: right;
+}
+
+/* line 60, /Users/dabrorius/Dev/Rails/HypeWall/app/assets/stylesheets/landing.css.scss */
+.btn-hype {
+  background-color: #fc224b;
+  border-color: #fc224b;
+}
+
+/* line 65, /Users/dabrorius/Dev/Rails/HypeWall/app/assets/stylesheets/landing.css.scss */
+.btn-hype:hover {
+  background-color: #fc3355;
+  border-color: #fc3355;
+}
+
+/* line 70, /Users/dabrorius/Dev/Rails/HypeWall/app/assets/stylesheets/landing.css.scss */
+.get-started {
+  margin-top: 50px;
+}
+/* line 73, /Users/dabrorius/Dev/Rails/HypeWall/app/assets/stylesheets/landing.css.scss */
+.get-started .description {
+  font-size: 18px;
+}
+/* line 77, /Users/dabrorius/Dev/Rails/HypeWall/app/assets/stylesheets/landing.css.scss */
+.get-started .sign-up {
+  padding-top: 28px;
+}
+
+/* line 82, /Users/dabrorius/Dev/Rails/HypeWall/app/assets/stylesheets/landing.css.scss */
+.strikeout {
+  position: relative;
+  color: #444;
+}
+
+/* line 86, /Users/dabrorius/Dev/Rails/HypeWall/app/assets/stylesheets/landing.css.scss */
+.strikeout::after {
+  border-bottom: 3px solid #444;
+  content: "";
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 50%;
+}
