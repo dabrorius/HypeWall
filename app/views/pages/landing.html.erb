@@ -10,9 +10,11 @@
         in less then 5 minutes.
       </div>
       <div class="form">
-        <%= link_to Wall.example, class: "btn btn-primary btn-lg btn-hype", target: "_blank" do %>
-          <i class="fa fa-play"></i>&nbsp;
-          See it in action
+        <% if Wall.example %>
+          <%= link_to Wall.example, class: "btn btn-primary btn-lg btn-hype", target: "_blank" do %>
+            <i class="fa fa-play"></i>&nbsp;
+            See it in action
+          <% end %>
         <% end %>
       </div>
     </div>

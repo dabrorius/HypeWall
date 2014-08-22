@@ -1,7 +1,7 @@
 class Wall < ActiveRecord::Base
 
   def self.example
-    Wall.find(ENV['EXAMPLE_WALL_ID'])
+    Wall.find_by_id(ENV['EXAMPLE_WALL_ID'] || 1)
   end
 
   include Rails.application.routes.url_helpers
