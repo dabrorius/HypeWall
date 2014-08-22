@@ -14,7 +14,10 @@ class ImagesController < ApplicationController
 
   def create
     @wall = current_user.walls.find(params[:id])
-    UploadedImage.create(uploaded_image_params.merge(status: 'approved').merge(wall: @wall))
+    params[:images_attributes].each_with_index do |image, index|
+      UploadedImage.create(uploaded_image_params(index).merge(status: 'approved').merge(wall: @wall))
+    end
+    # UploadedImage.create(uploaded_image_params.merge(status: 'approved').merge(wall: @wall))
     redirect_to control_wall_path(@wall)
   end
 
@@ -24,7 +27,7 @@ class ImagesController < ApplicationController
       @image = current_user.images.find(params[:id])
     end
 
-    def uploaded_image_params
-      params.require(:uploaded_image).permit(:attachment)
+    def uploaded_image_params(index)
+      params.require(:images_attributes)[index].permit(:attachment)
     end
 end
