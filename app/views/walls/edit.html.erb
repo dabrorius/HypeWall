@@ -3,7 +3,6 @@
       class="<%= @wall.background_style %>">
 
 <div id="info">
-
     <%= image_tag @wall.logo.url, class: 'logo' if @wall.has_logo? %>
 
     <!-- Logo upload -->
@@ -56,7 +55,9 @@
       <button class="btn btn-default" data-tool-box-open="change-bg">
         <i class="fa fa-upload"></i> Change background
       </button>
-      <%= link_to "Remove", remove_background_wall_path(@wall), class: "btn btn-danger", method: :delete %>
+      <% if @wall.has_background? %>
+        <%= link_to "Remove", remove_background_wall_path(@wall), class: "btn btn-danger", method: :delete %>
+      <% end %>
     </div>
     <div id="bg-select" class="tool-box hide" data-tool-box="change-bg">
       <%= form_for(@wall, class: 'form') do |f| %>
