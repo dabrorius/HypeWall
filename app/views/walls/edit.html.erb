@@ -31,7 +31,9 @@
     </div>
 
     <div class="description" data-tool-box-open="edit-description">
-      <%= parse_hypecode @wall.description %>
+      <span class="<%= @wall.font_color %> <%= @wall.font_style %>"?
+        <%= parse_hypecode @wall.description %>
+      </span>
       <button class="btn btn-default" data-tool-box-open="edit-description">
         <i class="fa fa-edit"></i> <%= @wall.description.blank? ? "Add description" : "Edit description" %>
       </button>
@@ -41,6 +43,14 @@
         <div class="form-group">
           <%= f.label :description %>
           <%= f.text_area :description, class: 'form-control large-textarea' %>
+        </div>
+        <div class="form-group">
+          <%= f.label :font_color %>
+          <%= f.select :font_color, Wall::FONT_COLORS %>
+        </div>
+        <div class="form-group">
+          <%= f.label :font_style %>
+          <%= f.select :font_style, Wall::FONT_STYLES %>
         </div>
         <div class="form-group">
           <%= f.submit class: "btn btn-primary" %>

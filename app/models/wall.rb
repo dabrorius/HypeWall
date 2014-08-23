@@ -7,6 +7,8 @@ class Wall < ActiveRecord::Base
   include Rails.application.routes.url_helpers
 
   BACKGROUND_STYLES = ['center','tile','stretch']
+  FONT_COLORS = ['light','dark']
+  FONT_STYLES = ['helvetica','lobster']
 
   has_attached_file :background_image, :styles => { :thumb => "300x300>" }, :default_url => "/images/:style/missing.png"
   has_attached_file :logo

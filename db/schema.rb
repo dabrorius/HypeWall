@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140822173935) do
+ActiveRecord::Schema.define(version: 20140823123004) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -89,6 +89,8 @@ ActiveRecord::Schema.define(version: 20140822173935) do
     t.datetime "logo_updated_at"
     t.string   "background_style",              default: "center"
     t.boolean  "require_image_approval",        default: false
+    t.string   "font_color",                    default: "light"
+    t.string   "font_style",                    default: "helvetica"
   end
 
 end
