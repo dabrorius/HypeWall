@@ -8,9 +8,17 @@
 
     <!-- Logo upload -->
     <p>
-      <button class="btn btn-default" data-tool-box-open="change-logo">
-        <i class="fa fa-upload"></i> <%= @wall.has_logo? ? 'Change logo' : 'Upload logo' %>
-      </button>
+      <% if @wall.has_logo? %>
+        <button class="btn btn-default" data-tool-box-open="change-logo">
+          <i class="fa fa-upload"></i> Change logo
+        </button>
+        <%= link_to "Remove", remove_logo_wall_path(@wall), class: "btn btn-danger", method: :delete %>
+      <% else %>
+        <button class="btn btn-default" data-tool-box-open="change-logo">
+          <i class="fa fa-upload"></i> Upload logo
+        </button>
+      <% end %>
+
     <p>
     <div class="logo-tool-box tool-box hide" data-tool-box="change-logo">
       <%= form_for(@wall, class: 'form') do |f| %>
@@ -44,9 +52,12 @@
 
 
     <!-- Background upload -->
-    <button id="btn-bg-select" class="btn btn-default" data-tool-box-open="change-bg">
-      <i class="fa fa-upload"></i> Change background
-    </button>
+    <div id="btn-bg-select">
+      <button class="btn btn-default" data-tool-box-open="change-bg">
+        <i class="fa fa-upload"></i> Change background
+      </button>
+      <%= link_to "Remove", remove_background_wall_path(@wall), class: "btn btn-danger", method: :delete %>
+    </div>
     <div id="bg-select" class="tool-box hide" data-tool-box="change-bg">
       <%= form_for(@wall, class: 'form') do |f| %>
         <div class="form-group">

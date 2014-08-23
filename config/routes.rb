@@ -13,6 +13,8 @@ Rails.application.routes.draw do
     member do
       get 'frame/:instance_id' => "walls#frame", as: 'frame'
       get 'control' => "walls#control", as: 'control'
+      delete 'remove_background'
+      delete 'remove_logo'
       resources :images, as: 'wall_uploaded_images', only: [:new, :create]
     end
   end

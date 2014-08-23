@@ -1,6 +1,6 @@
 class WallsController < ApplicationController
   before_action :authenticate_user!, except: [:show, :frame]
-  before_action :set_wall, only: [:edit, :update, :destroy, :control]
+  before_action :set_wall, only: [:edit, :update, :destroy, :control, :remove_background, :remove_logo]
 
   # GET /walls
   def index
@@ -59,6 +59,18 @@ class WallsController < ApplicationController
 
   def control
     @images = @wall.images
+  end
+
+  def remove_background
+    @wall.background_image = nil
+    @wall.save
+    redirect_to edit_wall_path(@wall)
+  end
+
+  def remove_logo
+    @wall.logo = nil
+    @wall.save
+    redirect_to edit_wall_path(@wall)
   end
 
   # Renders a partial with new set of images
