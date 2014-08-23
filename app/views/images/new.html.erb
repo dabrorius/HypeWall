@@ -1,0 +1,13 @@
+<div class="container">
+  <h1><i class="fa fa-upload"></i> Direct upload </h1> </br>
+
+  <div class="upload-box">
+    <%= form_for([@wall, UploadedImage.new], method: :post, html: { multipart: true }, class: 'form') do |f| %>
+      <div class="form-group">
+        <%= file_field_tag('uploaded_images_attributes_attachment', multiple: true, name: "images_attributes][][attachment]") %>
+      </div>
+      <%= f.submit 'Upload', class: "btn btn-primary" %>
+    <% end %>
+  </div>
+
+</div>

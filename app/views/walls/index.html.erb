@@ -8,6 +8,7 @@
       <tr>
         <th>Name</th>
         <th class="tool-column">Edit</th>
+        <th class="tool-column">Upload</th>
         <th class="tool-column">Control</th>
         <th class="tool-column">Delete</th>
       </tr>
@@ -16,6 +17,9 @@
           <td> <%= link_to wall.name, wall %> </td>
           <td class="tool-column">
             <%= link_to edit_wall_path(wall) do %> <i class="fa fa-pencil"></i> <% end %>
+          </td>
+          <td class="tool-column">
+            <%= link_to new_wall_uploaded_image_path(wall) do %> <i class="fa fa-upload"></i> <% end %>
           </td>
           <td class="tool-column">
             <%= link_to control_wall_path(wall) do %> <i class="fa fa-eye"></i> <% end %>

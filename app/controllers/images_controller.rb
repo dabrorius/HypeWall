@@ -12,6 +12,10 @@ class ImagesController < ApplicationController
     render :change_status
   end
 
+  def new
+    @wall = Wall.find(params[:id])
+  end
+
   def create
     @wall = current_user.walls.find(params[:id])
     params[:images_attributes].each_with_index do |image, index|

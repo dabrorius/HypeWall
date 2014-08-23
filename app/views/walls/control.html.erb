@@ -1,24 +1,13 @@
 <div class="container">
   <h1>Images control</h1>
 
-  <div class="tool-box" data-tool-box="change-logo">
-    <%= form_for([@wall, UploadedImage.new], method: :post, html: { multipart: true }, class: 'form') do |f| %>
-      <div class="form-group">
-        <%= f.label :upload_images %>
-        <%= file_field_tag('uploaded_images_attributes_attachment', multiple: true, name: "images_attributes][][attachment]") %>
-      </div>
-      <%= f.submit "Upload", class: "btn btn-primary" %>
-      <div class="btn btn-default" data-tool-box-close="change-logo">Cancel</div>
-    <% end %>
-  </div>
-
   <div id="control">
   <% @images.each do |image| %>
     <%= render partial: 'images/image', locals: { image: image } %>
   <% end %>
   </div>
 
-  <script>
+  <script>åç
     var dispatcher = new WebSocketRails('<%= websocket_host %>');
     channel = dispatcher.subscribe('image_control_<%= @wall.id %>');
     channel.bind('new', function(image_box_partial) {
