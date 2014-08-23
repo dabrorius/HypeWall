@@ -3,7 +3,7 @@
   <p>
     <%= image_tag @wall.logo.url, class: "logo" if @wall.has_logo? %>
   </p>
-  <div class="description">
+  <div class="description <%= @wall.font_color %> <%= @wall.font_style %>">
     <%= parse_hypecode @wall.description %>
   </div>
 </div>
