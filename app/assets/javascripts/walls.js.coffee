@@ -19,3 +19,27 @@ $ ->
     target = $(this).data "tool-box-close"
     $("[data-tool-box='#{target}']").addClass "hide"
     $("[data-tool-box-open='#{target}']").removeClass "hide"
+
+
+  doFirstFadeOut = true
+  setTimeout ->
+    if doFirstFadeOut
+      $("#wall-menu").fadeOut()
+  , 4000
+
+  $("#wall-menu-trigger").hover ->
+      doFirstFadeOut = false
+      $("#wall-menu").show()
+    , ->
+      $("#wall-menu").fadeOut()
+
+  $(".fullscreen").click ->
+    element = document.documentElement
+    if element.requestFullscreen
+      element.requestFullscreen()
+    else if element.mozRequestFullScreen
+      element.mozRequestFullScreen()
+    else if element.webkitRequestFullscreen
+      element.webkitRequestFullscreen()
+    else if element.msRequestFullscreen
+      element.msRequestFullscreen()

@@ -11,6 +11,33 @@ html, body {
   background-color: black;
 }
 
+#wall-menu {
+  a {
+    display: inline-block;
+    color: white;
+    background-color: #fc224b;
+    border-radius: 50%;
+    width: 75px;
+    height: 75px;
+    line-height: 75px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 30px;
+    margin-right: 5px;
+  }
+
+}
+
+#wall-menu-trigger {
+  z-index: 1000;
+  position: absolute;
+  left: 20px;
+  top: 20px;
+  width: 200px;
+  height: 100px;
+}
+
+
 .wall {
   border: 0px solid black;
   width: 100%;
