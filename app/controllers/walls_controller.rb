@@ -11,6 +11,7 @@ class WallsController < ApplicationController
   # GET /walls/1
   def show
     @wall = Wall.find(params[:id])
+    authenticate_user! unless @wall == Wall.example
     @wall_instance_id = SecureRandom.uuid
     render layout: 'application_fullscreen'
   end
