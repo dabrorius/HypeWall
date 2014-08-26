@@ -9,6 +9,8 @@
   <%= javascript_include_tag 'application'%>
 </head>
 <body style="background-image: url('<%= @wall.background_image.url %>'); background-color: <%= @wall.background_color %>" class="<%= @wall.background_style %>">
-<%= yield %>
+  <%= yield %>
+
+  <%= render partial: 'layouts/google_analytics' %>
 </body>
 </html>
