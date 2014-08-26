@@ -17,9 +17,6 @@ class Wall < ActiveRecord::Base
   validates_attachment_content_type :background_image, :content_type => /\Aimage\/.*\Z/
   validates_attachment_content_type :logo, :content_type => /\Aimage\/.*\Z/
 
-  validates :hashtag, presence: true
-  validates :hashtag, uniqueness: true
-
   has_many :wall_roles
   has_many :users, through: :wall_roles
   has_many :images
