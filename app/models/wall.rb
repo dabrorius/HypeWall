@@ -26,6 +26,11 @@ class Wall < ActiveRecord::Base
 
   accepts_nested_attributes_for :images, :allow_destroy => true
 
+  before_save :hashtag_cleanup
+  def hashtag_cleanup
+    hashtag.gsub!('#','')
+  end
+
   def has_logo?
     logo.file?
   end
