@@ -10,4 +10,8 @@ class User < ActiveRecord::Base
   def name
     email.split('@').first
   end
+
+  def is_pro?
+    subscription_level == 'pro'
+  end
 end

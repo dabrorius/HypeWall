@@ -19,6 +19,7 @@ class Wall < ActiveRecord::Base
   validates :hashtag, uniqueness: true
 
   has_many :wall_roles
+  has_many :users, through: :wall_roles
   has_many :images
 
   accepts_nested_attributes_for :images, :allow_destroy => true
@@ -64,6 +65,14 @@ class Wall < ActiveRecord::Base
 
   def instagram_unsubscribe
     Instagram.delete_subscription(id: instagram_subscription.id)
+  end
+
+  def owner
+    wall_roles.order('created_at').first.user
+  end
+
+  def is_pro?
+    owner.is_pro?
   end
 
 end
