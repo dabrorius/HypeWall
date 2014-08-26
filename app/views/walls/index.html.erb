@@ -2,12 +2,16 @@
   <div class="wall-list">
 
 
+  <h1>Subscription level: <%= current_user.subscription_level %></h1>
+
   <% if @walls.any? %>
     <h1>My walls</h1>
     <table class="table table-hover">
       <tr>
         <th>Name</th>
-        <th class="tool-column">Edit</th>
+        <% if current_user.is_pro? %>
+          <th class="tool-column">Edit</th>
+        <% end %>
         <th class="tool-column">Upload</th>
         <th class="tool-column">Control</th>
         <th class="tool-column">Delete</th>
@@ -15,9 +19,11 @@
       <% @walls.each do |wall| %>
         <tr>
           <td> <%= link_to wall.name, wall %> </td>
+          <% if wall.is_pro? %>
           <td class="tool-column">
             <%= link_to edit_wall_path(wall) do %> <i class="fa fa-pencil"></i> <% end %>
           </td>
+          <% end %>
           <td class="tool-column">
             <%= link_to new_wall_uploaded_image_path(wall) do %> <i class="fa fa-upload"></i> <% end %>
           </td>
