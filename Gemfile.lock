@@ -96,14 +96,22 @@ GEM
       multipart-post (>= 1.2, < 3)
     faraday_middleware (0.9.1)
       faraday (>= 0.7.4, < 0.10)
+    fastspring-saasy (0.6.0)
+      gyoku
+      httparty
     faye-websocket (0.7.4)
       eventmachine (>= 0.12.0)
       websocket-driver (>= 0.3.1)
     font-awesome-rails (4.1.0.0)
       railties (>= 3.2, < 5.0)
+    gyoku (1.1.1)
+      builder (>= 2.1.2)
     hashie (3.0.0)
     hike (1.2.3)
     hiredis (0.5.2)
+    httparty (0.13.1)
+      json (~> 1.8)
+      multi_xml (>= 0.5.2)
     i18n (0.6.9)
     instagram (1.1.1)
       faraday (>= 0.7, < 0.10)
@@ -124,6 +132,7 @@ GEM
     mini_portile (0.6.0)
     minitest (5.3.5)
     multi_json (1.10.1)
+    multi_xml (0.5.5)
     multipart-post (2.0.0)
     newrelic_rpm (3.9.0.229)
     nokogiri (1.6.2.1)
@@ -253,6 +262,7 @@ DEPENDENCIES
   devise
   dotenv-rails
   factory_girl_rails (= 4.2.1)
+  fastspring-saasy
   font-awesome-rails
   instagram
   jbuilder (~> 2.0)
