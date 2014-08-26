@@ -1,4 +1,6 @@
 class Wall < ActiveRecord::Base
+  extend FriendlyId
+  friendly_id :name, use: :slugged
 
   def self.example
     Wall.find_by_id(ENV['EXAMPLE_WALL_ID'] || 1)
@@ -15,14 +17,16 @@ class Wall < ActiveRecord::Base
   validates_attachment_content_type :background_image, :content_type => /\Aimage\/.*\Z/
   validates_attachment_content_type :logo, :content_type => /\Aimage\/.*\Z/
 
-  validates :hashtag, presence: true
-  validates :hashtag, uniqueness: true
-
   has_many :wall_roles
   has_many :users, through: :wall_roles
   has_many :images
 
   accepts_nested_attributes_for :images, :allow_destroy => true
+
+  before_save :hashtag_cleanup
+  def hashtag_cleanup
+    hashtag.gsub!('#','')
+  end
 
   def has_logo?
     logo.file?
