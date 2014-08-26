@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140826124513) do
+ActiveRecord::Schema.define(version: 20140826135642) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -107,6 +107,7 @@ ActiveRecord::Schema.define(version: 20140826124513) do
     t.string   "font_color",                    default: "light"
     t.string   "font_style",                    default: "helvetica"
     t.string   "slug"
+    t.string   "background_color",              default: "#000000"
   end
 
   add_index "walls", ["slug"], name: "index_walls_on_slug", unique: true, using: :btree

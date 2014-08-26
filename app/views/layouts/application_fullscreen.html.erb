@@ -8,7 +8,7 @@
   <%= stylesheet_link_tag 'application_fullscreen' %>
   <%= javascript_include_tag 'application'%>
 </head>
-<body style="background-image: url('<%= @wall.background_image.url %>');" class="<%= @wall.background_style %>">
+<body style="background-image: url('<%= @wall.background_image.url %>'); background-color: <%= @wall.background_color %>" class="<%= @wall.background_style %>">
 <%= yield %>
 </body>
 </html>
