@@ -43,3 +43,5 @@ $ ->
       element.webkitRequestFullscreen()
     else if element.msRequestFullscreen
       element.msRequestFullscreen()
+
+  $('.colorpicker').minicolors theme: 'bootstrap'

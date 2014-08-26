@@ -15,4 +15,4 @@
 //= require angular.min
 //= require_tree .
 //= require websocket_rails/main
-
+//= require jquery.minicolors
