@@ -10,7 +10,7 @@ class WallsController < ApplicationController
 
   # GET /walls/1
   def show
-    @wall = Wall.find(params[:id])
+    @wall = Wall.friendly.find(params[:id])
     authenticate_user! unless @wall == Wall.example
     @wall_instance_id = SecureRandom.uuid
     render layout: 'application_fullscreen'
@@ -77,7 +77,7 @@ class WallsController < ApplicationController
   # Renders a partial with new set of images
   # It's animated and added to wall
   def frame
-    @wall = Wall.find(params[:id])
+    @wall = Wall.friendly.find(params[:id])
     # Instance of wall, it's uniqe to each opened window.
     # This enables using multiple parallel walls
     instance_id = params[:instance_id]
@@ -119,7 +119,7 @@ class WallsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_wall
-      @wall = current_user.walls.find(params[:id])
+      @wall = current_user.walls.friendly.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

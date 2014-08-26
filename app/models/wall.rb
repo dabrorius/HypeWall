@@ -1,4 +1,6 @@
 class Wall < ActiveRecord::Base
+  extend FriendlyId
+  friendly_id :name, use: :slugged
 
   def self.example
     Wall.find_by_id(ENV['EXAMPLE_WALL_ID'] || 1)
