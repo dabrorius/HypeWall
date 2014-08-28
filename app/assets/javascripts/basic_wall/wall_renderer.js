@@ -19,15 +19,19 @@ $(document).ready(function(){// Get the canvas element from our HTML above
 
     // Create image
     var u1 = new Frame("/ultra/1.jpg", scene);
-    u1.moveToPosition(-2);
+    u1.moveToPosition(-3);
     var u2 = new Frame("/ultra/2.jpg", scene);
-    u2.moveToPosition(-1);
+    u2.moveToPosition(-2);
     var u3 = new Frame("/ultra/3.jpg", scene);
-    u3.moveToPosition(0);
+    u3.moveToPosition(-1);
     var u4 = new Frame("/ultra/4.jpg", scene);
-    u4.moveToPosition(1);
+    u4.moveToPosition(0);
     var u5 = new Frame("/ultra/5.jpg", scene);
-    u5.moveToPosition(2);
+    u5.moveToPosition(1);
+    var u6 = new Frame("/ultra/6.jpg", scene);
+    u6.moveToPosition(2);
+    var u7 = new Frame("/ultra/7.jpg", scene);
+    u7.moveToPosition(3);
     // Leave this function
 
     window.setInterval(function(){
@@ -36,6 +40,8 @@ $(document).ready(function(){// Get the canvas element from our HTML above
       u3.moveToNextPosition()
       u4.moveToNextPosition()
       u5.moveToNextPosition()
+      u6.moveToNextPosition()
+      u7.moveToNextPosition()
     }, 4000);
     return scene;
   };  // End of createScene function
