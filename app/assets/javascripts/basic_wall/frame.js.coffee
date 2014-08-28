@@ -34,9 +34,9 @@ class @Frame
     @position = position
     if position == -3
       @animation.stop() if @animation
-      @mesh.position = new BABYLON.Vector3(30,0,20)
+      @mesh.position = new BABYLON.Vector3(25,0,20)
       @mesh.rotation.y = 1.57
-      console.log "move to begining"
+      @mesh.material.alpha = 0.2
     else if position == -2
       @moveTo 15, 15, 0.5
       @mesh.material.alpha = 0.4
@@ -53,7 +53,8 @@ class @Frame
       @moveTo -15, 15, -0.5
       @mesh.material.alpha = 0.4
     else if position == 3
-      @moveTo -30, 20, -1.57
+      @moveTo -25, 20, -1.57
+      @mesh.material.alpha = 0.2
 
   moveToNextPosition: ->
     @position += 1
