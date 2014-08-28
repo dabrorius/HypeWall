@@ -35,41 +35,34 @@ $(document).ready(function(){// Get the canvas element from our HTML above
     // Animating it
     var animation = new BABYLON.Animation(
       "tutoAnimation",
-      "rotation.x",
+      "position",
       30,
-      BABYLON.Animation.ANIMATIONTYPE_FLOAT,
-      BABYLON.Animation.ANIMATIONLOOPMODE_CYCLE);
-
+      BABYLON.Animation.ANIMATIONTYPE_VECTOR3,
+      BABYLON.Animation.ANIMATIONLOOPMODE_CONSTANT);
     var keys = [];  
-
-    //At the animation key 0, the value of scaling is "1"
-    keys.push({
-        frame: 0,
-        value: 0
-    });
-
-    //At the animation key 20, the value of scaling is "0.2"
-    keys.push({
-        frame: 20,
-        value: -0.4
-    });
-
-    //At the animation key 100, the value of scaling is "1"
-    keys.push({
-        frame: 45,
-        value: 0.7
-    });
-
-    keys.push({
-        frame: 70,
-        value: 0
-    });
-
-
+    keys.push({ frame: 0, value: new BABYLON.Vector3(0,0,10) });
+    keys.push({ frame: 30, value: new BABYLON.Vector3(0,0,10) });
+    keys.push({ frame: 35, value: new BABYLON.Vector3(0,0,20) });
+    keys.push({ frame: 45, value: new BABYLON.Vector3(-10,0,20) });
     animation.setKeys(keys);
     plane.animations.push(animation);
 
-    scene.beginAnimation(plane, 0, 100, true);
+    // Animating it
+    var animation2 = new BABYLON.Animation(
+      "tutoAnimation",
+      "rotation.y",
+      30,
+      BABYLON.Animation.ANIMATIONTYPE_FLOAT,
+      BABYLON.Animation.ANIMATIONLOOPMODE_CONSTANT);
+    var keys2 = [];  
+    keys2.push({ frame: 0, value: 0 });
+    keys2.push({ frame: 30, value: 0 });
+    keys2.push({ frame: 35, value: 0 });
+    keys2.push({ frame: 45, value: -0.8 });
+    animation2.setKeys(keys2);
+    plane.animations.push(animation2);
+
+    scene.beginAnimation(plane, 0, 50, true);
 
     // Leave this function
     return scene;
