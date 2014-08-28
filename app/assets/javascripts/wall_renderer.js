@@ -10,7 +10,7 @@ $(document).ready(function(){// Get the canvas element from our HTML above
     var scene = new BABYLON.Scene(engine);
 
     // This creates and positions a free camera
-    var camera = new BABYLON.FreeCamera("camera1", new BABYLON.Vector3(0, 5, -10), scene);
+    var camera = new BABYLON.FreeCamera("camera1", new BABYLON.Vector3(0, 0, -10), scene);
 
     // This targets the camera to scene origin
     camera.setTarget(new BABYLON.Vector3.Zero());
@@ -22,16 +22,15 @@ $(document).ready(function(){// Get the canvas element from our HTML above
     var light = new BABYLON.HemisphericLight("light1", new BABYLON.Vector3(0, 1, 0), scene);
 
     // Dim the light a small amount
-    light.intensity = .5;
+    light.intensity = 1;
 
-    // Let's try our built-in 'sphere' shape. Params: name, subdivisions, size, scene
-    var sphere = BABYLON.Mesh.CreateSphere("sphere1", 16, 2, scene);
+    var plane = BABYLON.Mesh.CreatePlane("plane", 10.0, scene);
+    plane.position.z = 10;
 
-    // Move the sphere upward 1/2 its height
-    sphere.position.y = 1;
-
-    // Let's try our built-in 'ground' shape.  Params: name, width, depth, subdivisions, scene
-    var ground = BABYLON.Mesh.CreateGround("ground1", 6, 6, 2, scene);
+    var planeMaterial = new BABYLON.StandardMaterial("texture1", scene);
+    plane.material = planeMaterial;
+    // planeMaterial.diffuseColor = new BABYLON.Color3(1.0, 0.2, 0.7);
+    planeMaterial.diffuseTexture = new BABYLON.Texture("/ultra/1.jpg", scene);
 
     // Leave this function
     return scene;
