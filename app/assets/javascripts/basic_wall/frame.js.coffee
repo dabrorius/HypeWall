@@ -29,3 +29,15 @@ class @Frame
     @mesh.animations.push(rotationAnimation);
 
     @scene.beginAnimation(@mesh, 0, 15, true);
+
+  moveToPosition: (position) ->
+    if position == -2
+      @moveTo 15, 20, 0.5
+    else if position == -1
+      @moveTo 10, 20, 0.4
+    else if position == 0
+      @moveTo 0, 10, 0
+    else if position == 1
+      @moveTo -10, 20, -0.4
+    else if position == 2
+      @moveTo -15, 20, -0.5

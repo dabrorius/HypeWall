@@ -18,9 +18,16 @@ $(document).ready(function(){// Get the canvas element from our HTML above
     light.intensity = 1;
 
     // Create image
-    var plane = new Frame("/ultra/1.jpg", scene);
-    plane.moveTo(15, 20, 0.5);
-
+    var u1 = new Frame("/ultra/1.jpg", scene);
+    u1.moveToPosition(-2);
+    var u1 = new Frame("/ultra/2.jpg", scene);
+    u1.moveToPosition(-1);
+    var u1 = new Frame("/ultra/3.jpg", scene);
+    u1.moveToPosition(0);
+    var u1 = new Frame("/ultra/4.jpg", scene);
+    u1.moveToPosition(1);
+    var u1 = new Frame("/ultra/5.jpg", scene);
+    u1.moveToPosition(2);
     // Leave this function
     return scene;
   };  // End of createScene function
