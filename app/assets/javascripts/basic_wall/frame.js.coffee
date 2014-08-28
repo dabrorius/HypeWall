@@ -39,14 +39,19 @@ class @Frame
       console.log "move to begining"
     else if position == -2
       @moveTo 15, 15, 0.5
+      @mesh.material.alpha = 0.4
     else if position == -1
+      @mesh.material.alpha = 0.7
       @moveTo 10, 15, 0.4
     else if position == 0
       @moveTo 0, 5, 0
+      @mesh.material.alpha = 1
     else if position == 1
       @moveTo -10, 15, -0.4
+      @mesh.material.alpha = 0.7
     else if position == 2
       @moveTo -15, 15, -0.5
+      @mesh.material.alpha = 0.4
     else if position == 3
       @moveTo -30, 20, -1.57
 
