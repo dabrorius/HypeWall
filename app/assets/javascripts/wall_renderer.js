@@ -4,6 +4,38 @@ $(document).ready(function(){// Get the canvas element from our HTML above
   // Load the BABYLON 3D engine
   var engine = new BABYLON.Engine(canvas, true);
 
+  var moveToFarRight = function(image, scene) {
+    var playgroundHalfWidth = 30;
+
+    // Animating it
+    var animation = new BABYLON.Animation(
+      "tutoAnimation",
+      "position",
+      15,
+      BABYLON.Animation.ANIMATIONTYPE_VECTOR3,
+      BABYLON.Animation.ANIMATIONLOOPMODE_CONSTANT);
+    var keys = [];  
+    keys.push({ frame: 0, value: new BABYLON.Vector3(playgroundHalfWidth,0,20) });
+    keys.push({ frame: 10, value: new BABYLON.Vector3(15,0,20) });
+    animation.setKeys(keys);
+    image.animations.push(animation);
+
+    // Animating it
+    var animation2 = new BABYLON.Animation(
+      "tutoAnimation",
+      "rotation.y",
+      15,
+      BABYLON.Animation.ANIMATIONTYPE_FLOAT,
+      BABYLON.Animation.ANIMATIONLOOPMODE_CONSTANT);
+    var keys2 = [];  
+    keys2.push({ frame: 0, value: 2.5 });
+    keys2.push({ frame: 10, value: 1 });
+    animation2.setKeys(keys2);
+    image.animations.push(animation2);
+
+    scene.beginAnimation(image, 0, 15, true);
+  }
+
   var createScene = function () {
 
     // Now create a basic Babylon Scene object 
@@ -32,43 +64,8 @@ $(document).ready(function(){// Get the canvas element from our HTML above
     // planeMaterial.diffuseColor = new BABYLON.Color3(1.0, 0.2, 0.7);
     planeMaterial.diffuseTexture = new BABYLON.Texture("/ultra/1.jpg", scene);
 
-    var playgroundHalfWidth = 30;
+    moveToFarRight(plane, scene);
 
-    // Animating it
-    var animation = new BABYLON.Animation(
-      "tutoAnimation",
-      "position",
-      15,
-      BABYLON.Animation.ANIMATIONTYPE_VECTOR3,
-      BABYLON.Animation.ANIMATIONLOOPMODE_CONSTANT);
-    var keys = [];  
-    keys.push({ frame: 0, value: new BABYLON.Vector3(playgroundHalfWidth,0,20) });
-    keys.push({ frame: 10, value: new BABYLON.Vector3(0,0,20) });
-    keys.push({ frame: 15, value: new BABYLON.Vector3(0,0,10) });
-    keys.push({ frame: 45, value: new BABYLON.Vector3(0,0,10) });
-    keys.push({ frame: 50, value: new BABYLON.Vector3(0,0,20) });
-    keys.push({ frame: 65, value: new BABYLON.Vector3(-playgroundHalfWidth,0,20) });
-    animation.setKeys(keys);
-    plane.animations.push(animation);
-
-    // Animating it
-    var animation2 = new BABYLON.Animation(
-      "tutoAnimation",
-      "rotation.y",
-      15,
-      BABYLON.Animation.ANIMATIONTYPE_FLOAT,
-      BABYLON.Animation.ANIMATIONLOOPMODE_CONSTANT);
-    var keys2 = [];  
-    keys2.push({ frame: 0, value: 2.5 });
-    keys2.push({ frame: 10, value: 0 });
-    keys2.push({ frame: 15, value: 0 });
-    keys2.push({ frame: 45, value: 0 });
-    keys2.push({ frame: 50, value: 0 });
-    keys2.push({ frame: 65, value: -2.5 });
-    animation2.setKeys(keys2);
-    plane.animations.push(animation2);
-
-    scene.beginAnimation(plane, 0, 15, true);
 
     // Leave this function
     return scene;
