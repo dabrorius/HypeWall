@@ -42,7 +42,7 @@ $(document).ready(function(){// Get the canvas element from our HTML above
       u5.moveToNextPosition()
       u6.moveToNextPosition()
       u7.moveToNextPosition()
-    }, 4000);
+    }, 6000);
     return scene;
   };  // End of createScene function
 
