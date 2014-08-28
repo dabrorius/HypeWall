@@ -31,6 +31,7 @@ class @Frame
     @scene.beginAnimation(@mesh, 0, 15, true);
 
   moveToPosition: (position) ->
+    @position = position
     if position == -2
       @moveTo 15, 20, 0.5
     else if position == -1
@@ -41,3 +42,9 @@ class @Frame
       @moveTo -10, 20, -0.4
     else if position == 2
       @moveTo -15, 20, -0.5
+
+  moveToNextPosition: ->
+    @position += 1
+    if @position > 2
+      @position = -2
+    @moveToPosition(@position)
