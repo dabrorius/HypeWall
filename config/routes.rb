@@ -20,6 +20,7 @@ Rails.application.routes.draw do
       resources :items, as: 'wall_uploaded_images', only: [:new, :create]
       get "test_socket" => "walls#test_sockets"
       get "history" => "walls#history"
+      get :show2
     end
   end
 

@@ -17,6 +17,10 @@ class WallsController < ApplicationController
     render layout: 'application_fullscreen'
   end
 
+  def show2
+    render layout: 'wall_2'
+  end
+
   # GET /walls/new
   def new
     @wall = Wall.new
