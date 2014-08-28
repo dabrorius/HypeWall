@@ -28,23 +28,30 @@ class @Frame
     ]);
     @mesh.animations.push(rotationAnimation);
 
-    @scene.beginAnimation(@mesh, 0, 15, true);
+    @animation = @scene.beginAnimation(@mesh, 0, 15, true);
 
   moveToPosition: (position) ->
     @position = position
-    if position == -2
-      @moveTo 15, 20, 0.5
+    if position == -3
+      @animation.stop() if @animation
+      @mesh.position = new BABYLON.Vector3(30,0,20)
+      @mesh.rotation.y = 1.57
+      console.log "move to begining"
+    else if position == -2
+      @moveTo 15, 15, 0.5
     else if position == -1
-      @moveTo 10, 20, 0.4
+      @moveTo 10, 15, 0.4
     else if position == 0
-      @moveTo 0, 10, 0
+      @moveTo 0, 5, 0
     else if position == 1
-      @moveTo -10, 20, -0.4
+      @moveTo -10, 15, -0.4
     else if position == 2
-      @moveTo -15, 20, -0.5
+      @moveTo -15, 15, -0.5
+    else if position == 3
+      @moveTo -30, 20, -1.57
 
   moveToNextPosition: ->
     @position += 1
-    if @position > 2
-      @position = -2
+    if @position > 3
+      @position = -3
     @moveToPosition(@position)
