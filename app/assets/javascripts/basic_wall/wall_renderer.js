@@ -20,15 +20,23 @@ $(document).ready(function(){// Get the canvas element from our HTML above
     // Create image
     var u1 = new Frame("/ultra/1.jpg", scene);
     u1.moveToPosition(-2);
-    var u1 = new Frame("/ultra/2.jpg", scene);
-    u1.moveToPosition(-1);
-    var u1 = new Frame("/ultra/3.jpg", scene);
-    u1.moveToPosition(0);
-    var u1 = new Frame("/ultra/4.jpg", scene);
-    u1.moveToPosition(1);
-    var u1 = new Frame("/ultra/5.jpg", scene);
-    u1.moveToPosition(2);
+    var u2 = new Frame("/ultra/2.jpg", scene);
+    u2.moveToPosition(-1);
+    var u3 = new Frame("/ultra/3.jpg", scene);
+    u3.moveToPosition(0);
+    var u4 = new Frame("/ultra/4.jpg", scene);
+    u4.moveToPosition(1);
+    var u5 = new Frame("/ultra/5.jpg", scene);
+    u5.moveToPosition(2);
     // Leave this function
+
+    window.setInterval(function(){
+      u1.moveToNextPosition()
+      u2.moveToNextPosition()
+      u3.moveToNextPosition()
+      u4.moveToNextPosition()
+      u5.moveToNextPosition()
+    }, 4000);
     return scene;
   };  // End of createScene function
 
