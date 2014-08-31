@@ -59,7 +59,7 @@ class WallsController < ApplicationController
   end
 
   def control
-    @images = @wall.images
+    @images = @wall.items
   end
 
   def remove_background
