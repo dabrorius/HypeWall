@@ -1,11 +1,11 @@
 class @Frame
   constructor: (url, scene) ->
-    @image = new Image()
-    @image.onload = =>
-      console.log url
-      @ratio = @image.width / @image.height
-      console.log @ratio
-    @image.src = url;
+    # @image = new Image()
+    # @image.onload = =>
+    #   console.log url
+    #   @ratio = @image.width / @image.height
+    #   console.log @ratio
+    # @image.src = url;
     @initializeFrame url, scene
 
   initializeFrame: (url, scene) ->

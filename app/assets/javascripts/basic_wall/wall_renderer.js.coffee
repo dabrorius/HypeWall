@@ -1,6 +1,17 @@
 $ ->
   canvas = document.getElementById "renderCanvas"
   engine = new BABYLON.Engine canvas, true
+  imageData = [
+    "/ultra/high.jpg",
+    "/ultra/wide.jpg"
+  ]
+
+  @currentImageIndex = 0
+
+  getNextUrl = =>
+    url = imageData[@currentImageIndex]
+    @currentImageIndex = (@currentImageIndex + 1) % imageData.length
+    return url
 
   zoomCurrent = ->
     for frame in frames
@@ -13,14 +24,13 @@ $ ->
   createScene = ->
     scene = new BABYLON.Scene(engine)
 
-    @frames = [new Frame("/ultra/1.jpg", scene),
-      new Frame("/ultra/2.jpg", scene),
-      new Frame("/ultra/high.jpg", scene),
-      new Frame("/ultra/wide.jpg", scene),
-      new Frame("/ultra/5.jpg", scene),
-      new Frame("/ultra/6.jpg", scene),
-      new Frame("/ultra/7.jpg", scene)
-    ]
+    @frames = []
+
+    for position in [0..6]
+      url = getNextUrl()
+      frame = new Frame(url,scene)
+      frame.moveToPosition(position - 3)
+      @frames.push(frame)
 
     camera = new BABYLON.FreeCamera("camera1", new BABYLON.Vector3(0, 0, -9), scene)
     camera.setTarget(new BABYLON.Vector3.Zero())
@@ -28,14 +38,6 @@ $ ->
 
     light = new BABYLON.HemisphericLight("light1", new BABYLON.Vector3(0, 1, 0), scene)
     light.intensity = 10
-
-    @frames[0].moveToPosition(-3)
-    @frames[1].moveToPosition(-2)
-    @frames[2].moveToPosition(-1)
-    @frames[3].moveToPosition(0)
-    @frames[4].moveToPosition(1)
-    @frames[5].moveToPosition(2)
-    @frames[6].moveToPosition(3)
 
     window.setInterval ->
       for frame in frames
