@@ -27,8 +27,7 @@ $ ->
     @frames = []
 
     for position in [0..6]
-      url = getNextUrl()
-      frame = new Frame(url,scene)
+      frame = new Frame(getNextUrl,scene)
       frame.moveToPosition(position - 3)
       @frames.push(frame)
 
