@@ -4,6 +4,8 @@ class Item < ActiveRecord::Base
 
   validates :wall, presence: true
   validates :status, presence: true
+
+  STATUSES = ['pending_approval','approved','banned']
   validates :status, inclusion: { in: STATUSES }
 
   before_validation :set_status
@@ -14,8 +16,6 @@ class Item < ActiveRecord::Base
   end
 
   scope :approved, -> { where("status = 'approved'") }
-
-  STATUSES = ['pending_approval','approved','banned']
 
   def approve
     update_attribute :status, 'approved'

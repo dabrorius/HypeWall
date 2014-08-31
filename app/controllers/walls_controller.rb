@@ -94,12 +94,12 @@ class WallsController < ApplicationController
 
     images_per_frame = 4
     # Fetch images that have just been uploaded
-    new_images = @wall.images.approved.where('id > ?', newest_in_circulation).order('id ASC').limit(4)
+    new_images = @wall.items.approved.where('id > ?', newest_in_circulation).order('id ASC').limit(4)
 
     # Fetch images that come after the last presented
-    old_images_next = @wall.images.approved.where('id > ?', last_presented).order('id ASC').limit(images_per_frame - new_images.count)
+    old_images_next = @wall.items.approved.where('id > ?', last_presented).order('id ASC').limit(images_per_frame - new_images.count)
     # Fetch images from the begining of cyclus if full circle was made
-    old_images_previous = @wall.images.approved.order('id ASC').limit(images_per_frame - new_images.count - old_images_next.count)
+    old_images_previous = @wall.items.approved.order('id ASC').limit(images_per_frame - new_images.count - old_images_next.count)
     old_images = old_images_next.concat(old_images_previous)
 
     Rails.logger.debug "New images #{new_images.pluck(:id)}"

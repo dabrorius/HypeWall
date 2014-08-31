@@ -4,6 +4,7 @@ class CreateItems < ActiveRecord::Migration
       t.string :original_id
       t.string :user_id
       t.string :url
+      t.integer :likes, default: 0
       t.integer :wall_id
       t.string :status
       t.string :type
