@@ -1,16 +1,11 @@
 class @Frame
-  constructor: (url, scene) ->
-    # @image = new Image()
-    # @image.onload = =>
-    #   console.log url
-    #   @ratio = @image.width / @image.height
-    #   console.log @ratio
-    # @image.src = url;
-    @initializeFrame url, scene
-
-  initializeFrame: (url, scene) ->
+  constructor: (urlSource, scene) ->
+    @urlSource = urlSource
     @scene = scene
-    @mesh = new BABYLON.Mesh("newImage", scene)
+    @initializeFrame()
+
+  initializeFrame: ->
+    @mesh = new BABYLON.Mesh("newImage", @scene)
 
     indices = [];
     positions = [];
@@ -49,8 +44,8 @@ class @Frame
 
     @mesh.position = new BABYLON.Vector3(30,0,20)
     @mesh.rotation.y = 1.57
-    @mesh.material = new BABYLON.StandardMaterial("texture1", scene)
-    @mesh.material.diffuseTexture = new BABYLON.Texture(url, scene)
+    @mesh.material = new BABYLON.StandardMaterial("texture1", @scene)
+    @mesh.material.diffuseTexture = new BABYLON.Texture(@urlSource() , @scene)
 
   moveTo: (newX, newZ, newRotation) ->
     positionAnimation = new BABYLON.Animation(
@@ -100,6 +95,7 @@ class @Frame
       @mesh.material.alpha = 0.2
       @mesh.material.diffuseTexture.vScale = 1
       @mesh.material.diffuseTexture.uScale = 1
+      @mesh.material.diffuseTexture = new BABYLON.Texture(@urlSource(), @scene)
     else if position == -2
       @moveTo 15, 15, 0.5
       @mesh.material.alpha = 0.4
