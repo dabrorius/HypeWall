@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140826135642) do
+ActiveRecord::Schema.define(version: 20140831145823) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -47,6 +47,17 @@ ActiveRecord::Schema.define(version: 20140826135642) do
   end
 
   add_index "images", ["wall_id"], name: "index_images_on_wall_id", using: :btree
+
+  create_table "items", force: true do |t|
+    t.string   "original_id"
+    t.string   "user_id"
+    t.string   "url"
+    t.integer  "wall_id"
+    t.string   "status"
+    t.string   "type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "sessions", force: true do |t|
     t.string   "session_id", null: false
