@@ -28,7 +28,23 @@ class @Frame
     ]);
     @mesh.animations.push(rotationAnimation);
 
-    @animation = @scene.beginAnimation(@mesh, 0, 15, true);
+    @animation = @scene.beginAnimation(@mesh, 0, 15, false);
+
+  zoomAndPan: ->
+    animationKeys = [{ frame: 0, value: 1 }, { frame: 15, value: 1 }, { frame: 100, value: 0.5 }]
+    zoomAnimationU = new BABYLON.Animation(
+      "tutoAnimation", "uScale", 15,
+      BABYLON.Animation.ANIMATIONTYPE_FLOAT,
+      BABYLON.Animation.ANIMATIONLOOPMODE_CONSTANT);
+    zoomAnimationV = new BABYLON.Animation(
+      "tutoAnimation", "vScale", 15,
+      BABYLON.Animation.ANIMATIONTYPE_FLOAT,
+      BABYLON.Animation.ANIMATIONLOOPMODE_CONSTANT);
+    zoomAnimationU.setKeys animationKeys
+    zoomAnimationV.setKeys animationKeys
+    @mesh.material.diffuseTexture.animations.push(zoomAnimationU);
+    @mesh.material.diffuseTexture.animations.push(zoomAnimationV);
+    @zoomAnimation = @scene.beginAnimation(@mesh.material.diffuseTexture, 0, 100, false);
 
   moveToPosition: (position) ->
     @position = position
@@ -37,6 +53,8 @@ class @Frame
       @mesh.position = new BABYLON.Vector3(25,0,20)
       @mesh.rotation.y = 1.57
       @mesh.material.alpha = 0.2
+      @mesh.material.diffuseTexture.vScale = 1
+      @mesh.material.diffuseTexture.uScale = 1
     else if position == -2
       @moveTo 15, 15, 0.5
       @mesh.material.alpha = 0.4
@@ -46,7 +64,13 @@ class @Frame
     else if position == 0
       @moveTo 0, 5, 0
       @mesh.material.alpha = 1
+      # @zoomAndPan()
     else if position == 1
+      # @animation.stop() if @animation
+      # @mesh.material.diffuseTexture.uScale = 0.5
+      # @mesh.material.diffuseTexture.vScale = 0.5
+      # @animation.restart() if @animation
+      # @animation
       @moveTo -10, 15, -0.4
       @mesh.material.alpha = 0.7
     else if position == 2
