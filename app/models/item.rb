@@ -4,7 +4,7 @@ class Item < ActiveRecord::Base
 
   validates :wall, presence: true
   validates :status, presence: true
-  validates :status, inclusion: { in: STATUSES}
+  validates :status, inclusion: { in: STATUSES }
 
   before_validation :set_status
   def set_status
