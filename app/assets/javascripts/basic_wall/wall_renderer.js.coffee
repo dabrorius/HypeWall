@@ -5,17 +5,18 @@ $ ->
   zoomCurrent = ->
     for frame in frames
       if frame.position == 0
-        step = scene.getLastFrameDuration() / 5000;
+        step = scene.getLastFrameDuration() / 4000;
         frame.mesh.material.diffuseTexture.uScale -= step
         frame.mesh.material.diffuseTexture.vScale -= step
+        frame.mesh.material.diffuseTexture.uOffset -= step
 
   createScene = ->
     scene = new BABYLON.Scene(engine)
 
     @frames = [new Frame("/ultra/1.jpg", scene),
       new Frame("/ultra/2.jpg", scene),
-      new Frame("/ultra/3.jpg", scene),
-      new Frame("/ultra/4.jpg", scene),
+      new Frame("/ultra/high.jpg", scene),
+      new Frame("/ultra/wide.jpg", scene),
       new Frame("/ultra/5.jpg", scene),
       new Frame("/ultra/6.jpg", scene),
       new Frame("/ultra/7.jpg", scene)
