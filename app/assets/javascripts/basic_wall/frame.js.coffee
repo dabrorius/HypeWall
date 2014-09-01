@@ -8,12 +8,19 @@ class @Frame
     @url = @urlSource()
     img = new Image();
     img.onload = =>
-      console.log(img.width + 'x' + img.height)
       @mesh.material.diffuseTexture = new BABYLON.Texture(@url , @scene)
       if img.height > img.width
-        @mesh.material.diffuseTexture.vScale = img.width / img.height
+        scale = img.width / img.height
+        @mesh.material.diffuseTexture.vScale = scale
+        @mesh.material.diffuseTexture.vOffset = -scale
+        @scale = scale
+        @panAxis = 'y'
       else
-        @mesh.material.diffuseTexture.uScale = img.height / img.width
+        scale = img.height / img.width
+        @mesh.material.diffuseTexture.uScale = scale
+        @mesh.material.diffuseTexture.uOffset = scale
+        @scale = scale
+        @panAxis = 'x'
     img.src = @url
 
   initializeFrame: ->
@@ -68,6 +75,7 @@ class @Frame
     @zoomAnimation = @scene.beginAnimation(@mesh.material.diffuseTexture, 0, 100, false);
 
   moveToPosition: (position) ->
+    @onPositionSince = new Date().getTime()
     @position = position
     if position == -3
       @animation.stop() if @animation
@@ -76,7 +84,8 @@ class @Frame
       @mesh.material.alpha = 0.2
       @mesh.material.diffuseTexture.vScale = 1
       @mesh.material.diffuseTexture.uScale = 1
-      @mesh.material.diffuseTexture = new BABYLON.Texture(@urlSource(), @scene)
+      @fetchImage()
+
     else if position == -2
       @moveTo 15, 15, 0.5
       @mesh.material.alpha = 0.4
