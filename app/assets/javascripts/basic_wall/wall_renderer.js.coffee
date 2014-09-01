@@ -1,22 +1,6 @@
 $ ->
   canvas = document.getElementById "renderCanvas"
   engine = new BABYLON.Engine canvas, true
-  imageData = [
-    "/ultra/high.jpg",
-    "/ultra/wide.jpg",
-    "/ultra/1.jpg",
-    "/ultra/2.jpg",
-    "/ultra/3.jpg",
-    "/ultra/4.jpg",
-    "/ultra/5.jpg"
-  ]
-
-  @currentImageIndex = 0
-
-  getNextUrl = =>
-    url = imageData[@currentImageIndex]
-    @currentImageIndex = (@currentImageIndex + 1) % imageData.length
-    return url
 
   zoomCurrent = =>
     for frame in frames
@@ -33,7 +17,7 @@ $ ->
     @frames = []
 
     for position in [0..6]
-      frame = new Frame(getNextUrl,scene)
+      frame = new Frame(scene)
       frame.moveToPosition(position - 3)
       @frames.push(frame)
 
