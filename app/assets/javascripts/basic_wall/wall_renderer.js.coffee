@@ -2,8 +2,8 @@ $ ->
   canvas = document.getElementById "renderCanvas"
   engine = new BABYLON.Engine canvas, true
   imageData = [
-    "/ultra/high.jpg",
-    "/ultra/wide.jpg"
+    "/ultra/wsquare.jpg",
+    "/ultra/hsquare.jpg"
   ]
 
   @currentImageIndex = 0
@@ -13,13 +13,17 @@ $ ->
     @currentImageIndex = (@currentImageIndex + 1) % imageData.length
     return url
 
-  zoomCurrent = ->
+  zoomCurrent = =>
     for frame in frames
       if frame.position == 0
-        step = scene.getLastFrameDuration() / 4000;
-        frame.mesh.material.diffuseTexture.uScale -= step
-        frame.mesh.material.diffuseTexture.vScale -= step
-        frame.mesh.material.diffuseTexture.uOffset -= step
+        elapsedTime = ( (new Date().getTime()) - frame.onPositionSince )
+        percentPan = elapsedTime / 6000
+        if frame.panAxis == 'x'
+          offset = frame.scale - frame.scale * percentPan * 2
+          frame.mesh.material.diffuseTexture.uOffset = offset
+        else if frame.panAxis == 'y'
+          offset = - frame.scale + frame.scale * percentPan * 2
+          frame.mesh.material.diffuseTexture.vOffset = offset
 
   createScene = ->
     scene = new BABYLON.Scene(engine)
