@@ -4,48 +4,29 @@ class @Frame
     @scene = scene
     @initializeFrame()
 
+  fetchImage: ->
+    @url = @urlSource()
+    img = new Image();
+    img.onload = =>
+      console.log(img.width + 'x' + img.height)
+      @mesh.material.diffuseTexture = new BABYLON.Texture(@url , @scene)
+      if img.height > img.width
+        @mesh.material.diffuseTexture.vScale = img.width / img.height
+      else
+        @mesh.material.diffuseTexture.uScale = img.height / img.width
+    img.src = @url
+
   initializeFrame: ->
-    @mesh = new BABYLON.Mesh("newImage", @scene)
-
-    indices = [];
-    positions = [];
-    normals = [];
-    uvs = [];
-
-    halfSize = 5;
-    positions.push(-halfSize, -halfSize, 0);
-    normals.push(0, 0, -1.0);
-    uvs.push(0.0, 0.0);
-
-    positions.push(halfSize, -halfSize, 0);
-    normals.push(0, 0, -1.0);
-    uvs.push(1.0, 0.0);
-
-    positions.push(halfSize, halfSize, 0);
-    normals.push(0, 0, -1.0);
-    uvs.push(1.0, 1.0);
-
-    positions.push(-halfSize, halfSize, 0);
-    normals.push(0, 0, -1.0);
-    uvs.push(0.0, 1.0);
-
-    indices.push(0);
-    indices.push(1);
-    indices.push(2);
-
-    indices.push(0);
-    indices.push(2);
-    indices.push(3);
-
-    @mesh.setVerticesData(positions, BABYLON.VertexBuffer.PositionKind);
-    @mesh.setVerticesData(normals, BABYLON.VertexBuffer.NormalKind);
-    @mesh.setVerticesData(uvs, BABYLON.VertexBuffer.UVKind);
-    @mesh.setIndices(indices);
+    @mesh = BABYLON.Mesh.CreatePlane("Frame", 10, @scene)
 
     @mesh.position = new BABYLON.Vector3(30,0,20)
     @mesh.rotation.y = 1.57
     @mesh.material = new BABYLON.StandardMaterial("texture1", @scene)
-    @mesh.material.diffuseTexture = new BABYLON.Texture(@urlSource() , @scene)
+    @mesh.material.diffuseTexture = new BABYLON.Texture("/ultra/1.jpg" , @scene)
+    # @scene.executeWhenReady =>
+    #   console.log @mesh.material.diffuseTexture.getSize()
+    @fetchImage()
+    
 
   moveTo: (newX, newZ, newRotation) ->
     positionAnimation = new BABYLON.Animation(
