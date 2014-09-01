@@ -1,10 +1,18 @@
 class @Frame
+  @inFocus: null
+
   constructor: (scene) ->
     @scene = scene
     @mesh = BABYLON.Mesh.CreatePlane("Frame", 10, @scene)
     @mesh.material = new BABYLON.StandardMaterial("texture1", @scene)
     @mesh.material.diffuseTexture = new BABYLON.Texture("/ultra/1.jpg" , @scene)
     @fetchImage()
+
+  zoom: ->
+    elapsedTime = ( (new Date().getTime()) - @onPositionSince )
+    percentPan = elapsedTime / 6000
+    @mesh.material.diffuseTexture.uScale = 1 - 0.1 * percentPan
+    @mesh.material.diffuseTexture.vScale = 1 - 0.1 * percentPan
 
   fetchImage: ->
     @url = ImageSource.getNext()
@@ -61,6 +69,7 @@ class @Frame
     else if position == -1
       @moveTo 10, 15, 1.4
     else if position == 0
+      Frame.inFocus = this
       @moveTo 0, 5, 0
     else if position == 1
       @moveTo -10, 15, -1.4

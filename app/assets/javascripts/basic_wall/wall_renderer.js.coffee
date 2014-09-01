@@ -1,15 +1,6 @@
 $ ->
   canvas = document.getElementById "renderCanvas"
-  engine = new BABYLON.Engine canvas, true
-
-  zoomCurrent = =>
-    for frame in frames
-      if frame.position == 0
-        elapsedTime = ( (new Date().getTime()) - frame.onPositionSince )
-        percentPan = elapsedTime / 6000
-        frame.mesh.material.diffuseTexture.uScale = 1 - 0.1 * percentPan
-        frame.mesh.material.diffuseTexture.vScale = 1 - 0.1 * percentPan
-
+  engine = new BABYLON.Engine canvas, true    
 
   createScene = ->
     scene = new BABYLON.Scene(engine)
@@ -37,7 +28,7 @@ $ ->
   scene = createScene()
 
   engine.runRenderLoop ->
-    zoomCurrent()
+    Frame.inFocus.zoom() if Frame.inFocus
     scene.render()
 
   window.addEventListener "resize", ->
