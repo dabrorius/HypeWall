@@ -9,7 +9,15 @@ class @Frame
     img = new Image();
     img.onload = =>
       @mesh.material.diffuseTexture = new BABYLON.Texture(@url , @scene)
-      @mesh.scaling.x = img.width / img.height
+      xScale = img.width / img.height
+      yScale = 1
+
+      while (xScale > 1.8)
+        xScale *= 0.9
+        yScale *= 0.9
+        
+      @mesh.scaling.x = xScale
+      @mesh.scaling.y = yScale
         
     img.src = @url
 

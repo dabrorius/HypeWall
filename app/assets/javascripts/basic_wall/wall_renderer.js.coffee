@@ -4,7 +4,9 @@ $ ->
   imageData = [
     "/ultra/high.jpg",
     "/ultra/wide.jpg",
-    "/ultra/1.jpg"
+    "/ultra/1.jpg",
+    "/ultra/wsquare.jpg",
+    "/ultra/hsquare.jpg"
   ]
 
   @currentImageIndex = 0
