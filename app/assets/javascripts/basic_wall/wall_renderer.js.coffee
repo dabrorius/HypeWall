@@ -5,8 +5,10 @@ $ ->
     "/ultra/high.jpg",
     "/ultra/wide.jpg",
     "/ultra/1.jpg",
-    "/ultra/wsquare.jpg",
-    "/ultra/hsquare.jpg"
+    "/ultra/2.jpg",
+    "/ultra/3.jpg",
+    "/ultra/4.jpg",
+    "/ultra/5.jpg"
   ]
 
   @currentImageIndex = 0

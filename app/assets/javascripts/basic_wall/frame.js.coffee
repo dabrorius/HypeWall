@@ -2,7 +2,10 @@ class @Frame
   constructor: (urlSource, scene) ->
     @urlSource = urlSource
     @scene = scene
-    @initializeFrame()
+    @mesh = BABYLON.Mesh.CreatePlane("Frame", 10, @scene)
+    @mesh.material = new BABYLON.StandardMaterial("texture1", @scene)
+    @mesh.material.diffuseTexture = new BABYLON.Texture("/ultra/1.jpg" , @scene)
+    @fetchImage()
 
   fetchImage: ->
     @url = @urlSource()
@@ -19,19 +22,7 @@ class @Frame
       @mesh.scaling.x = xScale
       @mesh.scaling.y = yScale
         
-    img.src = @url
-
-  initializeFrame: ->
-    @mesh = BABYLON.Mesh.CreatePlane("Frame", 10, @scene)
-
-    @mesh.position = new BABYLON.Vector3(30,0,20)
-    @mesh.rotation.y = 1.57
-    @mesh.material = new BABYLON.StandardMaterial("texture1", @scene)
-    @mesh.material.diffuseTexture = new BABYLON.Texture("/ultra/1.jpg" , @scene)
-    # @scene.executeWhenReady =>
-    #   console.log @mesh.material.diffuseTexture.getSize()
-    @fetchImage()
-    
+    img.src = @url    
 
   moveTo: (newX, newZ, newRotation) ->
     positionAnimation = new BABYLON.Animation(
@@ -56,22 +47,6 @@ class @Frame
 
     @animation = @scene.beginAnimation(@mesh, 0, 15, false);
 
-  zoomAndPan: ->
-    animationKeys = [{ frame: 0, value: 1 }, { frame: 15, value: 1 }, { frame: 100, value: 0.5 }]
-    zoomAnimationU = new BABYLON.Animation(
-      "tutoAnimation", "uScale", 15,
-      BABYLON.Animation.ANIMATIONTYPE_FLOAT,
-      BABYLON.Animation.ANIMATIONLOOPMODE_CONSTANT);
-    zoomAnimationV = new BABYLON.Animation(
-      "tutoAnimation", "vScale", 15,
-      BABYLON.Animation.ANIMATIONTYPE_FLOAT,
-      BABYLON.Animation.ANIMATIONLOOPMODE_CONSTANT);
-    zoomAnimationU.setKeys animationKeys
-    zoomAnimationV.setKeys animationKeys
-    @mesh.material.diffuseTexture.animations.push(zoomAnimationU);
-    @mesh.material.diffuseTexture.animations.push(zoomAnimationV);
-    @zoomAnimation = @scene.beginAnimation(@mesh.material.diffuseTexture, 0, 100, false);
-
   moveToPosition: (position) ->
     @onPositionSince = new Date().getTime()
     @position = position
@@ -79,38 +54,25 @@ class @Frame
       @animation.stop() if @animation
       @mesh.position = new BABYLON.Vector3(25,0,20)
       @mesh.rotation.y = 2.57
-      @mesh.material.alpha = 0.2
       @mesh.material.diffuseTexture.vScale = 1
       @mesh.material.diffuseTexture.uScale = 1
       @fetchImage()
-
     else if position == -2
       @moveTo 15, 15, 1.5
-      @mesh.material.alpha = 0.4
     else if position == -1
-      @mesh.material.alpha = 0.7
       @moveTo 10, 15, 1.4
     else if position == 0
       @moveTo 0, 5, 0
-      @mesh.material.alpha = 1
-      # @zoomAndPan()
     else if position == 1
-      # @animation.stop() if @animation
-      # @mesh.material.diffuseTexture.uScale = 0.5
-      # @mesh.material.diffuseTexture.vScale = 0.5
-      # @animation.restart() if @animation
-      # @animation
       @moveTo -10, 15, -1.4
-      @mesh.material.alpha = 0.7
     else if position == 2
       @moveTo -15, 15, -1.5
-      @mesh.material.alpha = 0.4
     else if position == 3
       @moveTo -25, 20, -2.57
-      @mesh.material.alpha = 0.2
+    @mesh.material.alpha = 1 / (Math.abs(position)+1)
 
   moveToNextPosition: ->
-    @position += 1
-    if @position > 3
-      @position = -3
-    @moveToPosition(@position)
+    newPosition = @position + 1
+    if newPosition > 3
+      newPosition = -3
+    @moveToPosition(newPosition)
