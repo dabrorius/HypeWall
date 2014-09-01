@@ -1,6 +1,5 @@
 class @Frame
-  constructor: (urlSource, scene) ->
-    @urlSource = urlSource
+  constructor: (scene) ->
     @scene = scene
     @mesh = BABYLON.Mesh.CreatePlane("Frame", 10, @scene)
     @mesh.material = new BABYLON.StandardMaterial("texture1", @scene)
@@ -8,7 +7,7 @@ class @Frame
     @fetchImage()
 
   fetchImage: ->
-    @url = @urlSource()
+    @url = ImageSource.getNext()
     img = new Image();
     img.onload = =>
       @mesh.material.diffuseTexture = new BABYLON.Texture(@url , @scene)
