@@ -2,8 +2,9 @@ $ ->
   canvas = document.getElementById "renderCanvas"
   engine = new BABYLON.Engine canvas, true
   imageData = [
-    "/ultra/wsquare.jpg",
-    "/ultra/hsquare.jpg"
+    "/ultra/high.jpg",
+    "/ultra/wide.jpg",
+    "/ultra/1.jpg"
   ]
 
   @currentImageIndex = 0
@@ -18,12 +19,9 @@ $ ->
       if frame.position == 0
         elapsedTime = ( (new Date().getTime()) - frame.onPositionSince )
         percentPan = elapsedTime / 6000
-        if frame.panAxis == 'x'
-          offset = frame.scale - frame.scale * percentPan * 2
-          frame.mesh.material.diffuseTexture.uOffset = offset
-        else if frame.panAxis == 'y'
-          offset = - frame.scale + frame.scale * percentPan * 2
-          frame.mesh.material.diffuseTexture.vOffset = offset
+        frame.mesh.material.diffuseTexture.uScale = 1 - 0.1 * percentPan
+        frame.mesh.material.diffuseTexture.vScale = 1 - 0.1 * percentPan
+
 
   createScene = ->
     scene = new BABYLON.Scene(engine)

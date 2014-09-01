@@ -9,18 +9,8 @@ class @Frame
     img = new Image();
     img.onload = =>
       @mesh.material.diffuseTexture = new BABYLON.Texture(@url , @scene)
-      if img.height > img.width
-        scale = img.width / img.height
-        @mesh.material.diffuseTexture.vScale = scale
-        @mesh.material.diffuseTexture.vOffset = -scale
-        @scale = scale
-        @panAxis = 'y'
-      else
-        scale = img.height / img.width
-        @mesh.material.diffuseTexture.uScale = scale
-        @mesh.material.diffuseTexture.uOffset = scale
-        @scale = scale
-        @panAxis = 'x'
+      @mesh.scaling.x = img.width / img.height
+        
     img.src = @url
 
   initializeFrame: ->
@@ -80,18 +70,18 @@ class @Frame
     if position == -3
       @animation.stop() if @animation
       @mesh.position = new BABYLON.Vector3(25,0,20)
-      @mesh.rotation.y = 1.57
+      @mesh.rotation.y = 2.57
       @mesh.material.alpha = 0.2
       @mesh.material.diffuseTexture.vScale = 1
       @mesh.material.diffuseTexture.uScale = 1
       @fetchImage()
 
     else if position == -2
-      @moveTo 15, 15, 0.5
+      @moveTo 15, 15, 1.5
       @mesh.material.alpha = 0.4
     else if position == -1
       @mesh.material.alpha = 0.7
-      @moveTo 10, 15, 0.4
+      @moveTo 10, 15, 1.4
     else if position == 0
       @moveTo 0, 5, 0
       @mesh.material.alpha = 1
@@ -102,13 +92,13 @@ class @Frame
       # @mesh.material.diffuseTexture.vScale = 0.5
       # @animation.restart() if @animation
       # @animation
-      @moveTo -10, 15, -0.4
+      @moveTo -10, 15, -1.4
       @mesh.material.alpha = 0.7
     else if position == 2
-      @moveTo -15, 15, -0.5
+      @moveTo -15, 15, -1.5
       @mesh.material.alpha = 0.4
     else if position == 3
-      @moveTo -25, 20, -1.57
+      @moveTo -25, 20, -2.57
       @mesh.material.alpha = 0.2
 
   moveToNextPosition: ->
