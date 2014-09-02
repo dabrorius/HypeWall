@@ -4,7 +4,7 @@ $ ->
 
   createScene = ->
     scene = new BABYLON.Scene(engine)
-
+    scene.clearColor = new BABYLON.Color3 0, 0, 0
     @frames = []
 
     for position in [0..6]

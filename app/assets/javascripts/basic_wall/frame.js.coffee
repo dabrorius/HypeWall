@@ -7,8 +7,23 @@ class @Frame
     @mesh.material = new BABYLON.StandardMaterial("texture1", @scene)
     @mesh.material.diffuseTexture = new BABYLON.Texture("/ultra/1.jpg" , @scene)
     
+    @background = BABYLON.Mesh.CreatePlane("Frame", 10.03, @scene)
+    @background.material = new BABYLON.StandardMaterial("background", @scene)
+    @background.material.diffuseColor = new BABYLON.Color3(1, 1, 1)
+    @background.parent = @mesh
+    @background.position.z = 0.005
+
+    @dimLayer = BABYLON.Mesh.CreatePlane("Frame", 10.03, @scene)
+    @dimLayer.material = new BABYLON.StandardMaterial("dimLayer", @scene)
+    @dimLayer.material.diffuseColor = new BABYLON.Color3(0, 0, 0)
+    @dimLayer.material.alpha = 0
+    @dimLayer.parent = @mesh
+    @dimLayer.position.z = -0.005
+    @dimLayer.position.y = - 5.015
+    @dimLayer.scaling.y = 2
+
     @reflection = BABYLON.Mesh.CreatePlane("Reflection", 10, @scene)
-    @reflection.position.y = -10
+    @reflection.position.y = -10.03
     @reflection.scaling.y = -1
     @reflection.parent = @mesh
     @reflection.material = new BABYLON.StandardMaterial("texture1", @scene)
@@ -16,7 +31,17 @@ class @Frame
     @reflection.material.backFaceCulling = false
     @reflection.material.diffuseTexture = new BABYLON.Texture("/ultra/1.jpg" , @scene)
 
+    @reflectionBackground = BABYLON.Mesh.CreatePlane("ReflectionBackground", 10.03, @scene)
+    @reflectionBackground.material = new BABYLON.StandardMaterial("ReflectionBackground", @scene)
+    @reflectionBackground.parent = @mesh
+    @reflectionBackground.position.z = 0.01
+    @reflectionBackground.position.y = -10.03
+    @reflectionBackground.material.diffuseColor = new BABYLON.Color3(0.03,0.03,0.03)
+
     @fetchImage()
+
+  setDim: (value) ->
+    @dimLayer.material.alpha = value
 
   zoom: ->
     elapsedTime = ( (new Date().getTime()) - @onPositionSince )
@@ -73,7 +98,7 @@ class @Frame
     if position == -3
       @animation.stop() if @animation
       @mesh.position = new BABYLON.Vector3(25,0,20)
-      @mesh.rotation.y = 2.57
+      @mesh.rotation.y = 1.5
       @mesh.material.diffuseTexture.vScale = 1
       @mesh.material.diffuseTexture.uScale = 1
       @fetchImage()
@@ -89,8 +114,13 @@ class @Frame
     else if position == 2
       @moveTo -15, 15, -1.5
     else if position == 3
-      @moveTo -25, 20, -2.57
-    # @mesh.material.alpha = 1 / (Math.abs(position)+1)
+      @moveTo -25, 20, -1.5
+
+    switch Math.abs(position)
+      when 3 then @setDim(0.8)
+      when 2 then @setDim(0.65)
+      when 1 then @setDim(0.5)
+      when 0 then @setDim(0)
 
   moveToNextPosition: ->
     newPosition = @position + 1
