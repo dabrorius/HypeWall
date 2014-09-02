@@ -1,9 +1,9 @@
 Rails.application.routes.draw do
 
-  resources :images do
+  resources :items do
     member do
-      get 'approve' => "images#approve", as: 'approve'
-      get 'ban' => "images#ban", as: 'ban'
+      get 'approve' => "items#approve", as: 'approve'
+      get 'ban' => "items#ban", as: 'ban'
     end
   end
 

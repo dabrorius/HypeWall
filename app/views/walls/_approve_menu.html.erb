@@ -1,12 +1,12 @@
-<div class="controls <%= image.status %>">  
-  <% if image.status != 'approved' %>
-    <%= link_to approve_image_path(image), remote: true do -%><i class="fa fa-check"></i>Approve<% end %>
+<div class="controls <%= item.status %>">
+  <% if item.status != 'approved' %>
+    <%= link_to approve_item_path(item), remote: true do -%><i class="fa fa-check"></i>Approve<% end %>
   <% else %>
     <i class="fa fa-check"></i>Approve
   <% end %>
   |
-  <% if image.status != 'banned' %>
-    <%= link_to ban_image_path(image), remote: true do -%>
+  <% if item.status != 'banned' %>
+    <%= link_to ban_item_path(item), remote: true do -%>
       <i class="fa fa-times"></i>Block
     <% end %>
   <% else %>

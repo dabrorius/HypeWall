@@ -3,7 +3,7 @@
 
   <div id="control">
   <% @images.each do |image| %>
-    <%= render partial: 'images/image', locals: { image: image } %>
+    <%= render partial: 'items/item', locals: { item: image } %>
   <% end %>
   </div>
 
