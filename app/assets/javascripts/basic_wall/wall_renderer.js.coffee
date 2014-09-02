@@ -12,7 +12,7 @@ $ ->
       frame.moveToPosition(position - 3)
       @frames.push(frame)
 
-    camera = new BABYLON.FreeCamera("camera1", new BABYLON.Vector3(0, 0, -9), scene)
+    camera = new BABYLON.FreeCamera("camera1", new BABYLON.Vector3(0, 0, -11), scene)
     camera.setTarget(new BABYLON.Vector3.Zero())
     camera.attachControl(canvas, false)
 
