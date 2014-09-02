@@ -6,6 +6,16 @@ class @Frame
     @mesh = BABYLON.Mesh.CreatePlane("Frame", 10, @scene)
     @mesh.material = new BABYLON.StandardMaterial("texture1", @scene)
     @mesh.material.diffuseTexture = new BABYLON.Texture("/ultra/1.jpg" , @scene)
+    
+    @reflection = BABYLON.Mesh.CreatePlane("Reflection", 10, @scene)
+    @reflection.position.y = -10
+    @reflection.scaling.y = -1
+    @reflection.parent = @mesh
+    @reflection.material = new BABYLON.StandardMaterial("texture1", @scene)
+    @reflection.material.alpha = 0.1
+    @reflection.material.backFaceCulling = false
+    @reflection.material.diffuseTexture = new BABYLON.Texture("/ultra/1.jpg" , @scene)
+
     @fetchImage()
 
   zoom: ->
@@ -13,12 +23,15 @@ class @Frame
     percentPan = elapsedTime / 6000
     @mesh.material.diffuseTexture.uScale = 1 - 0.1 * percentPan
     @mesh.material.diffuseTexture.vScale = 1 - 0.1 * percentPan
+    @reflection.material.diffuseTexture.uScale = 1 - 0.1 * percentPan
+    @reflection.material.diffuseTexture.vScale = 1 - 0.1 * percentPan
 
   fetchImage: ->
     @url = ImageSource.getNext()
     img = new Image();
     img.onload = =>
       @mesh.material.diffuseTexture = new BABYLON.Texture(@url , @scene)
+      @reflection.material.diffuseTexture = new BABYLON.Texture(@url, @scene)
       xScale = img.width / img.height
       yScale = 1
 
@@ -77,7 +90,7 @@ class @Frame
       @moveTo -15, 15, -1.5
     else if position == 3
       @moveTo -25, 20, -2.57
-    @mesh.material.alpha = 1 / (Math.abs(position)+1)
+    # @mesh.material.alpha = 1 / (Math.abs(position)+1)
 
   moveToNextPosition: ->
     newPosition = @position + 1
