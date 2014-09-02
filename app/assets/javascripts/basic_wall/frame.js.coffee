@@ -91,6 +91,8 @@ class @Frame
         
       @mesh.scaling.x = xScale
       @mesh.scaling.y = yScale
+      @textLayer.scaling.x = 1 / xScale
+      @textLayer.scaling.y = 1 / yScale
         
     img.src = @url    
 
