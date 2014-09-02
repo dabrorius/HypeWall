@@ -38,6 +38,31 @@ class @Frame
     @reflectionBackground.position.y = -10.03
     @reflectionBackground.material.diffuseColor = new BABYLON.Color3(0.03,0.03,0.03)
 
+
+    @textLayer = BABYLON.Mesh.CreatePlane("Frame", 15.03, @scene)
+    @textLayer.material = new BABYLON.StandardMaterial("textLayer", @scene)
+    @textLayer.material.diffuseColor = new BABYLON.Color3 1,1,0
+    @textLayer.parent = @mesh
+    @textLayer.position.z = -0.1
+
+    dynamicTexture = new BABYLON.DynamicTexture "dynamicTexture", 512, @scene, true
+    dynamicTexture.hasAlpha = true
+    @textLayer.material.diffuseTexture = dynamicTexture
+    textureContext = dynamicTexture.getContext()
+    size = dynamicTexture.getSize()
+
+    text = "Pirate party"
+
+    textureContext.save();
+    textureContext.font = "bold 60px Calibri";
+    textSize = textureContext.measureText(text);
+    textureContext.fillStyle = "white";
+    textureContext.fillText(text, (size.width - textSize.width) / 2, (size.height - 100));
+
+    textureContext.restore();
+
+    dynamicTexture.update();
+    
     @fetchImage()
 
   setDim: (value) ->
@@ -108,7 +133,30 @@ class @Frame
       @moveTo 10, 15, 1.4
     else if position == 0
       Frame.inFocus = this
-      @moveTo 0, 5, 0
+      # @moveTo 0, 5, 0
+      positionAnimation = new BABYLON.Animation(
+        "tutoAnimation", "position", 15,
+        BABYLON.Animation.ANIMATIONTYPE_VECTOR3,
+        BABYLON.Animation.ANIMATIONLOOPMODE_CONSTANT);
+      positionAnimation.setKeys([
+        { frame: 0, value: @mesh.position }, 
+        { frame: 5, value: new BABYLON.Vector3(10,0,8) },
+        { frame: 12, value: new BABYLON.Vector3(0,0,5) }
+      ]);
+      @mesh.animations.push(positionAnimation);
+
+      rotationAnimation = new BABYLON.Animation(
+        "tutoAnimation", "rotation.y", 15,
+        BABYLON.Animation.ANIMATIONTYPE_FLOAT,
+        BABYLON.Animation.ANIMATIONLOOPMODE_CONSTANT);
+      rotationAnimation.setKeys([
+        { frame: 0, value: @mesh.rotation.y },
+        { frame: 5, value: @mesh.rotation.y },
+        { frame: 12, value: 0 }
+      ]);
+      @mesh.animations.push(rotationAnimation);
+
+      @animation = @scene.beginAnimation(@mesh, 0, 12, false);
     else if position == 1
       @moveTo -10, 15, -1.4
     else if position == 2
