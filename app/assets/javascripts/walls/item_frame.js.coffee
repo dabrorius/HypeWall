@@ -1,5 +1,7 @@
 class @ItemFrame
   textureSize: 512
+  border: 5
+  borderColor: "#FFFFFF"
 
   constructor: (scene) ->
     @scene = scene
@@ -17,6 +19,11 @@ class @ItemFrame
     img.onload = =>
       context = @texture.getContext()
       context.save()
-      context.drawImage(img, 0,0, img.width, img.height, 0, 0, @textureSize, @textureSize)
+      context.fillStyle = @borderColor
+      context.fillRect(0,0,@textureSize,@textureSize)
+      context.drawImage( img, 0, 0, 
+        img.width, img.height, @border, @border, 
+        (@textureSize - @border * 2), (@textureSize - @border * 2)
+      )
       context.restore()
       @texture.update()
