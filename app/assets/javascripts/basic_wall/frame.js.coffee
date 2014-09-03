@@ -45,23 +45,10 @@ class @Frame
     @textLayer.parent = @mesh
     @textLayer.position.z = -0.1
 
-    dynamicTexture = new BABYLON.DynamicTexture "dynamicTexture", 512, @scene, true
-    dynamicTexture.hasAlpha = true
-    @textLayer.material.diffuseTexture = dynamicTexture
-    textureContext = dynamicTexture.getContext()
-    size = dynamicTexture.getSize()
-
-    text = "Pirate party"
-
-    textureContext.save();
-    textureContext.font = "bold 60px Calibri";
-    textSize = textureContext.measureText(text);
-    textureContext.fillStyle = "white";
-    textureContext.fillText(text, (size.width - textSize.width) / 2, (size.height - 100));
-
-    textureContext.restore();
-
-    dynamicTexture.update();
+    @dynamicTexture = new BABYLON.DynamicTexture "dynamicTexture", 512, @scene, true
+    @dynamicTexture.hasAlpha = true
+    @textLayer.material.diffuseTexture = @dynamicTexture
+    @textureContext = @dynamicTexture.getContext()
     
     @fetchImage()
 
@@ -93,6 +80,19 @@ class @Frame
       @mesh.scaling.y = yScale
       @textLayer.scaling.x = 1 / xScale
       @textLayer.scaling.y = 1 / yScale
+
+      text = "dabrorius"
+
+      size = @dynamicTexture.getSize()
+      @textureContext.save();
+      @textureContext.font = "20px Helvetica";
+      textSize = @textureContext.measureText(text);
+      @textureContext.fillStyle = "white";
+      @textureContext.fillText(text, (size.width - textSize.width) / 2, (size.height * yScale - 100));
+      @textureContext.drawImage(img, 0,0,150,150,100,100,200,200)
+      @textureContext.restore();
+
+      @dynamicTexture.update();
         
     img.src = @url    
 
