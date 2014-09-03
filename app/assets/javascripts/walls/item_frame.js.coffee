@@ -2,6 +2,7 @@ class @ItemFrame
   textureSize: 512
   border: 5
   borderColor: "#FFFFFF"
+  aspectRatio: 1
 
   constructor: (scene) ->
     @scene = scene
@@ -15,8 +16,11 @@ class @ItemFrame
   loadImage: ->
     img = new Image()
     img.src = "/ultra/1.jpg"
-
+    
     img.onload = =>
+      @aspectRatio = img.width / img.height
+      @mesh.scaling.x = @aspectRatio
+
       context = @texture.getContext()
       context.save()
       context.fillStyle = @borderColor
