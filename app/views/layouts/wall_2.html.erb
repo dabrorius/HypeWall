@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html class="">
+<head>
+  <%= javascript_include_tag 'application' %>
+
+  <style>
+    html, body {
+      overflow: hidden;
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      padding: 0;
+    }
+
+    #renderCanvas {
+      width: 100%;
+      height: 100%;
+      touch-action: none;
+    }
+  </style>
+</head>
+<body>
+
+  <%= yield %>
+
+  <%= render partial: 'layouts/google_analytics' %>
+</body>
+</html>

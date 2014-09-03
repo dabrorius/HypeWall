@@ -16,6 +16,7 @@ Rails.application.routes.draw do
       delete 'remove_background'
       delete 'remove_logo'
       resources :images, as: 'wall_uploaded_images', only: [:new, :create]
+      get :show2
     end
   end
 
