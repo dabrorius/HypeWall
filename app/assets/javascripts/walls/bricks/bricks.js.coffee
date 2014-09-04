@@ -14,10 +14,13 @@ $ ->
     light.intensity = 10
 
     row1 = new BrickRow(scene, 0,0)
+
     frame1 = new ItemFrame(scene)
-    frame2 = new ItemFrame(scene)
     row1.addLeft frame1
-    row1.addLeft frame2
+    window.setInterval ->
+      frame1 = new ItemFrame(scene)
+      row1.addLeft frame1
+    , 3000
 
     return scene
 

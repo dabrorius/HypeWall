@@ -5,8 +5,8 @@ class @ItemFrame
   font: "40px helvetica"
   textPadding: 20
   aspectRatio: 1
-  height: 3
-  width: 3
+  height: 5
+  width: 5
 
   constructor: (scene) ->
     @scene = scene
