@@ -15,7 +15,7 @@ Rails.application.routes.draw do
       get 'control' => "walls#control", as: 'control'
       delete 'remove_background'
       delete 'remove_logo'
-      resources :images, as: 'wall_uploaded_images', only: [:new, :create]
+      resources :items, as: 'wall_uploaded_images', only: [:new, :create]
     end
   end
 
