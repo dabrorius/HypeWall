@@ -22,23 +22,26 @@ class @ItemFrame
     img.onload = =>
       @aspectRatio = img.width / img.height
       @mesh.scaling.x = @aspectRatio
+      @updateRender(img, 0)
 
-      context = @texture.getContext()
-      context.fillStyle = @borderColor
-      context.fillRect(0,0,@textureSize, @textureSize)
-      context.drawImage( img, 0, 0, 
-        img.width, img.height, @border/@aspectRatio, @border, 
-        (@textureSize - @border/@aspectRatio * 2), (@textureSize - @border * 2)
-      )
+  updateRender: (img, zoom = 0) ->
+    context = @texture.getContext()
+    context.fillStyle = @borderColor
+    context.fillRect(0,0,@textureSize, @textureSize)
+    context.drawImage( img, zoom, zoom/@aspectRatio, 
+      img.width - zoom, img.height - zoom / @aspectRatio, @border/@aspectRatio, @border, 
+      (@textureSize - @border/@aspectRatio * 2), (@textureSize - @border * 2)
+    )
 
-      username = "dabrorius"
-      context.save()
-      context.scale(1/@aspectRatio, 1);
-      context.font = @font
-      textSize = context.measureText(username)
-      textX = @textureSize * @aspectRatio - textSize.width - @textPadding
-      textY = @textureSize - @textPadding
-      context.fillText(username, textX, textY)
-      context.restore()
+    username = "dabrorius"
+    context.save()
+    context.scale(1/@aspectRatio, 1);
+    context.font = @font
+    textSize = context.measureText(username)
+    textX = @textureSize * @aspectRatio - textSize.width - @textPadding
+    textY = @textureSize - @textPadding
+    context.fillText(username, textX, textY)
+    context.restore()
 
-      @texture.update()
+    @texture.update()
+
