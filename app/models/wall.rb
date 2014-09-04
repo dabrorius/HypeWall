@@ -47,8 +47,8 @@ class Wall < ActiveRecord::Base
   def recent_instagram_images
     items = []
     Instagram.tag_recent_media(hashtag).each do |instagram_image|
-      unless Item.find_by_original_id(instagram_image.id).present?
-        items.push Item.create(
+      unless InstagramItem.find_by_original_id(instagram_image.id).present?
+        items.push InstagramItem.create(
           original_id: instagram_image.id,
           user_id: instagram_image.user.id,
           url: instagram_image.images.standard_resolution.url,
@@ -58,7 +58,7 @@ class Wall < ActiveRecord::Base
     return items
   end
 
-  def new_images
+  def new_items
     recent_instagram_images
   end
 
