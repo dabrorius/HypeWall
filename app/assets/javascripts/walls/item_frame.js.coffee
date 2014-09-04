@@ -1,6 +1,6 @@
 class @ItemFrame
   textureSize: 512
-  border: 5
+  border: 10
   borderColor: "#FFFFFF"
   aspectRatio: 1
 
@@ -24,10 +24,10 @@ class @ItemFrame
       context = @texture.getContext()
       context.save()
       context.fillStyle = @borderColor
-      context.fillRect(0,0,@textureSize * @aspectRatio, @textureSize)
+      context.fillRect(0,0,@textureSize, @textureSize)
       context.drawImage( img, 0, 0, 
-        img.width, img.height, @border, @border, 
-        (@textureSize - @border * 2), (@textureSize - @border * 2)
+        img.width, img.height, @border/@aspectRatio, @border, 
+        (@textureSize - @border/@aspectRatio * 2), (@textureSize - @border * 2)
       )
 
       username = "dabrorius"
