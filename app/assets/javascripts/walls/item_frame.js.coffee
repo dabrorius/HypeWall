@@ -5,10 +5,12 @@ class @ItemFrame
   font: "40px helvetica"
   textPadding: 20
   aspectRatio: 1
+  height: 3
+  width: 3
 
   constructor: (scene) ->
     @scene = scene
-    @mesh = BABYLON.Mesh.CreatePlane("Frame", 5, scene)
+    @mesh = BABYLON.Mesh.CreatePlane("Frame", @height, scene)
     @mesh.material = new BABYLON.StandardMaterial "FrameMaterial", scene
 
     @texture = new BABYLON.DynamicTexture "FrameTexture", @textureSize, scene, true
@@ -21,6 +23,7 @@ class @ItemFrame
     
     img.onload = =>
       @aspectRatio = img.width / img.height
+      @width = @width * @aspectRatio
       @mesh.scaling.x = @aspectRatio
       @updateRender(img, 0)
 
