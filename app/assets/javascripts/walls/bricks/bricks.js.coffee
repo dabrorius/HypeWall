@@ -13,7 +13,7 @@ $ ->
     light = new BABYLON.HemisphericLight("light1", new BABYLON.Vector3(0, 1, 0), scene)
     light.intensity = 10
 
-    frame1 = new BrickItem(scene)
+    frame1 = new ItemFrame(scene)
 
     return scene
 
