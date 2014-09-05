@@ -8,7 +8,8 @@ class @ItemFrame
   height: 5
   width: 5
 
-  constructor: (scene) ->
+  constructor: (scene, onLoad) ->
+    @onLoad = onLoad
     @scene = scene
     @mesh = BABYLON.Mesh.CreatePlane("Frame", @height, scene)
     @mesh.material = new BABYLON.StandardMaterial "FrameMaterial", scene
@@ -19,13 +20,14 @@ class @ItemFrame
 
   loadImage: ->
     img = new Image()
-    img.src = "/ultra/1.jpg"
+    img.src = "/ultra/wide.jpg"
     
     img.onload = =>
       @aspectRatio = img.width / img.height
       @width = @width * @aspectRatio
       @mesh.scaling.x = @aspectRatio
       @updateRender(img, 0)
+      @onLoad()
 
   updateRender: (img, zoom = 0) ->
     context = @texture.getContext()
