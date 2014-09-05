@@ -16,11 +16,6 @@ class ApplicationController < ActionController::Base
       flash[:alert] = "This page is restricted"
       redirect_to root_path
     end
-  end
-
-  def current_admin_user
-    return nil if !current_user.is_admin?
-    current_user   
-  end
+  end 
 
 end
