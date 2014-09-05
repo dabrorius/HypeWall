@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  ActiveAdmin.routes(self)
   resources :images do
     member do
       get 'approve' => "images#approve", as: 'approve'
