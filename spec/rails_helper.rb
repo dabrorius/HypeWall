@@ -43,4 +43,7 @@ RSpec.configure do |config|
 
   # Enables controller test helper methods
   config.include Devise::TestHelpers, type: :controller
+
+  # Enables Capybara
+  config.include Capybara::DSL
 end
