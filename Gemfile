@@ -52,8 +52,14 @@ gem 'websocket-rails'
 
 # Amazon web services (uploading stuff on heroku)
 gem 'aws-sdk'
+
+# Active admin dependency
+# gem "meta_search",    '>= 1.1.0.pre'
+
 # Admin interface
-gem 'activeadmin'
+gem 'activeadmin', github: 'activeadmin'
+
+
 
 group :test do
   gem "minitest"
