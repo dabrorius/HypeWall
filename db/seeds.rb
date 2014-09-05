@@ -9,7 +9,10 @@
 
 captain = User.create email: "captain@hypewall.io", 
   password: "password", 
-  password_confirmation: "password"
+  password_confirmation: "password",
+  subscription_level: "pro",
+  is_admin: true
+
 
 wall = Wall.create name: "ZIP Party",
   description: "Welcome to zip pirate party\n#zipparty\nGet drunk or die!",

@@ -87,7 +87,7 @@ ActiveRecord::Schema.define(version: 20140905124301) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "subscription_level",     default: "free"
-    t.boolean  "is_admin",               default: true
+    t.boolean  "is_admin",               default: false
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
