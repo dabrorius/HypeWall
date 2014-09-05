@@ -52,6 +52,8 @@ gem 'websocket-rails'
 
 # Amazon web services (uploading stuff on heroku)
 gem 'aws-sdk'
+# Admin interface
+gem 'activeadmin'
 
 group :test do
   gem "minitest"
