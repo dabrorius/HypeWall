@@ -7,8 +7,6 @@ ActiveAdmin.register Wall do
       :background_style, :require_image_approval, :font_color, :font_style,
       :slug, :background_color]
 
-
-
   permit_params to_permit
 
   index do
@@ -19,7 +17,7 @@ ActiveAdmin.register Wall do
   end
 
   form do |f|
-    f.inputs "User details" do
+    f.inputs "Wall details" do
       to_permit.each { |field| f.input field }
     end
     f.actions
