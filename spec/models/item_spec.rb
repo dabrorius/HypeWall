@@ -25,13 +25,22 @@ describe Item do
     end
   end
 
-
   describe "scope -> approved" do
     let(:pending_item) { FactoryGirl.create :item }
     let(:approved_item) { FactoryGirl.create :item }
 
     it "shows only approved items" do
       expect(Item.approved).to eq([approved_item])
+    end
+  end
+
+  context "when wall is deleted" do
+    let!(:wall) { FactoryGirl.create :wall }
+    let!(:item) { FactoryGirl.create :item, wall: wall }
+
+    it "removes the associated item too" do
+      expect { wall.destroy }.
+      to change{ Item.count }.from(1).to(0)
     end
   end
 
