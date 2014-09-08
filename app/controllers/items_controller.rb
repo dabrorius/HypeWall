@@ -1,23 +1,23 @@
-class ImagesController < ApplicationController
+class ItemsController < ApplicationController
 
-  before_action :set_image, only: [:approve, :ban]
+  before_action :set_item, only: [:approve, :ban]
 
   def approve
-    @image.approve
+    @item.approve
     render :change_status
   end
 
   def ban
-    @image.ban
+    @item.ban
     render :change_status
   end
 
   def new
-    @wall = Wall.find(params[:id])
+    @wall = Wall.friendly.find(params[:id])
   end
 
   def create
-    @wall = current_user.walls.find(params[:id])
+    @wall = current_user.walls.friendly.find(params[:id])
     params[:images_attributes].each_with_index do |image, index|
       UploadedImage.create(uploaded_image_params(index).merge(status: 'approved').merge(wall: @wall))
     end
@@ -27,8 +27,8 @@ class ImagesController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
-    def set_image
-      @image = current_user.images.find(params[:id])
+    def set_item
+      @item = current_user.items.find(params[:id])
     end
 
     def uploaded_image_params(index)

@@ -19,9 +19,9 @@ class Wall < ActiveRecord::Base
 
   has_many :wall_roles
   has_many :users, through: :wall_roles
-  has_many :images
+  has_many :items
 
-  accepts_nested_attributes_for :images, :allow_destroy => true
+  accepts_nested_attributes_for :items, :allow_destroy => true
 
   before_save :hashtag_cleanup
   def hashtag_cleanup
@@ -45,20 +45,20 @@ class Wall < ActiveRecord::Base
   end
 
   def recent_instagram_images
-    images = []
+    items = []
     Instagram.tag_recent_media(hashtag).each do |instagram_image|
-      unless Image.find_by_original_id(instagram_image.id).present?
-        images.push Image.create(
+      unless InstagramItem.find_by_original_id(instagram_image.id).present?
+        items.push InstagramItem.create(
           original_id: instagram_image.id,
           user_id: instagram_image.user.id,
           url: instagram_image.images.standard_resolution.url,
           wall_id: self.id)
       end
     end
-    return images
+    return items
   end
 
-  def new_images
+  def new_items
     recent_instagram_images
   end
 

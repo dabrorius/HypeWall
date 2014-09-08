@@ -3,11 +3,11 @@
 
   <div id="control">
   <% @images.each do |image| %>
-    <%= render partial: 'images/image', locals: { image: image } %>
+    <%= render partial: 'items/item', locals: { item: image } %>
   <% end %>
   </div>
 
-  <script>åç
+  <script>
     var dispatcher = new WebSocketRails('<%= websocket_host %>');
     channel = dispatcher.subscribe('image_control_<%= @wall.id %>');
     channel.bind('new', function(image_box_partial) {

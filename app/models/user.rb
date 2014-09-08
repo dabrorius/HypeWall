@@ -5,7 +5,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
   has_many :wall_roles
   has_many :walls, through: :wall_roles
-  has_many :images, through: :walls
+  has_many :items, through: :walls
 
   def name
     email.split('@').first

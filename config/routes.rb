@@ -1,10 +1,11 @@
 Rails.application.routes.draw do
 
   ActiveAdmin.routes(self)
-  resources :images do
+  resources :items do
+
     member do
-      get 'approve' => "images#approve", as: 'approve'
-      get 'ban' => "images#ban", as: 'ban'
+      get 'approve' => "items#approve", as: 'approve'
+      get 'ban' => "items#ban", as: 'ban'
     end
   end
 
@@ -16,7 +17,7 @@ Rails.application.routes.draw do
       get 'control' => "walls#control", as: 'control'
       delete 'remove_background'
       delete 'remove_logo'
-      resources :images, as: 'wall_uploaded_images', only: [:new, :create]
+      resources :items, as: 'wall_uploaded_images', only: [:new, :create]
     end
   end
 
