@@ -95,7 +95,7 @@ ActiveAdmin.setup do |config|
   # will call the method to return the path.
   #
   # Default:
-  config.logout_link_path = :destroy_user_session_path 
+  config.logout_link_path = :destroy_user_session_path
 
   # Devises use delete for logout path
   config.logout_link_method = :delete
@@ -243,5 +243,4 @@ ActiveAdmin.setup do |config|
   # You can enable or disable them for all resources here.
   #
   # config.filters = true
-
 end
