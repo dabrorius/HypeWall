@@ -14,8 +14,7 @@ RSpec.describe Admin::DashboardController, :type => :controller do
   context "regular user" do
 
     let(:user) { FactoryGirl.create :user }
-
-    #user.confirm!
+    
     before do
       sign_in user
       get :index
