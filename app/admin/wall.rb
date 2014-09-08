@@ -4,10 +4,8 @@ ActiveAdmin.register Wall do
   end
 
   to_permit = [:name, :hashtag, :description, :created_at, :updated_at,
-      :background_image_file_name, :logo_file_name,
-      :logo_file_size, :logo_updated_at, :background_style,
-      :require_image_approval, :font_color,
-      :font_style, :slug, :background_color]
+      :background_style, :require_image_approval, :font_color, :font_style,
+      :slug, :background_color]
 
 
 
