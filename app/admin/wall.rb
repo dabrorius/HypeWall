@@ -1,4 +1,6 @@
 ActiveAdmin.register Wall do
+
+  # needed to due to friendly find IDs
   before_filter :only => [:show, :edit, :update, :destroy] do
     @wall = Wall.friendly.find(params[:id])
   end
@@ -10,9 +12,11 @@ ActiveAdmin.register Wall do
   permit_params to_permit
 
   index do
-    # creates an appropriate column in the index view
-    to_permit.each { |field| column field }
-    # allows crud actions
+    column :name
+    column :hashtag
+    column :created_at
+    column :updated_at
+    column :require_image_approval
     actions
   end
 
