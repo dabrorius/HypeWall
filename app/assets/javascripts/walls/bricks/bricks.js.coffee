@@ -16,11 +16,12 @@ $ ->
     row1 = new BrickRow(scene, 0,0)
 
     frame1 = new ItemFrame scene, ->
-      row1.addLeft frame1
+      row1.addRight frame1
     
     window.setInterval ->
       frame1 = new ItemFrame scene, ->
-        row1.addLeft frame1
+        console.log "add right"
+        row1.addRight frame1
     , 3000
 
     return scene

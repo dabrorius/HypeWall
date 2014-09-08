@@ -20,7 +20,7 @@ class @ItemFrame
 
   loadImage: ->
     img = new Image()
-    img.src = "/ultra/wide.jpg"
+    img.src = "/ultra/1.jpg"
     
     img.onload = =>
       @aspectRatio = img.width / img.height
