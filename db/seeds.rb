@@ -7,11 +7,17 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 
-captain = User.create email: "captain@hypewall.io", 
-  password: "password", 
+captain = User.create email: "captain@hypewall.io",
+  password: "password",
   password_confirmation: "password",
   subscription_level: "pro",
   is_admin: true
+
+free_user = User.create email: "freeuser@hypewall.io",
+  password: "password",
+  password_confirmation: "password",
+  subscription_level: "free",
+  is_admin: false
 
 
 wall = Wall.create name: "ZIP Party",
@@ -21,7 +27,7 @@ wall = Wall.create name: "ZIP Party",
 captain.walls << wall
 
 8.times do |i|
-  Image.create url: "/ultra/#{i+1}.jpg", 
+  Image.create url: "/ultra/#{i+1}.jpg",
     likes: rand(20),
     wall: wall
 end
