@@ -9,7 +9,7 @@
 
   <script>
     var dispatcher = new WebSocketRails('<%= websocket_host %>');
-    channel = dispatcher.subscribe('image_control_<%= @wall.id %>');
+    channel = dispatcher.subscribe('item_control_<%= @wall.id %>');
     channel.bind('new', function(image_box_partial) {
       console.log('New photo data arrived!');
       $("#control").prepend(image_box_partial);

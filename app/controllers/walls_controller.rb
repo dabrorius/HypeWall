@@ -1,6 +1,7 @@
 class WallsController < ApplicationController
   before_action :authenticate_user!, except: [:show, :frame]
-  before_action :set_wall, only: [:edit, :update, :destroy, :control, :remove_background, :remove_logo]
+  before_action :set_wall, only: [:edit, :update, :destroy, :control,
+   :remove_background, :remove_logo, :test_sockets]
 
   # GET /walls
   def index
@@ -114,6 +115,13 @@ class WallsController < ApplicationController
 
     @photos = new_images.concat old_images
     render layout: false
+  end
+
+  def test_sockets
+    # this method is used to test pushing through websockets
+    # load this method and look for changes on the wall
+    push_to_item_control(@wall.items.first)
+    render text: "This is used to test websockets"
   end
 
   private
