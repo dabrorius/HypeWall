@@ -46,6 +46,24 @@ class Wall < ActiveRecord::Base
       t.exit
     end
   end
+  
+  def twitter_subscribe
+    Thread.new do |t|
+      TweetStream::Client.new.track(self.hashtag) do |status| 
+        @tweet = TwitterItem.new
+        @tweet.original_id = status.id
+        @tweet.user_id = status.user.id
+        if status.media[0]
+          @tweet.url = status.media[0].media_url
+        end
+        @tweet.wall_id = self.id
+        @tweet.text = status.text
+        @tweet.save
+      end
+      t.exit
+    end
+  end
+
 
   def recent_instagram_images
     items = []
@@ -72,6 +90,10 @@ class Wall < ActiveRecord::Base
 
   def instagram_unsubscribe
     Instagram.delete_subscription(id: instagram_subscription.id)
+  end
+  
+  def twitter_unsubscribe
+    TweetStream::Client.stop
   end
 
   def owner
