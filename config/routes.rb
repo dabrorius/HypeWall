@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
 
+  ActiveAdmin.routes(self)
   resources :items do
+
     member do
       get 'approve' => "items#approve", as: 'approve'
       get 'ban' => "items#ban", as: 'ban'
