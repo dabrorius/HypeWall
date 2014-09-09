@@ -1,18 +1,20 @@
 class @BrickRow
-  bricksLeft: []
-  bricksRight: []
-  side: 1
 
   constructor: (scene, x, y) ->
     @scene = scene
     @x = x
     @y = y
+    @bricksLeft = []
+    @bricksRight = []
+    @side = 1
 
   addBrick: (newBrick) ->
     if @side == 1
       relatedBricks = @bricksRight
     else 
       relatedBricks = @bricksLeft
+
+    console.log relatedBricks
 
     for brick in relatedBricks
       positionAnimation = new BABYLON.Animation( 

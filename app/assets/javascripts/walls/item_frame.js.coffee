@@ -1,12 +1,12 @@
 class @ItemFrame
   textureSize: 512
-  border: 5
+  border: 2
   borderColor: "#FFFFFF"
   font: "40px helvetica"
   textPadding: 20
   aspectRatio: 1
-  height: 1
-  width: 1
+  height: 0.5
+  width: 0.5
 
   constructor: (scene, onLoad) ->
     @onLoad = onLoad

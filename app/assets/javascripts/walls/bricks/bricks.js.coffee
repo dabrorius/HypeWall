@@ -13,16 +13,19 @@ $ ->
     light = new BABYLON.HemisphericLight("light1", new BABYLON.Vector3(0, 1, 0), scene)
     light.intensity = 10
 
-    row1 = new BrickRow(scene, 0,0)
+    currentRow = 0
+    rows = [new BrickRow(scene, 0,0.25), new BrickRow(scene, 0.1,-0.25)]
 
-    frame1 = new ItemFrame scene, ->
-      row1.addBrick frame1
-    
-    window.setInterval ->
-      frame1 = new ItemFrame scene, ->
-        console.log "add right"
-        row1.addBrick frame1
-    , 3000
+    addNewBrick = ->
+      row = rows[currentRow]
+      frame = new ItemFrame scene, ->
+        row.addBrick frame
+      currentRow = (currentRow + 1) % rows.length
+
+    for i in [1..10]
+      addNewBrick()
+    window.setInterval addNewBrick, 3000
+
 
     return scene
 
