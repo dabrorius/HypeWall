@@ -5,8 +5,8 @@ class @ItemFrame
   font: "40px helvetica"
   textPadding: 20
   aspectRatio: 1
-  height: 5
-  width: 5
+  height: 1
+  width: 1
 
   constructor: (scene, onLoad) ->
     @onLoad = onLoad

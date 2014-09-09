@@ -6,7 +6,7 @@ $ ->
     scene = new BABYLON.Scene(engine)
     scene.clearColor = new BABYLON.Color3 0, 1, 1
     
-    camera = new BABYLON.FreeCamera("camera1", new BABYLON.Vector3(0, 0, -10), scene)
+    camera = new BABYLON.FreeCamera("camera1", new BABYLON.Vector3(0, 0, -1.18), scene)
     camera.setTarget(new BABYLON.Vector3.Zero())
     camera.attachControl(canvas, false)
 
