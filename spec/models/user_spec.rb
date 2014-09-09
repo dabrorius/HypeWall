@@ -4,7 +4,7 @@ describe User do
   let!(:user) { FactoryGirl.create :user }
   let!(:wall) { FactoryGirl.create :wall }
   context "when wall role exists" do
-    let!(:wall_role) { FactoryGirl.create :wall_role, user_id:  user.id, wall_id: wall.id }
+    let!(:wall_role) { FactoryGirl.create :wall_role, user: user, wall: wall }
 
     it "wall role is properly removed" do
       expect { wall_role.destroy }.
@@ -16,7 +16,7 @@ describe User do
       to_not change{ User.count }
     end
 
-    it "wall is deleted when wall role is" do
+    it "wall is not deleted when wall role is" do
       expect { wall_role.destroy }.
       to_not change{ Wall.count }
     end
