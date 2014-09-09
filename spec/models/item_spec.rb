@@ -25,7 +25,6 @@ describe Item do
     end
   end
 
-
   describe "scope -> approved" do
     let(:pending_item) { FactoryGirl.create :item }
     let(:approved_item) { FactoryGirl.create :item }
@@ -34,5 +33,4 @@ describe Item do
       expect(Item.approved).to eq([approved_item])
     end
   end
-
 end
