@@ -11,7 +11,6 @@ class User < ActiveRecord::Base
   validates :name, presence: true
   validates :email, presence: true
   validates :subscription_level, presence: true
-  validates :is_admin, presence: true
   validates_associated :wall_roles
 
 

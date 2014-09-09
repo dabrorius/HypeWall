@@ -23,7 +23,6 @@ class Wall < ActiveRecord::Base
 
   validates :name, presence: true
   validates :hashtag, presence: true
-  validates_associated :items
 
   accepts_nested_attributes_for :items, :allow_destroy => true
 
