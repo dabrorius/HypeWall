@@ -6,11 +6,6 @@ describe User do
   context "when wall role exists" do
     let!(:wall_role) { FactoryGirl.create :wall_role, user_id:  user.id, wall_id: wall.id }
 
-    it "wall roles belonging to the user are deleted too" do
-      expect { user.destroy }.
-      to change{ WallRole.count }.from(1).to(0)
-    end
-
     it "wall role is properly removed" do
       expect { wall_role.destroy }.
       to change{ WallRole.count }.from(1).to(0)
