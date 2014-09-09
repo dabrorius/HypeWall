@@ -8,6 +8,11 @@ class User < ActiveRecord::Base
   has_many :walls, through: :wall_roles
   has_many :items, through: :walls
 
+  validates :name, presence: true
+  validates :email, presence: true
+  validates :subscription_level, presence: true
+  validates :is_admin, presence: true
+
 
   def name
     email.split('@').first
