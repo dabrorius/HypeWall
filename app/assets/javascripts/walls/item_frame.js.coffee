@@ -1,6 +1,6 @@
 class @ItemFrame
   textureSize: 512
-  border: 10
+  border: 5
   borderColor: "#FFFFFF"
   font: "40px helvetica"
   textPadding: 20
@@ -20,7 +20,7 @@ class @ItemFrame
 
   loadImage: ->
     img = new Image()
-    img.src = "/ultra/1.jpg"
+    img.src = DataSource.getNext()
     
     img.onload = =>
       @aspectRatio = img.width / img.height
