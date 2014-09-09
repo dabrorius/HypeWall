@@ -18,6 +18,7 @@ Rails.application.routes.draw do
       delete 'remove_background'
       delete 'remove_logo'
       resources :items, as: 'wall_uploaded_images', only: [:new, :create]
+      get "test_socket" => "walls#test_sockets"
     end
   end
 
@@ -28,6 +29,7 @@ Rails.application.routes.draw do
   root "pages#landing"
 
   post "fastspring/webhook" => "fastspring#webhook"
+
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
