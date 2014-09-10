@@ -59,6 +59,9 @@ gem 'activeadmin', github: 'activeadmin'
 # Pagination
 gem 'will_paginate'
 
+# Bootstrap helper for will_paginate
+gem 'will_paginate-bootstrap'
+
 group :test do
   gem "minitest"
   gem 'rspec-rails', '~> 3.0.0'
