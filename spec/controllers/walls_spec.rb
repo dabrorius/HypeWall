@@ -26,6 +26,11 @@ RSpec.describe WallsController, :type => :controller do
       expect(response).to redirect_to(new_user_session_path)
     end
 
+    it "can't see walls#control" do
+      get :control, id: wall
+      expect(response).to redirect_to(new_user_session_path)
+    end
+
     it "can't do walls#create" do
       post :create, id: wall
       expect(response).to redirect_to(new_user_session_path)
@@ -47,13 +52,15 @@ RSpec.describe WallsController, :type => :controller do
     let(:user) { FactoryGirl.create :user }
     let(:wall) { FactoryGirl.create :wall }
 
-    before { owner.walls << wall }
+    before do
+      sign_in user
+      owner.walls << wall
+    end
 
     it "can't see other persons walls#index" do
       get :index
-      expect(response.status).to eq(404)
-
+      expect(response).to render_template("index")
     end
-
   end
+
 end
