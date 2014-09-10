@@ -29,7 +29,9 @@ class Wall < ActiveRecord::Base
   before_save :hashtag_cleanup
   def hashtag_cleanup
     hashtag.gsub!('#','')
+    hashtag.downcase!
   end
+
 
   def has_logo?
     logo.file?
@@ -48,20 +50,30 @@ class Wall < ActiveRecord::Base
   end
   
   def twitter_subscribe
-    Thread.new do |t|
-      TweetStream::Client.new.track(self.hashtag) do |status| 
-        @tweet = TwitterItem.new
-        @tweet.original_id = status.id
-        @tweet.user_id = status.user.id
-        if status.media[0]
-          @tweet.url = status.media[0].media_url
-        end
-        @tweet.wall_id = self.id
-        @tweet.text = status.text
-        @tweet.save
+    #daemon = TweetStream::Daemon.new('tracker', :log_output => true, :monitor => true)
+    #daemon.on_inited do
+    #  ActiveRecord::Base.connection.reconnect!
+    #  ActiveRecord::Base.logger = Logger.new(File.open('log/stream.log', 'w+'))
+    #end
+    #daemon.track(Wall.all.map{|x| "#" + x["hashtag"]}) do |tweet|
+    TweetStream::Client.new.track(Wall.all.map{|x| "#" + x["hashtag"]}) do |tweet|
+      open('/Users/Dora/Desktop/HypeWall/log/probni.txt', 'w') { |f|
+        f.puts "#{tweet.text}"
+      }
+      hashtags = []
+      tweet.hashtags.each do |h|
+        hashtags << h.downcase
       end
-      t.exit
+      Wall.where("hashtag IN (?)", hashtags).each do |w|
+        if tweet.media != []
+          url = tweet.media[0].media_url
+        else
+          url = nil
+        end
+        TwitterItem.create(original_id: tweet.id, user_id: tweet.user.id, url: url, wall_id: w.id, text: tweet.text)
+      end
     end
+    
   end
 
 
