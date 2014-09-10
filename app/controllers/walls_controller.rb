@@ -60,7 +60,7 @@ class WallsController < ApplicationController
   end
 
   def control
-    @images = @wall.items
+    @images = @wall.items.limit(ApplicationHelper.control_wall_size)
   end
 
   def remove_background
@@ -119,7 +119,7 @@ class WallsController < ApplicationController
 
   def test_sockets
     # this method is used to test pushing through websockets
-    # load this method and look for changes on the wall
+    # load this method and look for changes on the wall control
     push_to_item_control(@wall.items.first)
     render text: "This is used to test websockets"
   end
