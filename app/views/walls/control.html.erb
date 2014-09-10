@@ -11,8 +11,13 @@
     var dispatcher = new WebSocketRails('<%= websocket_host %>');
     channel = dispatcher.subscribe('item_control_<%= @wall.id %>');
     channel.bind('new', function(image_box_partial) {
-      console.log('New photo data arrived!');
-      $("#control").prepend(image_box_partial);
+      control_div = $("#control")
+      console.log('<%= control_wall_size %>');
+      if (control_div.children().length >= '<%= control_wall_size %>') {
+        console.log('New photo data arrived!');
+        control_div.children().slice('<%= control_wall_size - 1 %>').remove();
+        control_div.prepend(image_box_partial);
+      }
     });
   </script>
 </div>

@@ -14,4 +14,13 @@ module ApplicationHelper
   def devise_mapping
     @devise_mapping ||= Devise.mappings[:user]
   end
+
+  def self.control_wall_size
+    6
+  end
+
+  # makes using this method less verbose in the view
+  def control_wall_size
+    ApplicationHelper.control_wall_size
+  end
 end
