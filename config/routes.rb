@@ -19,6 +19,7 @@ Rails.application.routes.draw do
       delete 'remove_logo'
       resources :items, as: 'wall_uploaded_images', only: [:new, :create]
       get "test_socket" => "walls#test_sockets"
+      get "history" => "walls#history"
     end
   end
 

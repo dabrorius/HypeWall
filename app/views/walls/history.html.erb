@@ -1,0 +1,6 @@
+<% @items.each do |item|  %>
+  <div id="control">
+    <%= render partial: 'items/item', locals: { item: item } %>
+  </div>
+<% end %>
+
