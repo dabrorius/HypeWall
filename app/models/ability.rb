@@ -33,5 +33,9 @@ class Ability
     if user.is_admin?
         can :manage, :all
     end
+
+    unless user.id.nil?
+        can :read, Wall
+    end
   end
 end
