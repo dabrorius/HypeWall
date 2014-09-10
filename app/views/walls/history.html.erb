@@ -3,3 +3,5 @@
     <%= render partial: 'items/item', locals: { item: item } %>
   </div>
 <% end %>
+
+<%= will_paginate @items %>

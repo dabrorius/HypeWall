@@ -64,7 +64,7 @@ class WallsController < ApplicationController
   end
 
   def history
-    @items = @wall.items.order(created_at: :desc)
+    @items = @wall.items.order(created_at: :desc).paginate(:page => params[:page], :per_page => 6)
   end
 
   def remove_background
