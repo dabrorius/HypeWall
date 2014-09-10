@@ -4,7 +4,7 @@ $ ->
 
   createScene = ->
     scene = new BABYLON.Scene(engine)
-    scene.clearColor = new BABYLON.Color3 0, 1, 1
+    scene.clearColor = new BABYLON.Color3 0, 0, 0
     
     camera = new BABYLON.FreeCamera("camera1", new BABYLON.Vector3(0, 0, -1.18), scene)
     camera.setTarget(new BABYLON.Vector3.Zero())
@@ -22,8 +22,9 @@ $ ->
         row.addBrick frame
       currentRow = (currentRow + 1) % rows.length
 
-    for i in [1..10]
-      addNewBrick()
+    # for i in [1..10]
+    #   addNewBrick()
+      
     window.setInterval addNewBrick, 3000
 
 
