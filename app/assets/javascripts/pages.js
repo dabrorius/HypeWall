@@ -103,16 +103,19 @@ function loadUnload() {
 }
 
 function loadNewFrames() {
+
   var url = $("#wall").data('frames-url');
-  $.get(url, function( data ) {
-    $(".wall").html(data);
-    resizeImage(0);
-    resizeImage(1);
-    resizeImage(2);
-    resizeImage(3);
-    loadUnload();
-  });
-  setTimeout( loadNewFrames, 28000);
+  if (url) {
+    $.get(url, function( data ) {
+      $(".wall").html(data);
+      resizeImage(0);
+      resizeImage(1);
+      resizeImage(2);
+      resizeImage(3);
+      loadUnload();
+    });
+    setTimeout( loadNewFrames, 28000);
+  }
 }
 
 $(document).ready(function(){
