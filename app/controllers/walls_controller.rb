@@ -1,8 +1,9 @@
 class WallsController < ApplicationController
   before_action :authenticate_user!, except: [:show, :frame]
+  load_and_authorize_resource find_by: :slug
   before_action :set_wall, only: [:edit, :update, :destroy, :control,
    :remove_background, :remove_logo, :test_sockets]
-   load_and_authorize_resource find_by: :slug
+
 
 
 
@@ -17,7 +18,6 @@ class WallsController < ApplicationController
     @wall = Wall.friendly.find(params[:id])
     authenticate_user! unless @wall == Wall.example
     @wall_instance_id = SecureRandom.uuid
-
     render layout: 'application_fullscreen'
   end
 

@@ -13,7 +13,7 @@ RSpec.describe WallsController, :type => :controller do
 
     it "can't see walls#show" do
       get :show, id: wall
-      expect(response).to redirect_to(new_user_session_path)
+      expect(response).to redirect_to(root_path)
     end
 
     it "can't see walls#new" do
