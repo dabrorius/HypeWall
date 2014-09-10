@@ -16,7 +16,6 @@ class ApplicationController < ActionController::Base
     dashboard_path
   end
 
-
   # used by active admin to verify admin
   def authenticate_admin_user!
     if current_user.nil? || !current_user.is_admin?
