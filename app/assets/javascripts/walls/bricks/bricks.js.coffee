@@ -16,15 +16,19 @@ $ ->
     currentRow = 0
     rows = [new BrickRow(scene, 0,0.25), new BrickRow(scene, 0.1,-0.25)]
 
+    addedBricks = 0
     addNewBrick = ->
-      row = rows[currentRow]
-      frame = new ItemFrame scene, ->
-        row.addBrick frame
-      currentRow = (currentRow + 1) % rows.length
+      if addedBricks >= 14
+        for row in rows
+          row.clearBricks()
+          addedBricks = 0
+      else
+        row = rows[currentRow]
+        frame = new ItemFrame scene, ->
+          row.addBrick frame
+        currentRow = (currentRow + 1) % rows.length
+        addedBricks += 1
 
-    # for i in [1..10]
-    #   addNewBrick()
-      
     window.setInterval addNewBrick, 3000
 
 
