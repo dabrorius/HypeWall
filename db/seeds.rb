@@ -26,8 +26,9 @@ wall = Wall.create name: "ZIP Party",
 
 captain.walls << wall
 
-8.times do |i|
-  Item.create url: "/ultra/#{i+1}.jpg",
+50.times do |i|
+  image_count = (i % 8) + 1
+  Item.create url: "/ultra/#{image_count}.jpg",
     likes: rand(20),
     wall: wall
 end
