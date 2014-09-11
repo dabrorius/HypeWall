@@ -30,12 +30,17 @@ class Ability
     # See the wiki for details:
     # https://github.com/CanCanCommunity/cancancan/wiki/Defining-Abilities
 
+    alias_action :read, :update, :destroy, :to => :rud
+
     if user.is_admin?
-        can :manage, :all
+      can :manage, :all
     end
 
     unless user.id.nil?
-        can :read, Wall
+      can [:create], Wall
+      can [:rud, :frame, :control, :remove_background, :remove_logo], Wall do |wall|
+        user.walls.pluck(:id).include? wall.id
+      end
     end
   end
 end

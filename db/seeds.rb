@@ -6,7 +6,6 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-
 captain = User.create email: "captain@hypewall.io",
   password: "password",
   password_confirmation: "password",
@@ -24,7 +23,12 @@ wall = Wall.create name: "ZIP Party",
   description: "Welcome to zip pirate party\n#zipparty\nGet drunk or die!",
   hashtag: "zipparty"
 
+user_wall = Wall.create name: "User wall",
+  description: "Welcome to free users wall!",
+  hashtag: "free"
+
 captain.walls << wall
+free_user.walls << user_wall
 
 50.times do |i|
   image_count = (i % 8) + 1
@@ -32,3 +36,10 @@ captain.walls << wall
     likes: rand(20),
     wall: wall
 end
+
+8.times do |i|
+  Item.create url: "/ultra/#{i+1}.jpg",
+    likes: rand(20),
+    wall: user_wall
+end
+
