@@ -30,17 +30,21 @@ class WallsController < ApplicationController
   def create
     @wall = Wall.new(wall_params)
     if @wall.save
-      old_pid = File.open('/Users/Dora/Desktop/HypeWall/log/pidovi.txt') {|f| f.readline}
       WallRole.create(user: current_user, wall: @wall)
       @wall.instagram_subscribe("#{root_url}instagram/webhook")
-      begin Process.kill("SIGINT", old_pid.chomp.to_i) rescue Errno::ESRCH end
+      old_pid = ENV['FORK_PID'].to_f
+      if old_pid != 0
+        begin Process.kill("SIGINT", old_pid.to_i) rescue Errno::ESRCH end
+      end
+      
       pid = fork do 
         exec("bin/rails runner Wall.twitter_subscribe")
       end
-      open('/Users/Dora/Desktop/HypeWall/log/pidovi.txt', 'w') { |f|
-        f.puts "#{pid}"
-      }
-      #exec("bin/rails runner Wall.twitter_subscribe")
+      
+      ENV['FORK_PID']=pid.to_s
+      #open('/Users/Dora/Desktop/HypeWall/log/pidovi.txt', 'w') { |f|
+      #  f.puts "#{ENV['FORK_PID']}"
+      #}
       redirect_to edit_wall_path(@wall), notice: 'Wall was successfully created.'
     else
       render :new

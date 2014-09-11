@@ -58,9 +58,6 @@ class Wall < ActiveRecord::Base
         hashtags << h.text.downcase
       end
 
-      open('/Users/Dora/Desktop/HypeWall/log/probni.txt', 'a') { |f|
-        f.puts "#{tweet.media}"
-      }
       if tweet.media.present?
         url = "#{tweet.media[0].media_url}"
       else
