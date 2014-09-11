@@ -7,7 +7,7 @@ end
 
 gem 'jquery-minicolors-rails'
 
-gem 'friendly_id', '~> 5.0.0' 
+gem 'friendly_id', '~> 5.0.0'
 # Track performance
 gem 'newrelic_rpm'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
@@ -55,6 +55,12 @@ gem 'aws-sdk'
 
 # Admin interface
 gem 'activeadmin', github: 'activeadmin'
+
+# Pagination
+gem 'will_paginate'
+
+# Bootstrap helper for will_paginate
+gem 'will_paginate-bootstrap'
 
 group :test do
   gem "minitest"

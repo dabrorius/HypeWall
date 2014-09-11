@@ -1,7 +1,7 @@
 class WallsController < ApplicationController
   before_action :authenticate_user!, except: [:show, :frame]
   before_action :set_wall, only: [:edit, :update, :destroy, :control,
-   :remove_background, :remove_logo, :test_sockets]
+   :remove_background, :remove_logo, :test_sockets, :history]
 
   # GET /walls
   def index
@@ -61,6 +61,10 @@ class WallsController < ApplicationController
 
   def control
     @images = @wall.items.limit(ApplicationHelper.control_wall_size)
+  end
+
+  def history
+    @items = @wall.items.order(created_at: :desc).paginate(:page => params[:page], :per_page => 6)
   end
 
   def remove_background
