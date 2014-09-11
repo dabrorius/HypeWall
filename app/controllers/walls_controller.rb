@@ -1,10 +1,6 @@
 class WallsController < ApplicationController
   before_action :authenticate_user!, except: [:show, :frame]
   load_and_authorize_resource find_by: :slug
-  before_action :set_wall, only: [:edit, :update, :destroy, :control,
-   :remove_background, :remove_logo, :test_sockets]
-
-
 
 
   # GET /walls
@@ -133,10 +129,6 @@ class WallsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_wall
-      @wall = current_user.walls.friendly.find(params[:id])
-    end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def wall_params
