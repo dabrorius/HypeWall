@@ -1,4 +1,5 @@
 class Wall < ActiveRecord::Base
+  require 'tweetstream'
   extend FriendlyId
   friendly_id :name, use: :slugged
 
@@ -29,7 +30,9 @@ class Wall < ActiveRecord::Base
   before_save :hashtag_cleanup
   def hashtag_cleanup
     hashtag.gsub!('#','')
+    hashtag.downcase!
   end
+
 
   def has_logo?
     logo.file?
@@ -46,6 +49,27 @@ class Wall < ActiveRecord::Base
       t.exit
     end
   end
+  
+  def self.twitter_subscribe
+    TweetStream::Client.new.track(Wall.all.map{|x| "#" + x["hashtag"]}) do |tweet|
+      
+      hashtags = []
+      tweet.hashtags.each do |h|
+        hashtags << h.text.downcase
+      end
+
+      if tweet.media.present?
+        url = "#{tweet.media[0].media_url}"
+      else
+        url = nil
+      end
+      Wall.where("hashtag IN (?)", hashtags).each do |w|
+        TwitterItem.create(original_id: tweet.id, user_id: tweet.user.id, url: url, wall_id: w.id, text: tweet.text)
+      end
+    end
+  end
+    
+
 
   def recent_instagram_images
     items = []
@@ -72,6 +96,10 @@ class Wall < ActiveRecord::Base
 
   def instagram_unsubscribe
     Instagram.delete_subscription(id: instagram_subscription.id)
+  end
+  
+  def twitter_unsubscribe
+    TweetStream::Client.stop
   end
 
   def owner

@@ -32,6 +32,19 @@ class WallsController < ApplicationController
     if @wall.save
       WallRole.create(user: current_user, wall: @wall)
       @wall.instagram_subscribe("#{root_url}instagram/webhook")
+      old_pid = ENV['FORK_PID'].to_f
+      if old_pid != 0
+        begin Process.kill("SIGINT", old_pid.to_i) rescue Errno::ESRCH end
+      end
+      
+      pid = fork do 
+        exec("bin/rails runner Wall.twitter_subscribe")
+      end
+      
+      ENV['FORK_PID']=pid.to_s
+      #open('/Users/Dora/Desktop/HypeWall/log/pidovi.txt', 'w') { |f|
+      #  f.puts "#{ENV['FORK_PID']}"
+      #}
       redirect_to edit_wall_path(@wall), notice: 'Wall was successfully created.'
     else
       render :new
@@ -44,8 +57,10 @@ class WallsController < ApplicationController
     if @wall.update(wall_params)
       if @wall.hashtag != @old_hashtag
         @wall.instagram_unsubscribe
-        @wall.images.destroy_all
+        @wall.instagram_items.destroy_all
         @wall.instagram_subscribe("#{root_url}instagram/webhook")
+        @wall.twitter_unsubscribe
+        @wall.twitter_items.destroy_all
       end
       redirect_to edit_wall_path(@wall), notice: 'Wall was successfully updated.'
     else
