@@ -65,7 +65,9 @@ class Wall < ActiveRecord::Base
         url = nil
       end
       Wall.where("hashtag IN (?)", hashtags).each do |w|
-        TwitterItem.create(original_id: tweet.id, user_id: tweet.user.id, url: url, wall_id: w.id, text: tweet.text)
+        if BannedUser.where("user_id = ? AND wall_id = ?", tweet.user.id.to_s, w.id.to_i).first.blank?
+          TwitterItem.create(original_id: tweet.id, user_id: tweet.user.id, url: url, wall_id: w.id, text: tweet.text)
+        end
       end
     end
   end
@@ -76,11 +78,13 @@ class Wall < ActiveRecord::Base
     items = []
     Instagram.tag_recent_media(hashtag).each do |instagram_image|
       unless InstagramItem.find_by_original_id(instagram_image.id).present?
-        items.push InstagramItem.create(
-          original_id: instagram_image.id,
-          user_id: instagram_image.user.id,
-          url: instagram_image.images.standard_resolution.url,
-          wall_id: self.id)
+        if BannedUser.where("wall_id = ? AND user_id = ?", self.id.to_i, instagram_image.user.id.to_s).first.blank?
+          items.push InstagramItem.create(
+            original_id: instagram_image.id,
+            user_id: instagram_image.user.id,
+            url: instagram_image.images.standard_resolution.url,
+            wall_id: self.id)
+        end
       end
     end
     return items

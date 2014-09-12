@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140912093749) do
+ActiveRecord::Schema.define(version: 20140912133615) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -33,7 +33,7 @@ ActiveRecord::Schema.define(version: 20140912093749) do
 
   create_table "banned_users", force: true do |t|
     t.string   "user_id"
-    t.string   "wall_id"
+    t.integer  "wall_id"
     t.string   "type"
     t.datetime "created_at"
     t.datetime "updated_at"

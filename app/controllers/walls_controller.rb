@@ -80,7 +80,7 @@ class WallsController < ApplicationController
 
   def ban_user
     item = Item.find(params[:item_id])
-    if BannedUser.where("user_id = ? AND wall_id = ?", item.user_id, item.wall_id)
+    if BannedUser.where("user_id = ? AND wall_id = ?", item.user_id, item.wall_id).first.blank?
       BannedUser.create(user_id: item.user_id, wall_id: item.wall_id)
     end
     render :nothing => true
