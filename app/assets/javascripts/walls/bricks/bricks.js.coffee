@@ -6,30 +6,34 @@ $ ->
     scene = new BABYLON.Scene(engine)
     scene.clearColor = new BABYLON.Color3 0, 0, 0
     
-    camera = new BABYLON.FreeCamera("camera1", new BABYLON.Vector3(0, 0, -1.18), scene)
+    camera = new BABYLON.FreeCamera("camera1", new BABYLON.Vector3(0, 0, -1.4), scene)
     camera.setTarget(new BABYLON.Vector3.Zero())
     camera.attachControl(canvas, false)
 
     light = new BABYLON.HemisphericLight("light1", new BABYLON.Vector3(0, 1, 0), scene)
     light.intensity = 10
 
-    currentRow = 0
-    rows = [new BrickRow(scene, 0,0.25), new BrickRow(scene, 0.1,-0.25)]
+    upperRow = new BrickRow(scene, 0,0.26)
+    lowerRow = new BrickRow(scene, 0,-0.26)
 
-    addedBricks = 0
+    clear = false
     addNewBrick = ->
-      if addedBricks >= 14
-        for row in rows
-          row.clearBricks()
-          addedBricks = 0
+      if clear
+        upperRow.clearBricks()
+        lowerRow.clearBricks()
+        clear = false
       else
-        row = rows[currentRow]
         frame = new ItemFrame scene, ->
-          row.addBrick frame
-        currentRow = (currentRow + 1) % rows.length
-        addedBricks += 1
+          upperRow.addBrick frame
+          frame = new ItemFrame scene, ->
+            upperRow.addBrick frame
+            frame = new ItemFrame scene, ->
+              lowerRow.addBrick frame
+              frame = new ItemFrame scene, ->
+                lowerRow.addBrick frame
+        clear = true
 
-    window.setInterval addNewBrick, 3000
+    window.setInterval addNewBrick, 6000
 
 
     return scene

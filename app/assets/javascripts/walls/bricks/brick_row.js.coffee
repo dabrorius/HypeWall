@@ -28,7 +28,8 @@ class @BrickRow
       @moveBrickToSide brick, newBrick
 
     relatedBricks.push newBrick
-    newBrick.mesh.position.x = @x + (newBrick.width * @side) / 2
+    margine = 0.01
+    newBrick.mesh.position.x = @x + (newBrick.width * @side) / 2 
     newBrick.mesh.position.y = @y
     newBrick.mesh.position.z = newBrick.width 
 
@@ -39,7 +40,8 @@ class @BrickRow
         BABYLON.Animation.ANIMATIONLOOPMODE_CONSTANT )
     positionAnimation.setKeys([
       { frame: 0, value: newBrick.mesh.position }, 
-      { frame: 15, value: new BABYLON.Vector3(@x + (newBrick.width * @side) / 2 , @y,0) }
+      { frame: 15, value: new BABYLON.Vector3(@x + (newBrick.width * @side) / 2 + (@side * margine), @y,0) }
+      { frame: 100, value: new BABYLON.Vector3(@x + (newBrick.width * @side) / 2 + (@side * margine), @y, -0.1) }
     ]);
     newBrick.mesh.animations.push(positionAnimation)
 
@@ -53,7 +55,7 @@ class @BrickRow
     ]);
     newBrick.mesh.animations.push(rotationAnimation)
 
-    @scene.beginAnimation(newBrick.mesh, 0, 15, false);
+    @scene.beginAnimation(newBrick.mesh, 0, 100, false);
 
     @side *= -1
 
@@ -82,7 +84,7 @@ class @BrickRow
       { frame: 15, value: -2 }
     ]);
     brick.mesh.animations = [rotationAnimation]
-
+    brick.mesh.material.alpha = 0.5
     @scene.beginAnimation(brick.mesh, 0, 15, false);
 
 
