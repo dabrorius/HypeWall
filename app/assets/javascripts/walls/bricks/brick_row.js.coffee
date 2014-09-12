@@ -5,6 +5,7 @@ class @BrickRow
     @x = x
     @y = y
     @bricks = []
+    @toRemove = []
     @side = 1
 
   clearBricks: ->
@@ -13,6 +14,10 @@ class @BrickRow
     @bricks = []
 
   addBrick: (newBrick) ->
+    for brick in @toRemove
+      brick.mesh.dispose()
+    @toRemove = []
+
     @bricks.push newBrick
     margine = 0.01
     newBrick.mesh.position.x = @x + (newBrick.width * @side) / 2 
@@ -28,8 +33,6 @@ class @BrickRow
       { frame: 15, value: new BABYLON.Vector3(@x + (newBrick.width * @side) / 2 + (@side * margine), @y,0) }
       { frame: 100, value: new BABYLON.Vector3(@x + (newBrick.width * @side) / 2 + (@side * margine), @y, -0.1) }
     ]);
-    newBrick.mesh.animations.push(positionAnimation)
-
     rotationAnimation = new BABYLON.Animation( 
         "pAnim", "rotation.y", 15,
         BABYLON.Animation.ANIMATIONTYPE_FLOAT,
@@ -38,23 +41,17 @@ class @BrickRow
       { frame: 0, value: (-Math.PI * 2/3) * @side }, 
       { frame: 15, value: 0 }
     ]);
-
-    alphaAnimation = new BABYLON.Animation( 
-        "pAnim", "material.alpha", 15,
-        BABYLON.Animation.ANIMATIONTYPE_FLOAT,
-        BABYLON.Animation.ANIMATIONLOOPMODE_CONSTANT )
-    alphaAnimation.setKeys([
-      { frame: 0, value: 0 }, 
-      { frame: 10, value: 1 }
-    ]);
+    alphaAnimation = Animations.createAlphaAnimation()
+    alphaAnimation.setKeys([ {frame: 0, value: 0}, {frame: 10, value: 1} ]);
 
     newBrick.mesh.animations.push(rotationAnimation)
-    newBrick.mesh.animations.push(alphaAnimation)
+    newBrick.mesh.animations.push(alphaAnimation,positionAnimation,rotationAnimation)
 
     @scene.beginAnimation(newBrick.mesh, 0, 100, false);
     @side *= -1
 
   clearBrick: (brick) ->
+    @toRemove.push brick
     rotationAnimation = new BABYLON.Animation( 
       "pAnim", "position.z", 15,
       BABYLON.Animation.ANIMATIONTYPE_FLOAT,
@@ -64,14 +61,9 @@ class @BrickRow
       { frame: 5, value: -0.7 }
     ]);
 
-    alphaAnimation = new BABYLON.Animation( 
-        "pAnim", "material.alpha", 15,
-        BABYLON.Animation.ANIMATIONTYPE_FLOAT,
-        BABYLON.Animation.ANIMATIONLOOPMODE_CONSTANT )
-    alphaAnimation.setKeys([
-      { frame: 0, value: 1 }, 
-      { frame: 5, value: 0 }
-    ]);
+    alphaAnimation = Animations.createAlphaAnimation()
+    alphaAnimation.setKeys([ {frame: 0, value: 1}, {frame: 5, value: 0} ]);
+
     brick.mesh.animations = [rotationAnimation,alphaAnimation]
     @scene.beginAnimation(brick.mesh, 0, 15, false);
 
