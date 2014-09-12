@@ -1,7 +1,7 @@
 $ ->
   canvas = document.getElementById "wall_bricks"
   engine = new BABYLON.Engine canvas, true    
-
+  DataSource.imageData = $("#wall_bricks").attr("data-images").split(',')
   createScene = ->
     scene = new BABYLON.Scene(engine)
     scene.clearColor = new BABYLON.Color4 0, 0, 0, 0
