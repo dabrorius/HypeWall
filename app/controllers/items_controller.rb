@@ -1,6 +1,7 @@
 class ItemsController < ApplicationController
-
-  before_action :set_item, only: [:approve, :ban]
+  before_action :authenticate_user!
+  load_and_authorize_resource
+  # before_action :set_item, only: [:approve, :ban]
 
   def approve
     @item.approve
@@ -27,9 +28,9 @@ class ItemsController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
-    def set_item
-      @item = current_user.items.find(params[:id])
-    end
+    # def set_item
+    #   @item = current_user.items.find(params[:id])
+    # end
 
     def uploaded_image_params(index)
       params.require(:images_attributes)[index].permit(:attachment)
