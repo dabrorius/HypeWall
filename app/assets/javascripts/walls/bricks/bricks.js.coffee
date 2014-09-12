@@ -4,7 +4,7 @@ $ ->
 
   createScene = ->
     scene = new BABYLON.Scene(engine)
-    scene.clearColor = new BABYLON.Color3 0, 0, 0
+    scene.clearColor = new BABYLON.Color4 0, 0, 0, 0
     
     camera = new BABYLON.FreeCamera("camera1", new BABYLON.Vector3(0, 0, -1.4), scene)
     camera.setTarget(new BABYLON.Vector3.Zero())

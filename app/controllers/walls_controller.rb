@@ -18,6 +18,7 @@ class WallsController < ApplicationController
   end
 
   def show2
+    @wall = Wall.friendly.find(params[:id])
     render layout: 'wall_2'
   end
 

@@ -1,6 +1,6 @@
 class @ItemFrame
   textureSize: 512
-  border: 2
+  border: 1
   borderColor: "#FFFFFF"
   font: "40px helvetica"
   textPadding: 20
