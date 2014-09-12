@@ -88,7 +88,6 @@ RSpec.describe WallsController, :type => :controller do
     end
 
     it "can't do other persons walls#update" do
-
       expect { put :update, id: wall, wall: { name: "New name" } }.
       to_not change { wall.reload.name }
       expect(response).to redirect_to(root_path)
@@ -96,16 +95,19 @@ RSpec.describe WallsController, :type => :controller do
 
     it "can't do other persons walls#destroy" do
       delete :destroy, id: wall
+      expect(wall.reload).to be
       expect(response).to redirect_to(root_path)
     end
 
     it "can't do other persons walls#remove_background" do
       delete :remove_background, id: wall
+      expect(wall.reload.background_image_file_name).not_to be_blank
       expect(response).to redirect_to(root_path)
     end
 
     it "can't do other persons walls#remove_logo" do
       delete :remove_logo, id: wall
+      expect(wall.reload.logo_file_name).not_to be_blank
       expect(response).to redirect_to(root_path)
     end
   end
@@ -141,27 +143,28 @@ RSpec.describe WallsController, :type => :controller do
       expect(response).to render_template("control")
     end
 
-    # perhaps better to use redirect_to, change destroy etc. too
     it "can do other persons walls#update" do
       put :update, id: wall, wall: { name: "New name" }
       expect(wall.reload.name).to eq "New name"
+      expect(response).to redirect_to edit_wall_path(wall)
     end
 
     it "can do other persons walls#destroy" do
-      delete :destroy, id: wall
-      expect(response.status).to eq 302
+      expect { delete :destroy, id: wall }.
+      to change{ Wall.count }.from(1).to(0)
+      expect(response).to redirect_to walls_path
     end
 
     it "can do other persons walls#remove_background" do
       delete :remove_background, id: wall
-      expect(response.status).to eq 302
+      expect(wall.reload.background_image_file_name).to be_blank
+      expect(response).to redirect_to edit_wall_path(wall)
     end
 
     it "can do other persons walls#remove_logo" do
       delete :remove_logo, id: wall
-      expect(response.status).to eq 302
+      expect(wall.reload.logo_file_name).to be_blank
+      expect(response).to redirect_to edit_wall_path(wall)
     end
-
   end
-
 end
