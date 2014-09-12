@@ -1,0 +1,15 @@
+<h1>List of banned users</h1>
+<table>
+	<tr>
+		<th>User Id</th>
+	    <th>Link</th>
+	</tr>
+
+<% @banned.each do |b| %>
+	<tr>
+		<td><%= b.user_id %></td>
+		<td><%=link_to "Unban", unban_user_wall_path(b.wall_id, b.id)%></td>
+	</tr>
+<% end %>
+
+</table>

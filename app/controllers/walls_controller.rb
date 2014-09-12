@@ -1,7 +1,7 @@
 class WallsController < ApplicationController
   before_action :authenticate_user!, except: [:show, :frame]
   before_action :set_wall, only: [:edit, :update, :destroy, :control,
-   :remove_background, :remove_logo, :test_sockets, :history, :ban_user]
+   :remove_background, :remove_logo, :test_sockets, :history, :ban_user, :unban_user, :list_banned_users]
 
   # GET /walls
   def index
@@ -87,8 +87,21 @@ class WallsController < ApplicationController
         i.save
       end
     end
-
     render :nothing => true
+  end
+
+  def unban_user
+    user = BannedUser.find(params[:user_id])
+    Item.where("user_id = ? AND wall_id = ?", user.user_id, user.wall_id).each do |i|
+      i.status = 'pending_approval'
+      i.save
+    end
+    user.destroy
+    redirect_to list_banned_users_wall_path
+  end
+
+  def list_banned_users
+    @banned = @wall.banned_users
   end
 
   def history

@@ -21,6 +21,8 @@ Rails.application.routes.draw do
       get "test_socket" => "walls#test_sockets"
       get "history" => "walls#history"
       get 'ban_user/:item_id' => "walls#ban_user", as: 'ban_user'
+      get 'unban_user/:user_id' => "walls#unban_user", as: 'unban_user'
+      get 'list_banned_users' => "walls#list_banned_users", as: 'list_banned_users'
     end
   end
 
