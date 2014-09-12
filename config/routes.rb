@@ -20,6 +20,7 @@ Rails.application.routes.draw do
       resources :items, as: 'wall_uploaded_images', only: [:new, :create]
       get "test_socket" => "walls#test_sockets"
       get "history" => "walls#history"
+      get 'ban_user/:item_id' => "walls#ban_user", as: 'ban_user'
     end
   end
 

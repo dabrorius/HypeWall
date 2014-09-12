@@ -1,7 +1,7 @@
 class WallsController < ApplicationController
   before_action :authenticate_user!, except: [:show, :frame]
   before_action :set_wall, only: [:edit, :update, :destroy, :control,
-   :remove_background, :remove_logo, :test_sockets, :history]
+   :remove_background, :remove_logo, :test_sockets, :history, :ban_user]
 
   # GET /walls
   def index
@@ -61,6 +61,13 @@ class WallsController < ApplicationController
 
   def control
     @images = @wall.items.limit(ApplicationHelper.control_wall_size)
+  end
+
+  def ban_user
+    item = Item.find(params[:item_id])
+    if Banned_users.where("user_id = ? AND wall_id = ?", item.user_id, item.wall_id)
+      BannedUser.create(user_id: item.user_id, wall_id: item.wall_id, type: item.type)
+    end
   end
 
   def history
