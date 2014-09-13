@@ -82,6 +82,7 @@ class WallsController < ApplicationController
     # this method is used to test pushing through websockets
     # load this method and look for changes on the wall control
     push_to_item_control(@wall.items.first)
+    push_to_wall(@wall.items.first)
     render text: "This is used to test websockets"
   end
 

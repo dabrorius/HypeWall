@@ -16,6 +16,7 @@ class InstagramController < ApplicationController
     wall = Wall.find_by_hashtag(hashtag)
     wall.new_items.each do |item|
       push_to_item_control item
+      push_to_wall item if item.status == 'approved'
     end
   end
 end

@@ -16,4 +16,4 @@
     </div>
   </div>
 </div>
-<canvas id="wall_bricks" data-images="<%= @wall.items.pluck(:url).join(",") %>"></canvas>
+<canvas id="wall_bricks" data-images="<%= @wall.items.pluck(:url).join(",") %>" data-websocket-host="<%= websocket_host %>" data-wall-id="<%= @wall.id %>"></canvas>

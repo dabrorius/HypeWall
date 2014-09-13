@@ -7,6 +7,10 @@ class ApplicationController < ActionController::Base
     WebsocketRails[:"item_control_#{item.wall.id}"].trigger 'new', render_to_string(item)
   end
 
+  def push_to_wall(item)
+    WebsocketRails[:"wall_#{item.wall.id}"].trigger 'new', item.url
+  end
+
   def after_sign_in_path_for(resource)
     dashboard_path
   end
