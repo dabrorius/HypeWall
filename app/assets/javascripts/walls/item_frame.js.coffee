@@ -29,6 +29,10 @@ class @ItemFrame
       @updateRender(img, 0)
       @onLoad()
 
+    img.onerror = =>
+      DataSource.removeCurrent()
+      @onLoad()
+
   updateRender: (img, zoom = 0) ->
     context = @texture.getContext()
     context.fillStyle = @borderColor

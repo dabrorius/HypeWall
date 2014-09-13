@@ -11,9 +11,13 @@ class @DataSource
     channel = dispatcher.subscribe('wall_' + wallId)
     channel.bind 'new', (url) =>
       console.log "New image " + url
-      @imageData.splice(@currentIndex, 0, url);
+      @imageData.splice(@currentIndex, 0, url)
 
   @getNext: =>
     url = @imageData[@currentIndex]
     @currentIndex = (@currentIndex + 1) % @imageData.length
     return url
+
+  @removeCurrent: (position) =>
+    @imageData.splice(@currentIndex-1, 1)
+    console.log @imageData
