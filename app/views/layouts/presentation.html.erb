@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html class="">
+
+  <head>
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href='http://fonts.googleapis.com/css?family=Lobster|Open+Sans' rel='stylesheet' type='text/css'>
+    <%= stylesheet_link_tag 'presentation' %>
+    <%= javascript_include_tag 'application' %>
+  </head>
+
+  <body style="background-image: url('<%= @wall.background_image.url %>'); background-color: <%= @wall.background_color %>" class="<%= @wall.background_style %>">
+    <%= yield %>
+    <%= render partial: 'layouts/google_analytics' %>
+  </body>
+
+</html>

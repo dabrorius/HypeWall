@@ -16,5 +16,4 @@
     </div>
   </div>
 </div>
-
-<div id="wall" class="wall" data-frames-url="<%= frame_wall_path(@wall,@wall_instance_id) %>"></div>
+<canvas id="wall_bricks" data-images="<%= @wall.items.pluck(:url).join(",") %>"></canvas>
