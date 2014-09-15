@@ -4,20 +4,21 @@ class @DataSource
   @currentIndex: 0
 
   @initialize: =>
-    @imageData = $("#wall_bricks").attr("data-images").split(',')
+    @imageData = JSON.parse $("#wall_bricks").attr("data-images")
+
     websocketHost = $("#wall_bricks").attr("data-websocket-host")
     wallId = $("#wall_bricks").attr("data-wall-id")
     dispatcher = new WebSocketRails(websocketHost)
     channel = dispatcher.subscribe('wall_' + wallId)
-    channel.bind 'new', (url) =>
-      console.log "New image " + url
-      @imageData.splice(@currentIndex, 0, url)
+    channel.bind 'new', (newItemJson) =>
+      console.log "New image: " + newItemJson
+      newItem = JSON.parse(newItemJson)
+      @imageData.splice(@currentIndex, 0, newItem)
 
   @getNext: =>
-    url = @imageData[@currentIndex]
+    url = @imageData[@currentIndex].url
     @currentIndex = (@currentIndex + 1) % @imageData.length
     return url
 
-  @removeCurrent: (position) =>
+  @removeCurrent: =>
     @imageData.splice(@currentIndex-1, 1)
-    console.log @imageData

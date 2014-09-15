@@ -8,7 +8,11 @@ class ApplicationController < ActionController::Base
   end
 
   def push_to_wall(item)
-    WebsocketRails[:"wall_#{item.wall.id}"].trigger 'new', item.url
+    WebsocketRails[:"wall_#{item.wall.id}"].trigger 'new', item.to_json
+  end
+
+  def remove_from_wall(item)
+    WebsocketRails[:"wall_#{item.wall.id}"].trigger 'remove', item.id
   end
 
   def after_sign_in_path_for(resource)
