@@ -4,11 +4,13 @@ class ItemsController < ApplicationController
 
   def approve
     @item.approve
+    push_to_wall @item
     render :change_status
   end
 
   def ban
     @item.ban
+    remove_from_wall @item
     render :change_status
   end
 
