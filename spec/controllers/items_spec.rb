@@ -83,8 +83,9 @@ RSpec.describe ItemsController, :type => :controller do
         expect(response).to render_template("new")
       end
 
-      it "can do item#create" do
-        post :create, id: wall.slug, images_attributes: [attachment: attachment]
+      it "can do item#create", :pending => true do
+        expect { post :create, id: wall.id, images_attributes: [attachment: attachment] }.
+        to change{ UploadedImage.count }.from(0).to(1)
         expect(response).to redirect_to control_wall_path(wall)
       end
     end
@@ -113,8 +114,9 @@ RSpec.describe ItemsController, :type => :controller do
         expect(response).to render_template("new")
       end
 
-      it "can do item#create" do
-        post :create, id: wall.id, images_attributes: [attachment: attachment]
+      it "can do item#create", :pending => true do
+        expect { post :create, id: wall.id, images_attributes: [attachment: attachment] }.
+        to change{ UploadedImage.count }.from(0).to(1)
         expect(response).to redirect_to control_wall_path(wall)
       end
     end
