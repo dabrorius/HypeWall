@@ -32,6 +32,11 @@ RSpec.describe WallsController, :type => :controller do
         expect(response).to redirect_to(new_user_session_path)
       end
 
+      it "can't see other persons walls#history" do
+        get :history, id: wall
+        expect(response).to redirect_to(new_user_session_path)
+      end
+
       it "can't do walls#create" do
         post :create, id: wall
         expect(response).to redirect_to(new_user_session_path)
@@ -87,6 +92,11 @@ RSpec.describe WallsController, :type => :controller do
         expect(response).to redirect_to(root_path)
       end
 
+      it "can't see other persons walls#history" do
+        get :history, id: wall
+        expect(response).to redirect_to(root_path)
+      end
+
       it "can't do other persons walls#update" do
         expect { put :update, id: wall, wall: { name: "New name" } }.
         to_not change { wall.reload.name }
@@ -125,40 +135,45 @@ RSpec.describe WallsController, :type => :controller do
         expect(response).to render_template("index")
       end
 
-      it "can see other persons walls#show" do
+      it "can see walls#show" do
         get :show, id: wall
         expect(response).to render_template("show")
       end
 
-      it "can see other persons walls#edit" do
+      it "can see walls#edit" do
         get :edit, id: wall
         expect(response).to render_template("edit")
       end
 
-      it "can see other persons walls#control" do
+      it "can see walls#control" do
         get :control, id: wall
         expect(response).to render_template("control")
       end
 
-      it "can do other persons walls#update" do
+      it "can see walls#history" do
+        get :history, id: wall
+        expect(response).to render_template("history")
+      end
+
+      it "can do walls#update" do
         put :update, id: wall, wall: { name: "New name" }
         expect(wall.reload.name).to eq "New name"
         expect(response).to redirect_to edit_wall_path(wall)
       end
 
-      it "can do other persons walls#destroy" do
+      it "can do walls#destroy" do
         expect { delete :destroy, id: wall }.
         to change{ Wall.count }.from(1).to(0)
         expect(response).to redirect_to walls_path
       end
 
-      it "can do other persons walls#remove_background" do
+      it "can do walls#remove_background" do
         delete :remove_background, id: wall
         expect(wall.reload.background_image_file_name).to be_blank
         expect(response).to redirect_to edit_wall_path(wall)
       end
 
-      it "can do other persons walls#remove_logo" do
+      it "can do walls#remove_logo" do
         delete :remove_logo, id: wall
         expect(wall.reload.logo_file_name).to be_blank
         expect(response).to redirect_to edit_wall_path(wall)
@@ -192,6 +207,11 @@ RSpec.describe WallsController, :type => :controller do
       it "can see other persons walls#control" do
         get :control, id: wall
         expect(response).to render_template("control")
+      end
+
+      it "can see other persons walls#history" do
+        get :history, id: wall
+        expect(response).to render_template("history")
       end
 
       it "can do other persons walls#update" do
