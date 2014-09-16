@@ -1,7 +1,7 @@
 class WallsController < ApplicationController
   before_action :authenticate_user!, except: [:show, :frame]
   before_action :set_wall, only: [:edit, :update, :destroy, :control,
-   :remove_background, :remove_logo, :test_sockets, :history]
+   :remove_background, :remove_logo, :test_sockets, :history, :activate_prompt]
 
   # GET /walls
   def index
@@ -79,8 +79,12 @@ class WallsController < ApplicationController
     redirect_to edit_wall_path(@wall)
   end
 
-  def activate
+  def activate_prompt
+  end
 
+  def activation
+    puts params.inspect
+    redirect_to dashboard_path
   end
 
   # Renders a partial with new set of images

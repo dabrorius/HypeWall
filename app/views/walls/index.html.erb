@@ -15,6 +15,7 @@
         <th class="tool-column">Upload</th>
         <th class="tool-column">Control</th>
         <th class="tool-column">Delete</th>
+        <th class="tool-column">Activate</th>
       </tr>
       <% @walls.each do |wall| %>
         <tr>
@@ -33,6 +34,11 @@
           <td class="tool-column">
             <%= link_to wall, method: :delete, data: { confirm: "Are you sure?" } do %> <i class="fa fa-times"></i> <% end %>
           </td>
+          <!-- temporary for testing -->
+          <td class="tool-column">
+          <%= link_to activate_prompt_wall_path(wall) do %> <p>activate</p> <% end %>
+          </td>
+          <!-- /temporary -->
         </tr>
       <% end %>
     </table>
