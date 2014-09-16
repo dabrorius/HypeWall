@@ -6,5 +6,6 @@ class ActivationCode < ActiveRecord::Base
 
     def generate_code
       self.code = "#{self.id.to_s}-#{SecureRandom.base64(8)}"
+      self.save
     end
 end

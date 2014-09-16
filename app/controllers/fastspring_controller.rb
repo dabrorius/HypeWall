@@ -4,9 +4,11 @@ class FastspringController < ApplicationController
   def webhook
     if params['customer'].present?
       user_email = params['customer']['email']
-
-
+      activation_code = ActivationCode.create
+      if activation_code
+        ActivationCodeMailer.activate_mail(user_email, activation_code).deliver
+      end
     end
-    render status: 200
+    render nothing: true
   end
 end

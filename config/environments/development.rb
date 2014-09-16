@@ -40,4 +40,7 @@ Rails.application.configure do
 
   # Websocket rails needs this
   config.middleware.delete Rack::Lock
+
+  # Uses letter_opener to send mails in development
+  config.action_mailer.delivery_method = :letter_opener
 end

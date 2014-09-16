@@ -79,6 +79,10 @@ class WallsController < ApplicationController
     redirect_to edit_wall_path(@wall)
   end
 
+  def activate
+
+  end
+
   # Renders a partial with new set of images
   # It's animated and added to wall
   def frame
