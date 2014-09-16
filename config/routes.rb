@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  get 'payments/buy'
+
   ActiveAdmin.routes(self)
   resources :items do
 
