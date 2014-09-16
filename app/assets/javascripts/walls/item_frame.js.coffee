@@ -21,6 +21,7 @@ class @ItemFrame
   loadImage: ->
     img = new Image()
     img.src = DataSource.getNext()
+    img.crossOrigin = "anonymous"
     
     img.onload = =>
       @aspectRatio = img.width / img.height
