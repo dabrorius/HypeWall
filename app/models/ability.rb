@@ -16,7 +16,7 @@ class Ability
 
     unless user.id.nil?
       can [:create, :new], Wall
-      can [:rud, :frame, :control, :remove_background, :remove_logo], Wall do |wall|
+      can [:rud, :frame, :control, :history, :remove_background, :remove_logo], Wall do |wall|
         user.walls.pluck(:id).include? wall.id
       end
       can [:approve, :ban], Item do |item|
