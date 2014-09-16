@@ -1,7 +1,7 @@
 class WallsController < ApplicationController
   before_action :authenticate_user!, except: [:show, :frame]
   before_action :set_wall, only: [:edit, :update, :destroy, :control,
-   :remove_background, :remove_logo, :test_sockets, :history, :activate_prompt]
+   :remove_background, :remove_logo, :test_sockets, :history, :activate_prompt, :activation]
 
   # GET /walls
   def index
@@ -83,7 +83,14 @@ class WallsController < ApplicationController
   end
 
   def activation
-    flash[:alert] = params.inspect
+    puts @wall.id.to_s + "=============="
+    activation_code = ActivationCode.where(code: params[:activation_code])
+    unless activation_code.blank?
+      activation_code[0].wall_id = @wall.id
+      activation_code[0].save
+    else
+      flash[:alert] = "Your activation code was rejected"
+    end
     redirect_to dashboard_path
   end
 

@@ -1,5 +1,5 @@
 <div class="container">
-  <!-- form -->
+
   <%= form_tag(activation_wall_path(@wall), method: "post") do %>
     <%= label_tag(:activation_code, "Paste your activation code here to use your wall") %>
     <%= text_field_tag(:activation_code) %>
