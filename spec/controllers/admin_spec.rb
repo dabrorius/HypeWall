@@ -25,10 +25,10 @@ RSpec.describe Admin::DashboardController, :type => :controller do
 
   context "admin" do
 
-    let(:user) { FactoryGirl.create :user, is_admin: true }
+    let(:admin) { FactoryGirl.create :user, :admin }
 
     before do
-      sign_in user
+      sign_in admin
       get :index
     end
 

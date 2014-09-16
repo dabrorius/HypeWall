@@ -56,11 +56,15 @@ gem 'aws-sdk'
 # Admin interface
 gem 'activeadmin', github: 'activeadmin'
 
+
 # Pagination
 gem 'will_paginate'
 
 # Bootstrap helper for will_paginate
 gem 'will_paginate-bootstrap'
+
+# Permissions
+gem 'cancancan'
 
 group :test do
   gem "minitest"
