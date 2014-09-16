@@ -20,6 +20,7 @@ class Wall < ActiveRecord::Base
   has_many :wall_roles
   has_many :users, through: :wall_roles
   has_many :items, dependent: :destroy
+  has_many :activation_codes
 
   validates :name, presence: true
   validates :hashtag, presence: true
