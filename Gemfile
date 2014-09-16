@@ -62,6 +62,9 @@ gem 'will_paginate'
 # Bootstrap helper for will_paginate
 gem 'will_paginate-bootstrap'
 
+# Testing e-mails
+gem "letter_opener", group: :development
+
 group :test do
   gem "minitest"
   gem 'rspec-rails', '~> 3.0.0'
