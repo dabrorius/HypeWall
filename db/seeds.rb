@@ -29,11 +29,25 @@ user_wall = Wall.create name: "User wall",
 
 captain.walls << wall
 free_user.walls << user_wall
+<<<<<<< HEAD
 
 50.times do |i|
   image_count = (i % 8) + 1
   Item.create url: "/ultra/#{image_count}.jpg",
     likes: rand(20),
+    wall: wall
+end
+=======
+>>>>>>> bcae0463d6b766e1763a2c734742d9f25a7c81e4
+
+8.times do |i|
+  Item.create url: "/ultra/#{i+1}.jpg",
+    likes: rand(20),
+<<<<<<< HEAD
+    wall: user_wall
+end
+
+=======
     wall: wall
 end
 
@@ -42,4 +56,4 @@ end
     likes: rand(20),
     wall: user_wall
 end
-
+>>>>>>> bcae0463d6b766e1763a2c734742d9f25a7c81e4

@@ -1,7 +1,10 @@
 class WallsController < ApplicationController
   before_action :authenticate_user!, except: [:show, :frame]
   load_and_authorize_resource find_by: :slug
+<<<<<<< HEAD
 
+=======
+>>>>>>> bcae0463d6b766e1763a2c734742d9f25a7c81e4
 
   # GET /walls
   def index

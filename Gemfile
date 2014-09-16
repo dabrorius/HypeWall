@@ -56,6 +56,7 @@ gem 'aws-sdk'
 # Admin interface
 gem 'activeadmin', github: 'activeadmin'
 
+<<<<<<< HEAD
 # Pagination
 gem 'will_paginate'
 
@@ -66,6 +67,11 @@ gem 'will_paginate-bootstrap'
 gem 'cancancan'
 
 
+=======
+# Permissions
+gem 'cancancan'
+
+>>>>>>> bcae0463d6b766e1763a2c734742d9f25a7c81e4
 group :test do
   gem "minitest"
   gem 'rspec-rails', '~> 3.0.0'
