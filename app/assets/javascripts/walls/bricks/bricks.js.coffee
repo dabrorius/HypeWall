@@ -32,7 +32,6 @@ $ ->
 
   engine.runRenderLoop ->
     elapsedTime = currentTime() - stateStartTime
-    console.log elapsedTime
     if state == "show-background" && elapsedTime >= backgroundDuration
       state = "show-wall"
       stateStartTime = currentTime()
