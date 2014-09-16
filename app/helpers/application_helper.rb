@@ -16,7 +16,8 @@ module ApplicationHelper
   end
 
   def self.control_wall_size
-    6
+    #6
+    20
   end
 
   # makes using this method less verbose in the view

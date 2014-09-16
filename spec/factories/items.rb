@@ -1,5 +1,7 @@
 FactoryGirl.define do
-  factory :item do
-    wall
+  factory :item do |f|
+    f.wall
+    f.user_id "123456"
+
   end
 end

@@ -1,4 +1,5 @@
 class Wall < ActiveRecord::Base
+  require 'tweetstream'
   extend FriendlyId
   friendly_id :name, use: :slugged
 
@@ -20,6 +21,7 @@ class Wall < ActiveRecord::Base
   has_many :wall_roles
   has_many :users, through: :wall_roles
   has_many :items, dependent: :destroy
+  has_many :banned_users
 
   validates :name, presence: true
   validates :hashtag, presence: true
@@ -29,7 +31,9 @@ class Wall < ActiveRecord::Base
   before_save :hashtag_cleanup
   def hashtag_cleanup
     hashtag.gsub!('#','')
+    hashtag.downcase!
   end
+
 
   def has_logo?
     logo.file?
@@ -46,16 +50,42 @@ class Wall < ActiveRecord::Base
       t.exit
     end
   end
+  
+  def self.twitter_subscribe
+    TweetStream::Client.new.track(Wall.all.map{|x| "#" + x["hashtag"]}) do |tweet|
+      
+      hashtags = []
+      tweet.hashtags.each do |h|
+        hashtags << h.text.downcase
+      end
+
+      if tweet.media.present?
+        url = "#{tweet.media[0].media_url}"
+      else
+        url = nil
+      end
+      Wall.where("hashtag IN (?)", hashtags).each do |w|
+        if BannedUser.where("user_id = ? AND wall_id = ?", tweet.user.id.to_s, w.id.to_i).first.blank?
+          item = TwitterItem.create(original_id: tweet.id, user_id: tweet.user.id, url: url, wall_id: w.id, text: tweet.text)
+          WebsocketRails[:"item_control_#{item.wall_id}"].trigger 'new', render_to_string(item)
+        end
+      end
+    end
+  end
+    
+
 
   def recent_instagram_images
     items = []
     Instagram.tag_recent_media(hashtag).each do |instagram_image|
       unless InstagramItem.find_by_original_id(instagram_image.id).present?
-        items.push InstagramItem.create(
-          original_id: instagram_image.id,
-          user_id: instagram_image.user.id,
-          url: instagram_image.images.standard_resolution.url,
-          wall_id: self.id)
+        if BannedUser.where("wall_id = ? AND user_id = ?", self.id.to_i, instagram_image.user.id.to_s).first.blank?
+          items.push InstagramItem.create(
+            original_id: instagram_image.id,
+            user_id: instagram_image.user.id,
+            url: instagram_image.images.standard_resolution.url,
+            wall_id: self.id)
+        end
       end
     end
     return items
@@ -72,6 +102,10 @@ class Wall < ActiveRecord::Base
 
   def instagram_unsubscribe
     Instagram.delete_subscription(id: instagram_subscription.id)
+  end
+  
+  def twitter_unsubscribe
+    TweetStream::Client.stop
   end
 
   def owner

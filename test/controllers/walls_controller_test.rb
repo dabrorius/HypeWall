@@ -3,6 +3,8 @@ require 'test_helper'
 class WallsControllerTest < ActionController::TestCase
   setup do
     @wall = walls(:one)
+    @item = items(:one)
+    @banned_user = banned_users(:one)
   end
 
   test "should get index" do
@@ -45,5 +47,22 @@ class WallsControllerTest < ActionController::TestCase
     end
 
     assert_redirected_to walls_path
+  end
+
+  test "should ban user" do 
+    assert_difference('BannedUser.count') do
+      get :ban_user, id: @item.id
+    end
+  end
+
+  test "should unban user" do 
+    assert_difference('BannedUser.count', -1) do
+      get :unban_user, id: @banned_user
+    end
+  end
+
+  test "should list banned users" do
+    get :list_banned_users
+    assert_response :success
   end
 end

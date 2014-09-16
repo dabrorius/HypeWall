@@ -1,7 +1,7 @@
 class WallsController < ApplicationController
   before_action :authenticate_user!, except: [:show, :frame]
   before_action :set_wall, only: [:edit, :update, :destroy, :control,
-   :remove_background, :remove_logo, :test_sockets, :history]
+   :remove_background, :remove_logo, :test_sockets, :history, :ban_user, :unban_user, :list_banned_users]
 
   # GET /walls
   def index
@@ -32,6 +32,19 @@ class WallsController < ApplicationController
     if @wall.save
       WallRole.create(user: current_user, wall: @wall)
       @wall.instagram_subscribe("#{root_url}instagram/webhook")
+      old_pid = ENV['FORK_PID'].to_f
+      if old_pid != 0
+        begin Process.kill("SIGINT", old_pid.to_i) rescue Errno::ESRCH end
+      end
+      
+      pid = fork do 
+        exec("bin/rails runner Wall.twitter_subscribe")
+      end
+      
+      ENV['FORK_PID']=pid.to_s
+      #open('/Users/Dora/Desktop/HypeWall/log/pidovi.txt', 'w') { |f|
+      #  f.puts "#{ENV['FORK_PID']}"
+      #}
       redirect_to edit_wall_path(@wall), notice: 'Wall was successfully created.'
     else
       render :new
@@ -44,8 +57,10 @@ class WallsController < ApplicationController
     if @wall.update(wall_params)
       if @wall.hashtag != @old_hashtag
         @wall.instagram_unsubscribe
-        @wall.images.destroy_all
+        @wall.instagram_items.destroy_all
         @wall.instagram_subscribe("#{root_url}instagram/webhook")
+        @wall.twitter_unsubscribe
+        @wall.twitter_items.destroy_all
       end
       redirect_to edit_wall_path(@wall), notice: 'Wall was successfully updated.'
     else
@@ -61,6 +76,32 @@ class WallsController < ApplicationController
 
   def control
     @images = @wall.items.limit(ApplicationHelper.control_wall_size)
+  end
+
+  def ban_user
+    item = Item.find(params[:item_id])
+    if BannedUser.where("user_id = ? AND wall_id = ?", item.user_id, item.wall_id).first.blank?
+      BannedUser.create(user_id: item.user_id, wall_id: item.wall_id)
+      Item.where("user_id = ? AND wall_id = ?", item.user_id, item.wall_id).each do |i|
+        i.status = 'banned'
+        i.save
+      end
+    end
+    render :nothing => true
+  end
+
+  def unban_user
+    user = BannedUser.find(params[:user_id])
+    Item.where("user_id = ? AND wall_id = ?", user.user_id, user.wall_id).each do |i|
+      i.status = 'pending_approval'
+      i.save
+    end
+    user.destroy
+    redirect_to list_banned_users_wall_path
+  end
+
+  def list_banned_users
+    @banned = @wall.banned_users
   end
 
   def history

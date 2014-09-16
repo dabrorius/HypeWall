@@ -6,8 +6,12 @@
   <% end %>
   |
   <% if item.status != 'banned' %>
+
     <%= link_to ban_item_path(item), remote: true do -%>
-      <i class="fa fa-times"></i>Block
+      <i class="fa fa-times"></i>Block photo
+    <% end %>
+    <%= link_to ban_user_wall_path(item.wall_id, item.id), :method => :post, remote: true do -%>
+      <i class="fa fa-times"></i>Block user
     <% end %>
   <% else %>
     <i class="fa fa-times"></i>Block
