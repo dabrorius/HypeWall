@@ -83,7 +83,7 @@ class WallsController < ApplicationController
   end
 
   def activation
-    puts params.inspect
+    flash[:alert] = params.inspect
     redirect_to dashboard_path
   end
 
