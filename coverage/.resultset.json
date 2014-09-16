@@ -282,14 +282,6 @@
         1,
         null
       ],
-      "/Users/Dora/Desktop/HypeWall/app/models/banned_user.rb": [
-        1,
-        1,
-        null,
-        1,
-        1,
-        null
-      ],
       "/Users/Dora/Desktop/HypeWall/app/models/item.rb": [
         1,
         null,
@@ -320,6 +312,6 @@
         null
       ]
     },
-    "timestamp": 1410879170
+    "timestamp": 1410880303
   }
 }
