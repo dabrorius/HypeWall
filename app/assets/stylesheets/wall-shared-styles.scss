@@ -23,8 +23,13 @@
   bottom: 0;
   text-align: center;
 
-  .logo {
-    margin-top: 100px;
+  #description {
+    position: relative;
+    top: 200px;
+
+    p {
+      margin-bottom: 0;
+    }
   }
 
   .description {
