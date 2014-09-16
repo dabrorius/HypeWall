@@ -42,15 +42,15 @@ class @ItemFrame
       (@textureSize - @border/@aspectRatio * 2), (@textureSize - @border * 2)
     )
 
-    username = "dabrorius"
-    context.save()
-    context.scale(1/@aspectRatio, 1);
-    context.font = @font
-    textSize = context.measureText(username)
-    textX = @textureSize * @aspectRatio - textSize.width - @textPadding
-    textY = @textureSize - @textPadding
-    context.fillText(username, textX, textY)
-    context.restore()
+    # username = "dabrorius"
+    # context.save()
+    # context.scale(1/@aspectRatio, 1);
+    # context.font = @font
+    # textSize = context.measureText(username)
+    # textX = @textureSize * @aspectRatio - textSize.width - @textPadding
+    # textY = @textureSize - @textPadding
+    # context.fillText(username, textX, textY)
+    # context.restore()
 
     @texture.update()
 

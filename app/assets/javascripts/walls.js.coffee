@@ -45,3 +45,13 @@ $ ->
       element.msRequestFullscreen()
 
   $('.colorpicker').minicolors theme: 'bootstrap'
+
+  centerDescription = ->
+    container = $('#info');
+    content = $('#description');
+    content.css("top", (container.height()-content.height())/2);
+
+  centerDescription()
+  $(".logo").load ->
+    centerDescription()
+  window.onresize = centerDescription
