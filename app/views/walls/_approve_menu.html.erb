@@ -10,7 +10,7 @@
     <%= link_to ban_item_path(item), remote: true do -%>
       <i class="fa fa-times"></i>Block photo
     <% end %>
-    <%= link_to ban_user_wall_path(item.wall_id, item.id), remote: true do -%>
+    <%= link_to ban_user_wall_path(item.wall_id, item.id), :method => :post, remote: true do -%>
       <i class="fa fa-times"></i>Block user
     <% end %>
   <% else %>

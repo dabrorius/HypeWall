@@ -66,7 +66,8 @@ class Wall < ActiveRecord::Base
       end
       Wall.where("hashtag IN (?)", hashtags).each do |w|
         if BannedUser.where("user_id = ? AND wall_id = ?", tweet.user.id.to_s, w.id.to_i).first.blank?
-          TwitterItem.create(original_id: tweet.id, user_id: tweet.user.id, url: url, wall_id: w.id, text: tweet.text)
+          item = TwitterItem.create(original_id: tweet.id, user_id: tweet.user.id, url: url, wall_id: w.id, text: tweet.text)
+          WebsocketRails[:"item_control_#{item.wall_id}"].trigger 'new', render_to_string(item)
         end
       end
     end

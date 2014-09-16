@@ -8,7 +8,7 @@
 <% @banned.each do |b| %>
 	<tr>
 		<td><%= b.user_id %></td>
-		<td><%=link_to "Unban", unban_user_wall_path(b.wall_id, b.id)%></td>
+		<td><%=link_to "Unban", unban_user_wall_path(b.wall_id, b.id), :method => :post%></td>
 	</tr>
 <% end %>
 
