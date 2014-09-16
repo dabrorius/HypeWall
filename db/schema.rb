@@ -11,10 +11,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140905124301) do
+ActiveRecord::Schema.define(version: 20140916093422) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "activation_codes", force: true do |t|
+    t.string   "code"
+    t.integer  "wall_id"
+    t.datetime "used_at"
+    t.integer  "valid_for",  default: 1440
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "activation_codes", ["wall_id"], name: "index_activation_codes_on_wall_id", using: :btree
 
   create_table "active_admin_comments", force: true do |t|
     t.string   "namespace"
