@@ -4,10 +4,9 @@ class FastspringController < ApplicationController
   def webhook
     if params['customer'].present?
       user_email = params['customer']['email']
-      user = User.find_by_email(user_email)
-      user.update_attributes(subscription_level: 'pro')
+
+
     end
     render status: 200
   end
-
 end
